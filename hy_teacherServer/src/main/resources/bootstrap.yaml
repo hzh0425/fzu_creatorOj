@@ -1,0 +1,28 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: oj-teacherServer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.70.200.174:8848
+        #ip: 124.70.200.174
+      config:
+        file-extension: yaml
+        group: creatorOj
+        server-addr: 124.70.200.174:8848
+
+security:
+  oauth2:
+    client:
+      client-id: client
+      client-secret: secret
+      access-token-uri: http://localhost:9005/oauth/token
+      user-authorization-uri: http://localhost:9005/oauth/authorize
+      resource-ids: Resource
+    resource:
+      token-info-uri: http://localhost:9005/oauth/check_token
+      id: Resource
+

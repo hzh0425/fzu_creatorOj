@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/hy_adminServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_authServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_base/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_commons/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_gateway/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_gateway/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_grpc/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_grpc/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_minio/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_minio/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_sms/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_sms/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_socketServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_teacherServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_utils/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_xo/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/hy_xo/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

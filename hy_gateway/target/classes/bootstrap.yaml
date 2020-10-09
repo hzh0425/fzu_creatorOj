@@ -1,0 +1,20 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: oj-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.70.200.174:8848
+        #ip: 124.70.200.174
+    gateway:
+      routes: # 配置路由规则,
+        - id: api-socket
+          uri: lb://oj-socketServer
+          predicates:
+            - Path=/socket/**
+        - id: api-teacherServer
+          uri: lb://oj-teacherServer
+          predicates:
+            - Path=/teacher/**
