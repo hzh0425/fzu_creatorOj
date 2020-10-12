@@ -12,5 +12,5 @@ import com.moxi.xo.entity.ClassStu;
  * @since 2020-10-09
  */
 public interface ClassStuService extends SuperService<ClassStu> {
-
+    public void deleteBatchByClassId(String classId);
 }

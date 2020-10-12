@@ -1,8 +1,6 @@
 package com.moxi.auth;
 
-import com.moxi.auth.dao.MemberDao;
-import com.moxi.auth.entity.Member;
-import com.moxi.auth.entity.Role;
+
 import com.moxi.xo.entity.AuthRole;
 import com.moxi.xo.entity.AuthUser;
 import com.moxi.xo.mapper.AuthRoleMapper;

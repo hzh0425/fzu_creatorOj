@@ -12,5 +12,5 @@ import com.moxi.xo.entity.ClassTeacher;
  * @since 2020-10-09
  */
 public interface ClassTeacherService extends SuperService<ClassTeacher> {
-
+    public void deleteBatchByClassId(String classId);
 }

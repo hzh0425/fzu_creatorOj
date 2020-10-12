@@ -13,7 +13,6 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
         "com.moxi.auth.config",
         "com.moxi.auth.server",
-        "com.moxi.auth.dao",
         "com.moxi.auth.controller",
         "com.moxi.auth.aop",
         "com.moxi.commons.config"

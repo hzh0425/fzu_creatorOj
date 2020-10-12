@@ -1,8 +1,11 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -13,7 +16,10 @@ import lombok.experimental.Accessors;
  * @author hzh
  * @since 2020-10-09
  */
+@TableName("class_teacher")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class ClassTeacher extends SuperEntity {
