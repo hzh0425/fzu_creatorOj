@@ -1,8 +1,11 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,9 +17,11 @@ import lombok.experimental.Accessors;
  * @since 2020-10-09
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+
 @Accessors(chain = true)
-public class ProgramExample extends SuperEntity {
+public class ProgramExample {
 
     private static final long serialVersionUID = 1L;
 

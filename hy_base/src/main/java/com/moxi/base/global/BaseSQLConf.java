@@ -13,8 +13,8 @@ public class BaseSQLConf {
     public final static String CID="cid";
     public final static String SID="sid";
     public final static String TO_UID = "to_uid";
-    public final static String CREATE_TIME = "create_time";
-    public final static String CRAETE_DATE="create_date";
+    public final static String CREATE_TIME = "create_date";
+    public final static String CREATE_DATE="create_date";
 
     /**
      * 参数配置相关

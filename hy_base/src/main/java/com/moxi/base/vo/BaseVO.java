@@ -22,7 +22,7 @@ public class BaseVO<T> extends PageInfo<T> {
     /**
      * 唯一UID
      */
-    @NotBlank(groups = {Update.class, Delete.class})
+
     private String uid;
 
     private Integer status;

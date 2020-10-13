@@ -21,7 +21,7 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
         "com.moxi.commons.config",//公共配置
         "com.moxi.xo.service",
         "com.moxi.commons.feign",
-        "com.moxi.teacherServer.Feign"
+        "com.moxi.utils.FileUtil"
 })
 public class teacherServerApplication {
     public static void main(String[] args) {

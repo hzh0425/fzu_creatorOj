@@ -9,8 +9,10 @@ import com.moxi.xo.service.ClassService;
 import com.moxi.xo.vo.ClassVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -60,7 +62,7 @@ public class classRestApi {
     }
 
     @ApiOperation(value = "删除班级", notes = "删除班级", response = String.class)
-    @PostMapping("/delete/{classId}")
+    @DeleteMapping("/delete/{classId}")
     public String delete(@PathVariable String classId){
         return classService.delete(classId);
     }
