@@ -1,8 +1,11 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,7 +17,9 @@ import lombok.experimental.Accessors;
  * @since 2020-10-09
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("exam_bank")
 @Accessors(chain = true)
 public class ExamBank extends SuperEntity {
 
@@ -44,7 +49,7 @@ public class ExamBank extends SuperEntity {
     /**
      * 题目分数
      */
-    private Integer score;
+    private String score;
 
 
 }

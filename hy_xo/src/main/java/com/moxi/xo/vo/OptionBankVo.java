@@ -11,9 +11,7 @@ import java.util.List;
 @Data
 public class OptionBankVo extends BaseVO<OptionBankVo> {
 
-
     private int optionType;
-
     private List<OptionVo> optionVoList;
     @Data
     public static class OptionVo{

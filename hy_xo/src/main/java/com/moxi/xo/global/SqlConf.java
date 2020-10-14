@@ -25,4 +25,9 @@ public class SqlConf extends BaseSQLConf {
      */
     public final static String QUESTION_TITLE="question_title";
     public final static String OPTION_TYPE="option_type";
+
+    /**
+     * 考试表
+     */
+    public final static String EXAM_NAME="exam_name";
 }
