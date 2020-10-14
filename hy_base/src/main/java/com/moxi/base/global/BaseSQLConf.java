@@ -10,6 +10,8 @@ public class BaseSQLConf {
     public final static String ID = "id";
     public final static String UID = "uid";
     public final static String TID="tid";
+    public final static String EID="eid";
+    public final static String BID="bid";
     public final static String CID="cid";
     public final static String SID="sid";
     public final static String TO_UID = "to_uid";

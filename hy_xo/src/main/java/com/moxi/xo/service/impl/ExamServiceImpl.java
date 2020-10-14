@@ -1,26 +1,29 @@
 package com.moxi.xo.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.moxi.base.enums.EProblemType;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.ExamBank;
-import com.moxi.xo.entity.OptionBank;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SqlConf;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.mapper.ExamMapper;
+import com.moxi.xo.mapper.GapBankMapper;
+import com.moxi.xo.mapper.OptionBankMapper;
+import com.moxi.xo.mapper.ProgramBankMapper;
 import com.moxi.xo.service.ExamBankService;
 import com.moxi.xo.service.ExamService;
 import com.moxi.xo.entity.Exam;
+import com.moxi.xo.vo.BankListVo;
 import com.moxi.xo.vo.ExamVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
+import javax.annotation.Resource;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +42,12 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
     ExamService examService;
     @Autowired
     ExamBankService examBankService;
+    @Resource
+    OptionBankMapper optionBankMapper;
+    @Resource
+    GapBankMapper gapBankMapper;
+    @Resource
+    ProgramBankMapper programBankMapper;
 
 
     @Override
@@ -78,11 +87,51 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
     }
 
     @Override
-    public String eid(ExamVo vo) {
+    public String edit(ExamVo vo) {
         Exam pre=examService.getById(vo.getUid());
         if(pre==null)return ResultUtil.result(SysConf.ERROR,MessageConf.ENTITY_NOT_EXIST);
         pre.UpdateExam(vo.getExamName(),vo.getStartTime(),vo.getEndTime());
         pre.updateById();
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.UPDATE_SUCCESS);
+    }
+
+    @Override
+    public List getListAsType(BankListVo vo) {
+        
+        switch (vo.getProblemType()){
+            case EProblemType.option:{
+                //选择
+                return optionBankMapper.getExamOptionList(vo.getExamId());
+            }
+            case EProblemType.gapFill:{
+                //填空
+                return gapBankMapper.getExamGapList(vo.getExamId());
+            }
+            case EProblemType.program:{
+                //编程,编程先返回title,而不是返回具体的题目(因为数据太大)
+                return programBankMapper.getExamProgramList(vo.getExamId());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public String addProblemBatch(BankListVo vo) {
+        List<ExamBank> bankList=vo.getBankVoList().stream().map(x->{
+            return new ExamBank(vo.getExamId(),x.getBid(),x.getType(),x.getNum(),x.getScore());
+        }).collect(Collectors.toList());
+        examBankService.saveBatch(bankList);
+        return ResultUtil.result(SysConf.SUCCESS,MessageConf.INSERT_SUCCESS);
+    }
+
+    @Override
+    public String deleteProblem(String eid, String bid) {
+        QueryWrapper<ExamBank> wrapper=new QueryWrapper<>();
+        wrapper.eq(SqlConf.EID,eid);
+        wrapper.eq(SqlConf.BID,bid);
+        ExamBank pre=examBankService.getOne(wrapper);
+        if(pre==null)return ResultUtil.result(SysConf.ERROR,MessageConf.ENTITY_NOT_EXIST);
+        pre.deleteById();
+        return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
     }
 }
