@@ -22,9 +22,5 @@ public class classTest {
 
     @Autowired
     ExcelUtil excelUtil;
-    @Test
-    public void test1(){
 
-        System.out.println(classService.getList("qmks3f7e0616fe660d11d6d397e215b8c"));
-    }
 }

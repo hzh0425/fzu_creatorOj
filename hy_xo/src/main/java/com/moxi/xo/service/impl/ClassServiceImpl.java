@@ -1,12 +1,12 @@
 package com.moxi.xo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.moxi.base.enums.EStatus;
-import com.moxi.base.global.BaseMessageConf;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.xo.entity.Class;
-import com.moxi.xo.entity.ClassStu;
 import com.moxi.xo.entity.ClassTeacher;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SqlConf;
@@ -16,7 +16,7 @@ import com.moxi.xo.service.ClassService;
 import com.moxi.xo.service.ClassStuService;
 import com.moxi.xo.service.ClassTeacherService;
 import com.moxi.xo.vo.ClassVo;
-import jdk.internal.dynalink.support.ClassMap;
+import com.moxi.xo.vo.ReturningTemplateVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -45,8 +45,10 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     @Autowired
     ClassStuService classStuService;
     @Override
-    public List<Class> getList(String teacherId) {
-        return classMapper.getListByTeacherId(teacherId);
+    public IPage<Class> getList(ClassVo vo) {
+        System.out.println(vo.getPageSize());
+        Page<Class> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
+        return classMapper.getListByTeacherId(page,vo.getTeacherId());
     }
 
     @Override
@@ -65,7 +67,11 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         //3.创建教师-班级中间表
         ClassTeacher ct=new ClassTeacher(vo.getTeacherId(),cur.getUid());
         ct.insert();
-        return ResultUtil.result(SysConf.SUCCESS,MessageConf.INSERT_SUCCESS);
+
+        //4.创建返回体
+        String permissionUrl="/class/"+cur.getUid();
+        ReturningTemplateVo templateVo=new ReturningTemplateVo(vo.getTeacherId(),permissionUrl,MessageConf.INSERT_SUCCESS);
+        return ResultUtil.result(SysConf.SUCCESS,templateVo);
     }
 
     @Override

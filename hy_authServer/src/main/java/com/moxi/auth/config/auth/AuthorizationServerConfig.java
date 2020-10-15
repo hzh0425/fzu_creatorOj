@@ -45,6 +45,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     //配置客户端
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+
         clients.inMemory()
                 //client的id和密码
                 .withClient("client")

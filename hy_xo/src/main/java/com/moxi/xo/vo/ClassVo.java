@@ -2,6 +2,8 @@ package com.moxi.xo.vo;
 
 import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.validator.group.Insert;
+import com.moxi.base.vo.BaseVO;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.apache.ibatis.annotations.Update;
 
@@ -13,50 +15,48 @@ import java.time.LocalDate;
  * @date 2020/10/12 14:19
  */
 @Data
-public class ClassVo {
+public class ClassVo extends BaseVO {
 
 
-    @NotBlank(groups = {Update.class})
-    private String uid;
 
+
+
+    @ApiModelProperty(value = "教师的id")
     @NotBlank(groups = {Insert.class})
     private String teacherId;
 
     /**
      * 班级名称
      */
+    @ApiModelProperty(value = "班级名称")
     @NotBlank(groups = {Insert.class})
     private String className;
 
     /**
      * 班级描述
      */
+    @ApiModelProperty(value = "班级描述")
     private String classDesc;
 
     /**
      * 班级人数
      */
+    @ApiModelProperty(value = "班级人数")
     private Integer stuNum;
 
     /**
      * 创建者
      */
+    @ApiModelProperty(value = "班级创建者(教师的名字)")
     @NotBlank(groups = {Insert.class})
     private String creator;
 
     /**
-     * 该用户是否起作用
+     * 该是否起作用
      */
+    @ApiModelProperty(value = "是否起作用")
     private Integer valid;
 
-    /**
-     * 创造时间
-     */
-    private LocalDate createDate;
 
-    /**
-     * 修改时间
-     */
-    private LocalDate updateDate;
 
 }

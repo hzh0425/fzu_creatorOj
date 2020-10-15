@@ -1,12 +1,19 @@
 package com.moxi.teacherServer;
 
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter;
+import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
+import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import springfox.documentation.oas.annotations.EnableOpenApi;
+
 
 /**
  * @author hzh
@@ -14,17 +21,18 @@ import springfox.documentation.oas.annotations.EnableOpenApi;
  * @date 2020/10/8 21:53
  */
 @SpringBootApplication
-@EnableOpenApi
 @ComponentScan(basePackages = {
         "com.moxi.teacherServer.config",
         "com.moxi.teacherServer.restApi",
         "com.moxi.commons.config",//公共配置
         "com.moxi.xo.service",
         "com.moxi.commons.feign",
-        "com.moxi.utils.FileUtil"
+        "com.moxi.utils.FileUtil",
+        "com.moxi.teacherServer.annotation"
 })
 public class teacherServerApplication {
     public static void main(String[] args) {
+
         SpringApplication.run(teacherServerApplication.class,args);
     }
 

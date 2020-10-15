@@ -9,6 +9,7 @@ import java.util.Map;
  * @author xzx19950624@qq.com
  * 2018年9月9日19:22:20
  */
+
 public class ResultUtil {
     /**
      * @param code success error

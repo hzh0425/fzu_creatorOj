@@ -19,6 +19,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +37,12 @@ public class ProgramBankRestApi {
     @Autowired
     ProgramBankService programBankService;
 
+    @PreAuthorize("hasAuthority()")
     @ApiOperation(value = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class})@RequestBody ProgramBankVo vo, BindingResult result)
     {
+
         ThrowableUtils.checkParamArgument(result);
         return ResultUtil.result(SysConf.SUCCESS, programBankService.getList(vo));
     }

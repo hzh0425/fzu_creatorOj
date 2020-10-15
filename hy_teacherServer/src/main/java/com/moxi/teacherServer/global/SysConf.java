@@ -8,4 +8,5 @@ import com.moxi.base.global.BaseSysConf;
  * @date 2020/10/12 14:23
  */
 public class SysConf extends BaseSysConf {
+
 }

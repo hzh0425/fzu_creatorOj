@@ -3,6 +3,7 @@ package com.moxi.base.vo;
 
 import com.moxi.base.validator.annotion.IdValid;
 import com.moxi.base.validator.annotion.NotBlank;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Update;
@@ -23,7 +24,8 @@ public class BaseVO<T> extends PageInfo<T> {
      * 唯一UID
      */
 
+    @ApiModelProperty(value = "uuid")
     private String uid;
 
-    private Integer status;
+
 }

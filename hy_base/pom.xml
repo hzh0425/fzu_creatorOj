@@ -17,7 +17,12 @@
             <groupId>com.moxi</groupId>
             <version>${project.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <!--在引用时请在maven中央仓库搜索最新版本号-->
+            <version>2.0.4</version>
+        </dependency>
         <!-- 引入lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>

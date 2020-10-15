@@ -1,8 +1,11 @@
 package com.moxi.teacherServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.base.validator.group.Insert;
+import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
+import com.moxi.teacherServer.annotation.permissionLog.permissionLogVerify;
 import com.moxi.teacherServer.global.SysConf;
 import com.moxi.utils.ResultUtil;
 import com.moxi.xo.service.ClassService;
@@ -39,16 +42,18 @@ public class classRestApi {
     ClassService classService;
 
 
-
-    @ApiOperation(value = "获取班级列表", notes = "获取班级列表", response = String.class)
-    @GetMapping("/getList/{teacherId}")
-    public String getList(@PathVariable String teacherId)
+    @ApiOperation(value = "获取班级列表", notes = "获取班级列表,keyword可选,用于模糊查询", response = String.class)
+    @ApiOperationSupport(includeParameters = {"currentPage","teacherId","pageSize","keyword"})
+    @PostMapping("/getList")
+    public String getList(@RequestBody ClassVo vo)
     {
-        return ResultUtil.result(SysConf.SUCCESS, classService.getList(teacherId));
+        return ResultUtil.result(SysConf.SUCCESS, classService.getList(vo));
     }
 
 
+    @permissionLogVerify
     @ApiOperation(value = "新增班级", notes = "新增班级", response = String.class)
+    @ApiOperationSupport(includeParameters ={"teacherId","classDesc","className","creator"})
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody ClassVo vo, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
@@ -56,11 +61,13 @@ public class classRestApi {
     }
 
     @ApiOperation(value = "更新班级信息", notes = "更新班级信息", response = String.class)
+    @ApiOperationSupport(ignoreParameters ={"stuNum","valid","currentPage","teacherId","pageSize","keyword"})
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody ClassVo vo) {
         return classService.edit(vo);
     }
 
+    @AuthorityVerify
     @ApiOperation(value = "删除班级", notes = "删除班级", response = String.class)
     @DeleteMapping("/delete/{classId}")
     public String delete(@PathVariable String classId){

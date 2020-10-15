@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/problem/option")
-@Api(value = "单/多选,判断题相关接口", tags = {"单/多选,判断题相关接口"})
+@Api(value = "1.单/多选,判断题相关接口", tags = {"单/多选,判断题相关接口"})
 public class OptionBankRestApi {
     @Autowired
     OptionBankService optionBankService;

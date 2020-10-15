@@ -2,6 +2,7 @@ package com.moxi.teacherServer.restApi;
 
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
+import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;

@@ -7,6 +7,9 @@ package com.moxi.base.global;
  * @create: 2019-12-29-20:16
  */
 public class BaseMessageConf {
+    public final static String LOGIN_FAIL="请重新登录";
+
+
     public static final String OPERATION_SUCCESS = "操作成功";
     public static final String OPERATION_FAIL = "操作失败";
     public final static String COMMENT_SUCCESS="评论成功";
@@ -53,7 +56,7 @@ public class BaseMessageConf {
     public static final String THIS_TAG_IS_TOP = "该标签已经在顶端！";
     public final static String INVALID_TOKEN = "token令牌未被识别";
     public final static String INVALID_AUTH="您无此权限";
-    public final static String OUT_SURVIVOR_TOKEN="token已经过期";
+    public final static String OUT_SURVIVOR_TOKEN="token已经过期,请重新登录";
     public final static String ERROR_PASSWORD = "密码错误";
     public final static String YOU_HAVE_BEEN_PRISE = "您已经点赞过了!";
     public final static String PLEASE_LOGIN_TO_PRISE = "请先登录后才能点赞!";

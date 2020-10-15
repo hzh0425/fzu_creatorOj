@@ -4,6 +4,7 @@ import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.validator.group.AddBatch;
 import com.moxi.base.validator.group.Delete;
 import com.moxi.base.validator.group.Insert;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
@@ -15,14 +16,16 @@ import java.util.List;
 @Data
 public class ClassStuVo {
 
-    private MultipartFile file;
-
+    @ApiModelProperty(value = "studentId,(student表的id,若有多个id,用(',')划分)")
     @NotBlank(groups = {Insert.class, Delete.class})
     private String sid;
 
+    @ApiModelProperty(value = "classId")
     @NotBlank(groups = {Insert.class,AddBatch.class})
     private String cid;
 
+
+    @ApiModelProperty(value = "学生列表")
     @NotBlank(groups = {AddBatch.class})
     private List<StuVo> stuList;
 }

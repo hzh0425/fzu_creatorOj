@@ -2,11 +2,14 @@ package com.moxi.xo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * <p>
@@ -17,6 +20,8 @@ import java.time.LocalDate;
  * @since 2020-10-09
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("auth_permission")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
@@ -49,12 +54,12 @@ public class AuthPermission extends SuperEntity {
     /**
      * 创造时间
      */
-    private LocalDate createDate;
+    private Date createDate;
 
     /**
      * 修改时间
      */
-    private LocalDate updateDate;
+    private Date updateDate;
 
 
 }

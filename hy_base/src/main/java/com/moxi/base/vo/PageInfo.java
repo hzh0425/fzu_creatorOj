@@ -2,6 +2,7 @@ package com.moxi.base.vo;
 import com.moxi.base.validator.Messages;
 import com.moxi.base.validator.annotion.LongNotNull;
 import com.moxi.base.validator.group.GetList;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -24,12 +25,14 @@ public class PageInfo<T> {
     /**
      * 当前页
      */
+    @ApiModelProperty(value = "当前页面")
     @LongNotNull(groups = {GetList.class}, message = Messages.PAGE_NOT_NULL)
     private Long currentPage;
 
     /**
      * 页大小
      */
+    @ApiModelProperty(value = "页面的大小")
     @LongNotNull(groups = {GetList.class}, message = Messages.SIZE_NOT_NULL)
     private Long pageSize;
 }

@@ -14,6 +14,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -56,6 +57,8 @@ public class classStuRestApi {
         if(vo.getStuList()==null||vo.getStuList().size()==0)return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
         return classService.addBatch(vo);
     }
+
+
     @ApiOperation(value = "批量删除学生", notes = "批量删除学生", response = String.class)
     @PostMapping("/deleteBatch")
     public String delete(@Validated({Insert.class}) @RequestBody ClassStuVo vo, BindingResult result){
