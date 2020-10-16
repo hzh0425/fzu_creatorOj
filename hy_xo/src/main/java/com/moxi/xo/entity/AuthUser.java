@@ -3,8 +3,10 @@ package com.moxi.xo.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.List;;
 import java.time.LocalDate;
@@ -18,10 +20,12 @@ import java.time.LocalDate;
  * @since 2020-10-09
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @TableName("auth_user")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class AuthUser extends SuperEntity {
+public class AuthUser extends SuperEntity<AuthUser> {
 
     private static final long serialVersionUID = 1L;
 

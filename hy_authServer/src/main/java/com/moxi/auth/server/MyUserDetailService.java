@@ -1,6 +1,7 @@
 package com.moxi.auth.server;
 
 
+import com.moxi.auth.config.bean.MySecurityUser;
 import com.moxi.xo.entity.AuthPermission;
 import com.moxi.xo.entity.AuthRole;
 import com.moxi.xo.entity.AuthUser;
@@ -49,10 +50,7 @@ public class MyUserDetailService implements UserDetailsService {
         boolean credentialsNonExpired = true;
         // 锁定性 :true:未锁定 false:已锁定
         boolean accountNonLocked = true;
-
-        User user = new User(username,authUser.getPassWord(),
-                enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, grantedAuthorities);
-        return user;
+        return new MySecurityUser(authUser.getUid(),authUser.getSelfDesc(),username,authUser.getPassWord(),grantedAuthorities);
 
     }
 

@@ -65,7 +65,7 @@ public class OptionBankServiceImpl extends SuperServiceImpl<OptionBankMapper, Op
                     String selectLists=null;
                     //如果不是多选题类型,需要构造选项
                     if(vo.getOptionType()!=EOption.JUDGE_CHOICE&&vo.getOptionVoList()!=null&&vo.getOptionVoList().size()>0){
-                        selectLists= JSON.toJSONString(vo.getOptionVoList());
+                        selectLists= JSON.toJSONString(x.getOptionSelectList());
                     }
                     return new OptionBank(x.getQuestionTitle(),selectLists,x.getOptionType(),x.getQuestionAnswer(),x.getPublisher(), EStatus.ENABLE,new Date(),new Date());
                 }).collect(Collectors.toList());

@@ -1,8 +1,7 @@
 package com.moxi.auth.config.security;
 
 
-import com.moxi.auth.config.bean.CustomAccessDecisionManager;
-import com.moxi.auth.config.bean.MyFilterInvocationSecurityMetadataSource;
+
 import com.moxi.auth.server.MyUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.CustomAutowireConfigurer;

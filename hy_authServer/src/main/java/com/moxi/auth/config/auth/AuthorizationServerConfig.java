@@ -1,8 +1,11 @@
 package com.moxi.auth.config.auth;
 
+import com.moxi.auth.config.bean.CustomTokenEnhancer;
+import com.moxi.auth.config.bean.MySecurityUser;
 import com.moxi.auth.config.error.MssWebResponseExceptionTranslator;
 import com.moxi.auth.config.security.NoEncryptPasswordEncoder;
 import com.moxi.auth.server.MyUserDetailService;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,22 +15,27 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.code.InMemoryAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.AuthorizationServerTokenServices;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
+import java.util.Map;
 
 /**
  * @author hzh
@@ -80,6 +88,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
+
+    @Bean
+    public TokenEnhancer tokenEnhancer() {
+        return new CustomTokenEnhancer();
+    }
     @Bean
     public TokenStore tokenStore(){
         return new RedisTokenStore(redisConnectionFactory);
@@ -108,8 +121,17 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)//认证管理器
                 .authorizationCodeServices(new InMemoryAuthorizationCodeServices())//授权码管理
-                .tokenServices(tokenServices())//token管理
-                .allowedTokenEndpointRequestMethods(HttpMethod.POST);
+                .allowedTokenEndpointRequestMethods(HttpMethod.POST)
+                .tokenEnhancer(new TokenEnhancer() {
+                    @Override
+                    public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
+                        MySecurityUser user=(MySecurityUser) oAuth2Authentication.getPrincipal();
+                        Map<String,Object> map=new HashedMap();
+                        map.put("userId",user.getUserId());
+                        ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(map);
+                        return oAuth2AccessToken;
+                    }
+                });
     }
 
     //配置哪些接口可以被访问

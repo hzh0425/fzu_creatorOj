@@ -3,6 +3,7 @@ package com.moxi.xo.entity;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("auth_student")
+@Builder
 public class AuthStudent extends SuperEntity<AuthStudent> {
     private String stuName;
     private String stuNum;
@@ -22,4 +24,5 @@ public class AuthStudent extends SuperEntity<AuthStudent> {
     private String stuMajor;
     private String stuGrade;
     private String stuClass;
+
 }

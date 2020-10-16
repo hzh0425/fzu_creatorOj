@@ -1,7 +1,5 @@
 package com.moxi.auth.config.auth;
 
-import com.moxi.auth.config.bean.CustomAccessDecisionManager;
-import com.moxi.auth.config.bean.MyFilterInvocationSecurityMetadataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
@@ -26,10 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 
-    @Autowired
-    CustomAccessDecisionManager customAccessDecisionManager;
-    @Autowired
-    MyFilterInvocationSecurityMetadataSource securityMetadataSource;
+
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

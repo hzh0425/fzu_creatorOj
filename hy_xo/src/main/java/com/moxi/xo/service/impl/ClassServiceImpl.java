@@ -74,10 +74,11 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         ClassTeacher ct=new ClassTeacher(vo.getTeacherId(),cur.getUid());
         ct.insert();
 
-        //4.创建返回体
-        String permissionUrl="/class/"+cur.getUid();
-        ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),permissionUrl,MessageConf.INSERT_SUCCESS);
-        return ResultUtil.result(SysConf.SUCCESS,templateVo);
+//        //4.创建返回体
+//        String permissionUrl="/class/"+cur.getUid();
+//        ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),permissionUrl,MessageConf.INSERT_SUCCESS);
+
+        return ResultUtil.result(SysConf.SUCCESS,MessageConf.INSERT_SUCCESS);
     }
 
     @Override

@@ -4,6 +4,7 @@ import com.moxi.base.mapper.SuperMapper;
 import com.moxi.xo.entity.AuthUser;
 import org.apache.ibatis.annotations.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 /**
  * <p>
@@ -20,6 +21,7 @@ public interface AuthUserMapper extends SuperMapper<AuthUser> {
 
     @Select("SELECT * FROM auth_user WHERE email=#{username}")
     @Results(value = {
+            @Result(column = "uid",property = "uid",id = true),
             @Result(column = "uid",property = "roleList",many = @Many(select = "com.moxi.xo.mapper.AuthRoleMapper.getRolesByUserId"))
     })
     public AuthUser loadUserByEmail(@Param("username") String username);
