@@ -12,4 +12,5 @@ public class MessageConf extends BaseMessageConf {
      * 班级相关
      */
     public final static String CLASS_EXIST="该班级已经存在,请务重复创建";
+    public final static String CLASS_NOT_FOUND="该班级不存在";
 }

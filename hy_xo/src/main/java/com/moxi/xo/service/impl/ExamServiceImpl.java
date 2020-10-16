@@ -55,7 +55,7 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
 
         QueryWrapper<Exam> wrapper=new QueryWrapper<>();
         if(StringUtils.isNotEmpty(vo.getKeyword())){
-            wrapper.eq(SqlConf.EXAM_NAME,vo.getKeyword());
+            wrapper.like(SqlConf.EXAM_NAME,vo.getKeyword());
         }
         wrapper.eq(SqlConf.TID,vo.getTid());
         wrapper.orderByDesc(SqlConf.CREATE_DATE);
@@ -80,9 +80,14 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
 
     @Override
     public String delete(String eid) {
+        //1.删除考试
         Exam pre=examService.getById(eid);
         if(pre==null)return ResultUtil.result(SysConf.ERROR,MessageConf.ENTITY_NOT_EXIST);
         pre.deleteById();
+        //2.删除考试题目
+        QueryWrapper<ExamBank> wrapper=new QueryWrapper<>();
+        wrapper.eq(SqlConf.EID,eid);
+        examBankService.remove(wrapper);
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
     }
 

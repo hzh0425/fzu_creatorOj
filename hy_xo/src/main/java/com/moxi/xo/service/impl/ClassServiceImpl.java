@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.moxi.base.enums.EStatus;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
+import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.Class;
 import com.moxi.xo.entity.ClassTeacher;
 import com.moxi.xo.global.MessageConf;
@@ -16,14 +17,14 @@ import com.moxi.xo.service.ClassService;
 import com.moxi.xo.service.ClassStuService;
 import com.moxi.xo.service.ClassTeacherService;
 import com.moxi.xo.vo.ClassVo;
-import com.moxi.xo.vo.ReturningTemplateVo;
+import com.moxi.xo.vo.ResourceReturningVo;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <p>
@@ -46,9 +47,14 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     ClassStuService classStuService;
     @Override
     public IPage<Class> getList(ClassVo vo) {
-        System.out.println(vo.getPageSize());
         Page<Class> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
-        return classMapper.getListByTeacherId(page,vo.getTeacherId());
+        QueryWrapper<Class> wrapper=new QueryWrapper<>();
+        wrapper.eq(SqlConf.TID,vo.getTeacherId());
+        wrapper.eq(SqlConf.VALID,EStatus.ENABLE);
+        if(StringUtils.isNotEmpty(vo.getKeyword())){
+            wrapper.like(SqlConf.CLASS_NAME,vo.getKeyword());
+        }
+        return classMapper.getListByTeacherId(page,wrapper);
     }
 
     @Override
@@ -70,7 +76,7 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
 
         //4.创建返回体
         String permissionUrl="/class/"+cur.getUid();
-        ReturningTemplateVo templateVo=new ReturningTemplateVo(vo.getTeacherId(),permissionUrl,MessageConf.INSERT_SUCCESS);
+        ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),permissionUrl,MessageConf.INSERT_SUCCESS);
         return ResultUtil.result(SysConf.SUCCESS,templateVo);
     }
 

@@ -41,8 +41,16 @@ public class BaseSQLConf {
     public static final String AVATAR = "avatar";
 
 
+    /**
+     *
+     */
+    public final static String VALID="valid";
+    public final static String KEY_WORD="keyword";
 
 
-
+    /**
+     * 学生表
+     */
+    public final static String STUDENT_NAME="stu_name";
 
 }

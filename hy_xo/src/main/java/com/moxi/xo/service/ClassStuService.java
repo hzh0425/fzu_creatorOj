@@ -1,10 +1,10 @@
 package com.moxi.xo.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.moxi.base.service.SuperService;
 import com.moxi.xo.entity.AuthStudent;
 import com.moxi.xo.entity.ClassStu;
 import com.moxi.xo.vo.ClassStuVo;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;;
 /**
@@ -18,7 +18,7 @@ import java.util.List;;
 public interface ClassStuService extends SuperService<ClassStu> {
     public void deleteBatchByClassId(String classId);
 
-    public List<AuthStudent> getList(String classId);
+    public IPage<AuthStudent> getList(ClassStuVo classId);
 
     public String add(ClassStuVo vo);
 

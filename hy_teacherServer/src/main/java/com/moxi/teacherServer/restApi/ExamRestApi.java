@@ -1,5 +1,6 @@
 package com.moxi.teacherServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.utils.ResultUtil;
@@ -24,13 +25,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/teacher/exam")
-@Api(value = "考试相关接口", tags = {"考试相关接口"})
+@Api(value = "6.考试相关接口", tags = {"6.考试相关接口"})
 public class ExamRestApi {
 
     @Autowired
     ExamService examService;
 
     @ApiOperation(value = "获取当前用户创建的考试列表(分页,支持根据keyword字段模糊查询)", notes = "获取当前用户创建的考试列表(分页,支持根据keyword字段模糊查询)", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"examBankVoList","startTime","endTime","uid","examName","publisher"})
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class})@RequestBody ExamVo vo, BindingResult result)
     {
@@ -39,6 +41,7 @@ public class ExamRestApi {
     }
 
     @ApiOperation(value = "新增考试", notes = "新增考试", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})
     @PostMapping("/add")
     public String addBatch(@RequestBody ExamVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -46,6 +49,7 @@ public class ExamRestApi {
     }
 
     @ApiOperation(value = "编辑考试", notes = "编辑考试", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","tid","examBankVoList","publisher"})
     @PostMapping("/edit")
     public String edit(@RequestBody ExamVo vo) {
         //ThrowableUtils.checkParamArgument(result);

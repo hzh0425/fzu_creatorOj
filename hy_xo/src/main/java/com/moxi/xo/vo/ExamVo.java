@@ -6,6 +6,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.base.vo.BaseVO;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,13 +21,16 @@ import java.util.List;
  * @date 2020/10/14 14:17
  */
 @Data
+@ApiModel("考试 接受类")
 public class ExamVo extends BaseVO<ExamVo> {
 
+    @ApiModelProperty(value = "teacherId")
     @NotBlank(groups = {GetList.class})
     private String tid;
     /**
      * 考试名
      */
+    @ApiModelProperty(value = "考试名称")
     private String examName;
 
     /**
@@ -34,6 +39,7 @@ public class ExamVo extends BaseVO<ExamVo> {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "开始时间,格式:yyyy-MM-dd HH:mm:ss")
     private Date startTime;
 
     /**
@@ -42,13 +48,16 @@ public class ExamVo extends BaseVO<ExamVo> {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(fill = FieldFill.INSERT_UPDATE)
+    @ApiModelProperty(value = "结束时间,格式:yyyy-MM-dd HH:mm:ss")
     private Date endTime;
 
     /**
      * 发布者
      */
+    @ApiModelProperty(value = "发布者姓名,如 王姥姥")
     private String publisher;
 
+    @ApiModelProperty(value = "考试题目集")
     private List<examBankVo> examBankVoList;
 
 }

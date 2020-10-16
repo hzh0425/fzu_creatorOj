@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @ApiModel("增加资源类型的统一返回体")
-public class ReturningTemplateVo {
+public class ResourceReturningVo {
 
     @ApiModelProperty(value = "资源创建者的id")
     private String ownerId;

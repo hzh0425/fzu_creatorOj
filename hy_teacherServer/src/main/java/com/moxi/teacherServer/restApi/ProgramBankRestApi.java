@@ -1,5 +1,6 @@
 package com.moxi.teacherServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.Delete;
 import com.moxi.base.validator.group.GetList;
@@ -32,13 +33,13 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/problem/program")
-@Api(value = "编程题相关接口", tags = {"编程题相关接口"})
+@Api(value = "3.编程题相关接口", tags = {"3.编程题相关接口"})
 public class ProgramBankRestApi {
     @Autowired
     ProgramBankService programBankService;
 
-    @PreAuthorize("hasAuthority()")
     @ApiOperation(value = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"programVoList","uid"})
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class})@RequestBody ProgramBankVo vo, BindingResult result)
     {
@@ -48,6 +49,7 @@ public class ProgramBankRestApi {
     }
 
     @ApiOperation(value = "批量新增编程问题", notes = "批量新增编程问题", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})
     @PostMapping("/addBatch")
     public String addBatch(@RequestBody ProgramBankVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -55,6 +57,7 @@ public class ProgramBankRestApi {
     }
 
     @ApiOperation(value = "编辑编程问题", notes = "编辑编程问题", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"publisher"})
     @PostMapping("/edit")
     public String edit(@RequestBody ProgramBankVo.ProgramVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -67,6 +70,9 @@ public class ProgramBankRestApi {
         if(StringUtils.isEmpty(pid))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
         return programBankService.delete(pid);
     }
+
+
+
 
 }
 

@@ -1,5 +1,6 @@
 package com.moxi.teacherServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.utils.ResultUtil;
@@ -25,12 +26,13 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/problem/gapFill")
-@Api(value = "填空题相关接口", tags = {"填空题相关接口"})
+@Api(value = "2.填空题相关接口", tags = {"2.填空题相关接口"})
 public class GapFillBankRestApi {
     @Autowired
     GapBankService gapBankService;
 
     @ApiOperation(value = "获取填空题问题列表(分页,支持根据keyword字段模糊查询)", notes = "获取填空题问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"gapFillVoList","uid"})
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class})@RequestBody GapFillBankVo vo, BindingResult result)
     {
@@ -40,6 +42,7 @@ public class GapFillBankRestApi {
 
 
     @ApiOperation(value = "批量新增填空题问题", notes = "批量新增填空题问题", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})
     @PostMapping("/addBatch")
     public String addBatch(@RequestBody GapFillBankVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -47,6 +50,7 @@ public class GapFillBankRestApi {
     }
 
     @ApiOperation(value = "编辑填空题问题", notes = "编辑填空题问题", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"publisher"})
     @PostMapping("/edit")
     public String edit(@RequestBody GapFillBankVo.GapFillVo vo) {
         //ThrowableUtils.checkParamArgument(result);

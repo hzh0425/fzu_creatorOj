@@ -1,5 +1,6 @@
 package com.moxi.teacherServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
@@ -24,13 +25,14 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/teacher/examBank")
-@Api(value = "考试的题目相关接口", tags = {"考试的题目相关接口"})
+@Api(value = "7.考试的题目相关接口", tags = {"7.考试的题目相关接口"})
 public class ExamBankRestApi {
 
     @Autowired
     ExamService examService;
 
-    @ApiOperation(value = "获取某场考试的某一题型的题目列表", notes = "获取某场考试的某一题型的题目列表", response = String.class)
+    @ApiOperation(value = "获取某场考试的某一题型的题目列表,会根据num字段排序,编程题只返回题目列表,需要再通过uid获取编程题的具体内容", notes = "获取某场考试的某一题型的题目列表", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"bankVoList","programId"})
     @PostMapping("/getListAsType")
     public String getListAsType(@Validated({GetList.class})@RequestBody BankListVo vo, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
@@ -38,6 +40,7 @@ public class ExamBankRestApi {
     }
 
     @ApiOperation(value = "为某场考试批量新增题目", notes = "为某场考试批量新增题目", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"programId","problemType","examId"})
     @PostMapping("/addProblemBatch")
     public String addProblemBatch(@RequestBody BankListVo vo) {
         //ThrowableUtils.checkParamArgument(result);

@@ -1,6 +1,9 @@
 package com.moxi.xo.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.moxi.base.mapper.SuperMapper;
 import com.moxi.xo.entity.Class;
@@ -18,7 +21,7 @@ import java.util.List;
 public interface ClassMapper extends SuperMapper<Class> {
     @Select("SELECT a2.* \n" +
             "FROM class_teacher a1 JOIN class a2\n" +
-            "ON a1.cid=a2.uid\n" +
-            "WHERE a1.tid=#{teacherId} AND a2.valid=1 ")
-    public IPage<Class> getListByTeacherId( IPage<Class> page,@Param("teacherId")String teacherId);
+            "ON a1.cid=a2.uid \n" +
+            "${ew.customSqlSegment}")
+    public IPage<Class> getListByTeacherId(IPage<Class> page,@Param(Constants.WRAPPER) Wrapper<Class> wrapper);
 }

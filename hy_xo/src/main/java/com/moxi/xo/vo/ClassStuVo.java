@@ -4,6 +4,8 @@ import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.validator.group.AddBatch;
 import com.moxi.base.validator.group.Delete;
 import com.moxi.base.validator.group.Insert;
+import com.moxi.base.vo.BaseVO;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,7 +16,8 @@ import java.util.List;
  * @date 2020/10/12 19:25
  */
 @Data
-public class ClassStuVo {
+@ApiModel("班级学生 接受类")
+public class ClassStuVo extends BaseVO<ClassStuVo> {
 
     @ApiModelProperty(value = "studentId,(student表的id,若有多个id,用(',')划分)")
     @NotBlank(groups = {Insert.class, Delete.class})

@@ -1,5 +1,6 @@
 package com.moxi.teacherServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.utils.ResultUtil;
@@ -27,12 +28,13 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/problem/option")
-@Api(value = "1.单/多选,判断题相关接口", tags = {"单/多选,判断题相关接口"})
+@Api(value = "1.选择题相关接口", tags = {"1.选择题相关接口"})
 public class OptionBankRestApi {
     @Autowired
     OptionBankService optionBankService;
 
     @ApiOperation(value = "获取选择题列表(分页,支持根据keyword字段模糊查询),需要先传入", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"optionVoList","uid"})
     @PostMapping("/getList")
     public String getList(@Validated({GetList.class})@RequestBody OptionBankVo vo, BindingResult result)
     {
@@ -41,6 +43,7 @@ public class OptionBankRestApi {
     }
 
     @ApiOperation(value = "批量新增选择问题", notes = "批量新增选择问题", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","optionType"})
     @PostMapping("/addBatch")
     public String addBatch(@RequestBody OptionBankVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -48,6 +51,7 @@ public class OptionBankRestApi {
     }
 
     @ApiOperation(value = "编辑选择问题", notes = "编辑选择问题", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"publisher"})
     @PostMapping("/edit")
     public String edit(@RequestBody OptionBankVo.OptionVo vo) {
         //ThrowableUtils.checkParamArgument(result);

@@ -36,14 +36,14 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("/teacher/class")
-@Api(value = "班级相关接口", tags = {"班级相关接口"})
+@Api(value = "4.班级相关接口", tags = {"4.班级相关接口"})
 public class classRestApi {
     @Autowired
     ClassService classService;
 
 
     @ApiOperation(value = "获取班级列表", notes = "获取班级列表,keyword可选,用于模糊查询", response = String.class)
-    @ApiOperationSupport(includeParameters = {"currentPage","teacherId","pageSize","keyword"})
+    @ApiOperationSupport(ignoreParameters = {"className","classDesc","creator","uid"})
     @PostMapping("/getList")
     public String getList(@RequestBody ClassVo vo)
     {
@@ -51,9 +51,9 @@ public class classRestApi {
     }
 
 
-    @permissionLogVerify
+
     @ApiOperation(value = "新增班级", notes = "新增班级", response = String.class)
-    @ApiOperationSupport(includeParameters ={"teacherId","classDesc","className","creator"})
+    @ApiOperationSupport(ignoreParameters ={"uid","currentPage","pageSize","keyword"})
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody ClassVo vo, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
@@ -61,13 +61,13 @@ public class classRestApi {
     }
 
     @ApiOperation(value = "更新班级信息", notes = "更新班级信息", response = String.class)
-    @ApiOperationSupport(ignoreParameters ={"stuNum","valid","currentPage","teacherId","pageSize","keyword"})
+    @ApiOperationSupport(ignoreParameters ={"currentPage","teacherId","pageSize","keyword"})
     @PostMapping("/edit")
     public String edit(@Validated({Update.class}) @RequestBody ClassVo vo) {
         return classService.edit(vo);
     }
 
-    @AuthorityVerify
+
     @ApiOperation(value = "删除班级", notes = "删除班级", response = String.class)
     @DeleteMapping("/delete/{classId}")
     public String delete(@PathVariable String classId){

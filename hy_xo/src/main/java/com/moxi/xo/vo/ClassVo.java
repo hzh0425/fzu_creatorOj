@@ -3,6 +3,7 @@ package com.moxi.xo.vo;
 import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.validator.group.Insert;
 import com.moxi.base.vo.BaseVO;
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.apache.ibatis.annotations.Update;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
  * @date 2020/10/12 14:19
  */
 @Data
+@ApiModel("班级接受类")
 public class ClassVo extends BaseVO {
 
 
@@ -39,23 +41,13 @@ public class ClassVo extends BaseVO {
     private String classDesc;
 
     /**
-     * 班级人数
-     */
-    @ApiModelProperty(value = "班级人数")
-    private Integer stuNum;
-
-    /**
      * 创建者
      */
     @ApiModelProperty(value = "班级创建者(教师的名字)")
     @NotBlank(groups = {Insert.class})
     private String creator;
 
-    /**
-     * 该是否起作用
-     */
-    @ApiModelProperty(value = "是否起作用")
-    private Integer valid;
+
 
 
 

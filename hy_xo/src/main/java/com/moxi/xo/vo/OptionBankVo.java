@@ -1,6 +1,9 @@
 package com.moxi.xo.vo;
 
 import com.moxi.base.vo.BaseVO;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import java.util.List;
 /**
@@ -9,10 +12,15 @@ import java.util.List;
  * @date 2020/10/13 21:42
  */
 @Data
+@ApiModel("选择题题库 接收类")
 public class OptionBankVo extends BaseVO<OptionBankVo> {
 
+    @ApiModelProperty(value = "选择题类型,1-单选题,2-多选题,3,判断题")
     private int optionType;
+    @ApiModelProperty("选择题题库列表")
     private List<OptionVo> optionVoList;
+
+    @ApiModel(value = "选择题 接收类"  )
     @Data
     public static class OptionVo{
 
@@ -21,25 +29,31 @@ public class OptionBankVo extends BaseVO<OptionBankVo> {
         /**
          * 题目题目/描述
          */
+
+        @ApiModelProperty(value = "题目")
         private String questionTitle;
 
 
         /**
          * 1-单选题,2-多选题,3,判断题
          */
+        @ApiModelProperty(value = "选择题类型,1-单选题,2-多选题,3,判断题 ")
         private Integer optionType;
         /**
          * 选项答案
          */
+        @ApiModelProperty(value = "答案,如果有多个 则以,划分")
         private String questionAnswer;
         /**
          * 发布者
          */
+        @ApiModelProperty(value = "发布者姓名")
         private String publisher;
 
         /**
          * 选项表
          */
+        @ApiModelProperty(value = "选项列表")
         private List<OptionSelect> optionSelectList;
 
     }
@@ -49,11 +63,13 @@ public class OptionBankVo extends BaseVO<OptionBankVo> {
         /**
          * 选项描述
          */
+        @ApiModelProperty(value = "选项描述")
         private String optionDesc;
 
         /**
          * A,B,C,D
          */
+        @ApiModelProperty(value = "第几个选项 A,B,C,D")
         private String optionNum;
 
     }
