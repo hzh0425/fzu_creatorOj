@@ -52,8 +52,7 @@ public class ClassStuServiceImpl extends SuperServiceImpl<ClassStuMapper, ClassS
     ClassStuMapper classStuMapper;
     @Resource
     ClassStuService classStuService;
-    @Autowired
-    ExcelUtil excelUtil;
+
 
 
     @Override
