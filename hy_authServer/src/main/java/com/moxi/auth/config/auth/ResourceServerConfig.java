@@ -22,28 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 @Configuration
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
-
-
-
-
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         //需要在此配置resouorceId,并在oauth2中配置client
         resources.resourceId("Resource");
     }
 
-    @Override
-    public void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/api/**").authenticated()
-                .and()
-                .authorizeRequests()
-                .antMatchers("/info/**").authenticated()
-                .and()
-                .httpBasic();
-    }
+
 }
 
 

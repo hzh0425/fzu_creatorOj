@@ -1,4 +1,4 @@
-package com.moxi.auth.config.bean;
+package com.moxi.auth.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,11 +20,13 @@ public class MySecurityUser extends User {
 
     public String userDesc;
 
-    public MySecurityUser(String userId,String userDesc,String username, String password, Collection<? extends GrantedAuthority> authorities) {
+    public int userType;
+
+    public MySecurityUser(String userId,String userDesc,int userType,String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
-        System.out.println("get a userId"+userId);
         this.userId=userId;
         this.userDesc=userDesc;
+        this.userType=userType;
     }
 
     public String getUserDesc() {
@@ -33,5 +35,9 @@ public class MySecurityUser extends User {
 
     public String getUserId() {
         return userId;
+    }
+
+    public int getUserType() {
+        return userType;
     }
 }

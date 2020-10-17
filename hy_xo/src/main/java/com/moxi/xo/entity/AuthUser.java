@@ -72,6 +72,10 @@ public class AuthUser extends SuperEntity<AuthUser> {
     private Integer valid;
 
     /**
+     *  1-学生,2-教师,3-管理员
+     */
+    private int userType;
+    /**
      * 创造时间
      */
     private LocalDate createDate;
@@ -83,4 +87,8 @@ public class AuthUser extends SuperEntity<AuthUser> {
 
     @TableField(exist = false)
     private List<AuthRole> roleList;
+
+
+
+
 }

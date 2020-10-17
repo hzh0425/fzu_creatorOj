@@ -1,5 +1,6 @@
 package com.moxi.auth.entity;
 
+import com.moxi.xo.entity.AuthUser;
 import lombok.Builder;
 import lombok.Data;
 
@@ -28,5 +29,8 @@ public class Oauth2TokenVo {
      */
     private int expiresIn;
 
+    /**
+     * 用户的uid
+     */
     private String userId;
 }

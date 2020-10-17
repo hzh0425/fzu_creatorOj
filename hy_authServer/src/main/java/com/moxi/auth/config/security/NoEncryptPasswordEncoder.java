@@ -4,10 +4,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * 〈自定义无加密密码验证〉
- * 重写了PasswordEncoder  密码是不加密的
- * 加密的话 使用 BCryptPasswordEncoder
- * @since 1.0.0 * @author wangmx
  */
 @Component
 public class NoEncryptPasswordEncoder implements PasswordEncoder {
