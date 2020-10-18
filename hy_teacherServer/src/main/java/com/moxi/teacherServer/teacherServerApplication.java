@@ -30,7 +30,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         "com.moxi.xo.service",
         "com.moxi.commons.feign",
         "com.moxi.utils.FileUtil",
-        "com.moxi.teacherServer.annotation"
+        "com.moxi.teacherServer.annotation",
+        "com.moxi.xo.util"
 })
 public class teacherServerApplication {
     public static void main(String[] args) {

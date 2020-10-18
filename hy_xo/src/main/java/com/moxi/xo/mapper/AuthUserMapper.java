@@ -22,7 +22,8 @@ public interface AuthUserMapper extends SuperMapper<AuthUser> {
     @Select("SELECT * FROM auth_user WHERE email=#{username}")
     @Results(value = {
             @Result(column = "uid",property = "uid",id = true),
-            @Result(column = "uid",property = "roleList",many = @Many(select = "com.moxi.xo.mapper.AuthRoleMapper.getRolesByUserId"))
+            @Result(column = "uid",property = "roleList",many = @Many(select = "com.moxi.xo.mapper.AuthRoleMapper.getRolesByUserId")),
+            @Result(column = "uid",property = "permissionList",many = @Many(select = "com.moxi.xo.mapper.AuthPermissionMapper.getPermissionsByOwnerId"))
     })
     public AuthUser loadUserByEmail(@Param("username") String username);
     /**

@@ -74,6 +74,7 @@ public class AuthController {
         Boolean flag=false;
         for(GrantedAuthority authority:authorities){
             String per = authority.getAuthority();
+            System.out.println("auth:"+per);
             if(per.equals(url)){
                 flag=true;break;
             }

@@ -1,5 +1,6 @@
 package com.moxi.xo.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -16,6 +17,7 @@ import com.moxi.xo.mapper.ClassMapper;
 import com.moxi.xo.service.ClassService;
 import com.moxi.xo.service.ClassStuService;
 import com.moxi.xo.service.ClassTeacherService;
+import com.moxi.xo.util.ResourceUtil;
 import com.moxi.xo.vo.ClassVo;
 import com.moxi.xo.vo.ResourceReturningVo;
 import org.apache.ibatis.jdbc.SQL;
@@ -45,6 +47,8 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     ClassTeacherService classTeacherService;
     @Autowired
     ClassStuService classStuService;
+    @Autowired
+    ResourceUtil resourceUtil;
     @Override
     public IPage<Class> getList(ClassVo vo) {
         Page<Class> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
@@ -74,11 +78,13 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         ClassTeacher ct=new ClassTeacher(vo.getTeacherId(),cur.getUid());
         ct.insert();
 
-//        //4.创建返回体
-//        String permissionUrl="/class/"+cur.getUid();
-//        ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),permissionUrl,MessageConf.INSERT_SUCCESS);
+        //4.创建返回体
+        ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),MessageConf.INSERT_SUCCESS,cur.getUid(),SysConf.RESOURCE_CLASS);
 
-        return ResultUtil.result(SysConf.SUCCESS,MessageConf.INSERT_SUCCESS);
+        //5.创建资源
+        resourceUtil.buildPermissionAfterAddResource(templateVo);
+
+        return ResultUtil.result(SysConf.SUCCESS, templateVo);
     }
 
     @Override

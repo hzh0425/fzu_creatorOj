@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
+import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
 
 /**
  * @author hzh
@@ -19,9 +20,11 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
         "com.moxi.auth.aop",
         "com.moxi.commons.config",
         "com.moxi.auth.util",
-        "com.moxi.xo.service"
+        "com.moxi.xo.service",
+        "com.moxi.xo.util"
 })
 public class authApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(authApplication.class,args);
     }

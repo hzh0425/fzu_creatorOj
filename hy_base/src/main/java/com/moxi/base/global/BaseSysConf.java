@@ -1,5 +1,6 @@
 package com.moxi.base.global;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * 常量的基类
  *
@@ -46,8 +47,28 @@ public class BaseSysConf {
     public final static String BEARER="bearer";
     public final static String CODE="code";
 
+    public final static String RESOURCE_CLASS="class";
+    public final static String RESOURCE_EXAM="exam";
+    public final static String RESOURCE_PERMISSION_GROUP="permissionGroup";
 
+    public final static String OPERATION_ADD="add";
+    public final static String OPERATION_DELETE="delete";
+    public final static String OPERATION_EDIT="edit";
+    public final static String OPERATION_GET_LIST="getList";
 
+    public final static String OPERAND_STU="stu";
+    public final static String OPERAND_EXAM="exam";
+    public final static String OPERAND_PERMISSION_GROUP="permissionGroup";
 
-
+    public final static List<String> OPERATIONS=new ArrayList<String>(){{
+        add(OPERATION_ADD);
+        add(OPERATION_DELETE);
+        add(OPERATION_EDIT);
+        add(OPERATION_GET_LIST);
+    }};
+    public final static List<String> CLASS_OPERAND=new ArrayList<String>(){{
+        add(OPERAND_STU);
+        add(OPERAND_EXAM);
+        add(OPERAND_PERMISSION_GROUP);
+    }};
 }

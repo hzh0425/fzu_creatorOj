@@ -3,7 +3,7 @@ package com.moxi.teacherServer.annotation;
 /**
  * @author hzh
  * @version 1.0
- * @date 2020/10/15 21:00
+ * @date 2020/10/18 10:05
  */
-public class tt {
+public class t1 {
 }

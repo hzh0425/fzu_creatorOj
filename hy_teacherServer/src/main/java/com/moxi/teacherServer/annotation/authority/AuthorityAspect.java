@@ -46,9 +46,6 @@ public class AuthorityAspect {
 
     @Around(value = "pointcut(authorityVerify)")
     public Object doAround(ProceedingJoinPoint joinPoint, AuthorityVerify authorityVerify) throws Throwable {
-        //0.获取检验类型
-        String type=authorityVerify.value();
-        System.out.println(type);
         //1.解析token
         ServletRequestAttributes attribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attribute.getRequest();
@@ -63,16 +60,17 @@ public class AuthorityAspect {
 
         //2.获取请求路径
         String url = request.getRequestURI();
+        System.out.println("url is:"+url);
         //3.验证
         String result = authFeign.checkPermission(bearerToken, url);
 
         Map<String, Object> map = JsonUtils.jsonToMap(result);
         //4.结果
         String code=map.get(SysConf.CODE).toString();
+        System.out.println(code);
         if(code.equals(SysConf.SUCCESS)){
-            joinPoint.proceed();
+            return joinPoint.proceed();
         }
-
         return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_AUTH);
     }
 

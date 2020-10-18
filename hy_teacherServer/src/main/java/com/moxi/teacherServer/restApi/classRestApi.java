@@ -8,6 +8,7 @@ import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
 import com.moxi.teacherServer.annotation.permissionLog.permissionLogVerify;
 import com.moxi.teacherServer.global.SysConf;
 import com.moxi.utils.ResultUtil;
+import com.moxi.utils.ServerInfo.Sys;
 import com.moxi.xo.service.ClassService;
 import com.moxi.xo.vo.ClassVo;
 import io.swagger.annotations.Api;
@@ -53,7 +54,11 @@ public class classRestApi {
 
 
 
-    @permissionLogVerify(resourceType = "class",operationType = {"edit","delete","add","getList"},operand = {"stu","exam","permissionGroup"})
+//    @permissionLogVerify(
+//            resourceType = SysConf.RESOURCE_CLASS,
+//            operationType = {SysConf.OPERATION_ADD,SysConf.OPERATION_DELETE,SysConf.OPERATION_EDIT,SysConf.OPERATION_GETLIST},
+//            operand = {SysConf.OPERAND_STU,SysConf.OPERAND_EXAM, SysConf.OPERAND_PERMISSION_GROUP}
+//            )
     @ApiOperation(value = "新增班级", notes = "新增班级", response = String.class)
     @ApiOperationSupport(ignoreParameters ={"uid","currentPage","pageSize","keyword"})
     @PostMapping("/add")

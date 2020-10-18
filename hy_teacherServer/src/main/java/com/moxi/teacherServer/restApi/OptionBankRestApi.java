@@ -34,7 +34,7 @@ public class OptionBankRestApi {
     @Autowired
     OptionBankService optionBankService;
 
-    @AuthorityVerify("option")
+    @AuthorityVerify
     @ApiOperation(value = "获取选择题列表(分页,支持根据keyword字段模糊查询),需要先传入", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"optionVoList","uid"})
     @PostMapping("/getList")

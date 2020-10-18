@@ -21,10 +21,12 @@ public class ResourceReturningVo {
     private String ownerId;
 
 
-
     @ApiModelProperty(value = "通知")
     private String message;
 
     @ApiModelProperty("资源Id")
     private String resourceId;
+
+    @ApiModelProperty(value = "资源类型")
+    private String resourceType;
 }

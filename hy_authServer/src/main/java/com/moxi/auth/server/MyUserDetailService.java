@@ -33,7 +33,6 @@ public class MyUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         AuthUser authUser=userMapper.loadUserByEmail(username);
-
         Set<GrantedAuthority> grantedAuthorities=new HashSet<>();
         for(AuthRole role:authUser.getRoleList()){
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
@@ -45,6 +44,12 @@ public class MyUserDetailService implements UserDetailsService {
                 grantedAuthorities.add(authority);
             }
         }
+        for(AuthPermission permission:authUser.getPermissionList()){
+            String url=permission.getResourceUrl();
+            System.out.println(url);
+            GrantedAuthority authority = new SimpleGrantedAuthority(url);
+            grantedAuthorities.add(authority);
+        }
         //后期再改这几个参数
         // 可用性 :true:可用 false:不可用
         boolean enabled = true;
@@ -55,7 +60,6 @@ public class MyUserDetailService implements UserDetailsService {
         // 锁定性 :true:未锁定 false:已锁定
         boolean accountNonLocked = true;
         return new MySecurityUser(authUser.getUid(),authUser.getSelfDesc(),username,authUser.getPassWord(),grantedAuthorities);
-
     }
 
 }

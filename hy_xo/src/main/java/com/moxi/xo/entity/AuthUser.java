@@ -88,6 +88,8 @@ public class AuthUser extends SuperEntity<AuthUser> {
     @TableField(exist = false)
     private List<AuthRole> roleList;
 
+    @TableField(exist = false)
+    private List<AuthPermission> permissionList;
 
 
 

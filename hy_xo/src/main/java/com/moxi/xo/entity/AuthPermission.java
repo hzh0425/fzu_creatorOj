@@ -37,7 +37,7 @@ public class AuthPermission extends SuperEntity {
 
     private String resourceId;
 
-    private String operation_type;
+    private String operationType;
 
     private String operand;
 
@@ -50,12 +50,17 @@ public class AuthPermission extends SuperEntity {
 
     public String getResourceUrl(){
         StringBuilder sb=new StringBuilder();
-        sb.append(resourceType+SysConf.FILE_SEGMEN+resourceId);
-        if(StringUtils.isNotEmpty(operation_type)){
-            sb.append(SysConf.FILE_SEGMEN+operation_type);
+        if(StringUtils.isNotEmpty(resourceType)){
+            sb.append(SysConf.FILE_SEGMEN+resourceType);
         }
         if(StringUtils.isNotEmpty(operand)){
             sb.append(SysConf.FILE_SEGMEN+operand);
+        }
+        if(StringUtils.isNotEmpty(operationType)){
+            sb.append(SysConf.FILE_SEGMEN+operationType);
+        }
+        if(StringUtils.isNotEmpty(resourceId)){
+            sb.append(SysConf.FILE_SEGMEN+resourceId);
         }
         return sb.toString();
     }

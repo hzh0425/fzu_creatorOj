@@ -3,7 +3,9 @@ package com.moxi.teacherServer.restApi;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
+import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
 import com.moxi.utils.ResultUtil;
+import com.moxi.utils.ServerInfo.Sys;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SysConf;
@@ -24,16 +26,17 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/10/13 20:03
  */
 @RestController
-@RequestMapping("/teacher/exam")
+@RequestMapping("/class/exam")
 @Api(value = "6.考试相关接口", tags = {"6.考试相关接口"})
 public class ExamRestApi {
 
     @Autowired
     ExamService examService;
 
+    @AuthorityVerify
     @ApiOperation(value = "获取当前用户创建的考试列表(分页,支持根据keyword字段模糊查询)", notes = "获取当前用户创建的考试列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"examBankVoList","startTime","endTime","uid","examName","publisher"})
-    @PostMapping("/getList")
+    @PostMapping("/getList/{classId}")
     public String getList(@Validated({GetList.class})@RequestBody ExamVo vo, BindingResult result)
     {
         ThrowableUtils.checkParamArgument(result);
@@ -42,7 +45,7 @@ public class ExamRestApi {
 
     @ApiOperation(value = "新增考试", notes = "新增考试", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})
-    @PostMapping("/add")
+    @PostMapping("/add/{classId}")
     public String addBatch(@RequestBody ExamVo vo) {
         //ThrowableUtils.checkParamArgument(result);
         return examService.add(vo);
@@ -50,7 +53,7 @@ public class ExamRestApi {
 
     @ApiOperation(value = "编辑考试", notes = "编辑考试", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","tid","examBankVoList","publisher"})
-    @PostMapping("/edit")
+    @PostMapping("/edit/{classId}")
     public String edit(@RequestBody ExamVo vo) {
         //ThrowableUtils.checkParamArgument(result);
         return examService.edit(vo);
