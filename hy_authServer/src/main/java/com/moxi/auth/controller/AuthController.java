@@ -19,7 +19,6 @@ import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoi
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
-import test.service.AuthTeacherService;
 
 import java.security.Principal;
 import java.util.Collection;
@@ -70,6 +69,7 @@ public class AuthController {
      */
     @GetMapping(value = "/checkPermission")
     public String checkPermission(@RequestParam("token")String token,@RequestParam("url") String url){
+        System.out.println(token);
         Collection<GrantedAuthority> authorities=oauth2Utils.getAuthorities(token);
         Boolean flag=false;
         for(GrantedAuthority authority:authorities){

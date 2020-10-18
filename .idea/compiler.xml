@@ -14,7 +14,6 @@
         <module name="hy_base" />
         <module name="hy_gateway" />
         <module name="hy_commons" />
-        <module name="hy_grpc" />
         <module name="hy_minio" />
         <module name="hy_socketServer" />
         <module name="hy_xo" />
@@ -24,6 +23,7 @@
       <module name="hy_admin" target="1.8" />
       <module name="hy_authClient" target="1.8" />
       <module name="hy_envoy" target="1.8" />
+      <module name="hy_grpc" target="1.8" />
       <module name="hy_kubes" target="1.8" />
       <module name="hy_search" target="1.8" />
       <module name="hy_socket" target="1.8" />

@@ -1,7 +1,7 @@
 package com.moxi.auth.config.auth;
 
 import com.moxi.auth.config.bean.CustomTokenEnhancer;
-import com.moxi.auth.entity.MySecurityUser;
+import com.moxi.auth.controller.MySecurityUser;
 import com.moxi.auth.config.security.NoEncryptPasswordEncoder;
 import com.moxi.auth.global.SysConf;
 import org.apache.commons.collections.map.HashedMap;
@@ -119,6 +119,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                     @Override
                     public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
                         MySecurityUser user=(MySecurityUser) oAuth2Authentication.getPrincipal();
+                        System.out.println("get a user:");
+                        System.out.println(user.getUserId());
+                        System.out.println(user);
                         Map<String,Object> map=new HashedMap();
                         map.put(SysConf.USER_ID,user.getUserId());
                         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(map);

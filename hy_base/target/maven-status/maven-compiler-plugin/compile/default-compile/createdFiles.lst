@@ -4,6 +4,7 @@ com\moxi\base\global\BaseMessageConf.class
 com\moxi\base\global\BaseSQLConf.class
 com\moxi\base\validator\group\Delete.class
 com\moxi\base\validator\annotion\IdValid.class
+com\moxi\base\enums\EOption.class
 com\moxi\base\enums\EBehavior$1.class
 com\moxi\base\exception\ErrorMessageUtil.class
 com\moxi\base\enums\EPublish.class
@@ -35,6 +36,7 @@ com\moxi\base\exception\ExceptionUtil.class
 com\moxi\base\validator\constraint\BooleanValidator.class
 com\moxi\base\enums\EOriginal.class
 com\moxi\base\validator\annotion\Numeric.class
+com\moxi\base\validator\group\AddBatch.class
 com\moxi\base\global\Constants.class
 com\moxi\base\validator\annotion\NotBlank.class
 com\moxi\base\global\BaseSysConf.class
@@ -42,6 +44,7 @@ com\moxi\base\enums\EOpenStatus.class
 com\moxi\base\validator\constraint\IntegerValidator.class
 com\moxi\base\mapper\SuperMapper.class
 com\moxi\base\enums\ELevel.class
+com\moxi\base\enums\EProblemType.class
 com\moxi\base\exception\ErrorMessageUtil$ErrorMessage.class
 com\moxi\base\handler\HandlerExceptionResolver.class
 com\moxi\base\enums\ELinkStatus.class

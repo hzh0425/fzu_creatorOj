@@ -15,6 +15,7 @@
         <option value="$PROJECT_DIR$/hy_admin/pom.xml" />
         <option value="$PROJECT_DIR$/hy_authClient/pom.xml" />
         <option value="$PROJECT_DIR$/hy_envoy/pom.xml" />
+        <option value="$PROJECT_DIR$/hy_grpc/pom.xml" />
         <option value="$PROJECT_DIR$/hy_socket/pom.xml" />
       </set>
     </option>

@@ -42,6 +42,7 @@ public class classRestApi {
     ClassService classService;
 
 
+
     @ApiOperation(value = "获取班级列表", notes = "获取班级列表,keyword可选,用于模糊查询", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"className","classDesc","creator","uid"})
     @PostMapping("/getList")
@@ -52,6 +53,7 @@ public class classRestApi {
 
 
 
+    @permissionLogVerify(resourceType = "class",operationType = {"edit","delete","add","getList"},operand = {"stu","exam","permissionGroup"})
     @ApiOperation(value = "新增班级", notes = "新增班级", response = String.class)
     @ApiOperationSupport(ignoreParameters ={"uid","currentPage","pageSize","keyword"})
     @PostMapping("/add")

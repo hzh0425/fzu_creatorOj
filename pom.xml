@@ -21,7 +21,6 @@
         <module>hy_sms</module>
         <module>hy_xo</module>
         <module>hy_minio</module>
-        <module>hy_grpc</module>
         <module>hy_authServer</module>
         <module>hy_socketServer</module>
         <module>hy_teacherServer</module>

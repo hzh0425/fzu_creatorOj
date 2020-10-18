@@ -3,10 +3,12 @@ server:
 
 spring:
   application:
-    name: oj-teacherServer
+    name: oj-teacherServert
   cloud:
     nacos:
       discovery:
+
+        group: ojdev
         server-addr: 124.70.200.174:8848
         #ip: 124.70.200.174
       config:
@@ -17,15 +19,3 @@ spring:
     multipart:
       max-request-size: 30MB
       max-file-size: 20MB
-
-security:
-  oauth2:
-    client:
-      client-id: client
-      client-secret: secret
-      access-token-uri: http://localhost:9005/oauth/token
-      user-authorization-uri: http://localhost:9005/oauth/authorize
-      resource-ids: Resource
-    resource:
-      token-info-uri: http://localhost:9005/oauth/check_token
-      id: Resource

@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: oj-authServer #权限认证中心
+    name: oj-authServert #权限认证中心
   cloud:
     nacos:
       discovery:

@@ -21,9 +21,10 @@ public class ResourceReturningVo {
     private String ownerId;
 
 
-    @ApiModelProperty(value = "资源路径")
-    private String permissionUrl;
 
     @ApiModelProperty(value = "通知")
     private String message;
+
+    @ApiModelProperty("资源Id")
+    private String resourceId;
 }

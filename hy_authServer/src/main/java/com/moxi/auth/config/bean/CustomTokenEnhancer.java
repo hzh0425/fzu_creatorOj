@@ -1,6 +1,6 @@
 package com.moxi.auth.config.bean;
 
-import com.moxi.auth.entity.MySecurityUser;
+import com.moxi.auth.controller.MySecurityUser;
 import com.moxi.auth.global.SysConf;
 import org.apache.commons.collections.map.HashedMap;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -23,7 +23,6 @@ public class CustomTokenEnhancer implements TokenEnhancer {
         MySecurityUser user=(MySecurityUser) oAuth2Authentication.getPrincipal();
         Map<String,Object> map=new HashedMap();
         map.put(SysConf.USER_ID,user.getUserId());
-        map.put(SysConf.USER_TYPE,user.getUserType());
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(map);
         return oAuth2AccessToken;
     }

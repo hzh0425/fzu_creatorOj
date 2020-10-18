@@ -1,24 +1,11 @@
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\feign\FeignBasicAuthRequestInterceptor.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\redis\FastJsonRedisSerializer.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\security\SecurityUser.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\MenuPm.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\jwt\Audience.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\AuthPmGpFk.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\MicroDeployment.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\jwt\JwtHelper.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\mybatis\GlobalExceptionHandler.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\MenuPmGp.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\redis\RedisConfig.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\AuthPmGp.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\mybatis\MybatisPlusConfig.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\MenuPmGpFK.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\AuthUser.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\AuthUserPmGpFk.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\WebProxy.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\AuthPm.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\feign\FeignConfiguration.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\mybatis\MetaObjectHandlerConfig.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\UserPmGpFK.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\feign\envoyFeign.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\entity\trainSet.java
-D:\AjavaMyProject\springboot\sas\hy_commons\src\main\java\com\moxi\commons\config\durid\DruidConfig.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\annotation\asdf.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\redis\RedisConfig.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\durid\DruidConfig.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\feign\FeignBasicAuthRequestInterceptor.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\feign\FeignConfiguration.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\mybatis\MetaObjectHandlerConfig.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\mybatis\GlobalExceptionHandler.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\jwt\JwtHelper.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\mybatis\MybatisPlusConfig.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\redis\FastJsonRedisSerializer.java
+D:\AjavaMyProject\springboot\creatorOj - 副本\hy_commons\src\main\java\com\moxi\commons\config\jwt\Audience.java

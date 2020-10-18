@@ -1,7 +1,10 @@
 package com.moxi.teacherServer.annotation.authority;
 
+import com.moxi.commons.feign.authFeign;
 import com.moxi.teacherServer.config.RedisTokenStore;
+import com.moxi.utils.JsonUtils;
 import com.moxi.utils.ResultUtil;
+import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SysConf;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -18,6 +21,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * @author hzh
@@ -31,6 +35,8 @@ import java.util.Collection;
 public class AuthorityAspect {
     @Autowired
     RedisTokenStore tokenStore;
+    @Autowired
+    com.moxi.commons.feign.authFeign authFeign;
     /**
      * cut point
      */
@@ -40,27 +46,33 @@ public class AuthorityAspect {
 
     @Around(value = "pointcut(authorityVerify)")
     public Object doAround(ProceedingJoinPoint joinPoint, AuthorityVerify authorityVerify) throws Throwable {
+        //0.获取检验类型
+        String type=authorityVerify.value();
+        System.out.println(type);
+        //1.解析token
         ServletRequestAttributes attribute = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-
         HttpServletRequest request = attribute.getRequest();
-
-        String token=request.getHeader("Authorization");
+        String token=request.getHeader(SysConf.Authorization);
         if(token==null)return ResultUtil.result(SysConf.ERROR,MessageConf.OUT_SURVIVOR_TOKEN);
-        String bearerToken=token.split("bearer")[1];
-        if(bearerToken==null)return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_TOKEN);
-        //获取请求路径
+        String bearerToken;
+        if(token.contains(SysConf.BEARER)){
+            bearerToken=token.split(SysConf.BEARER)[1];
+        }else{
+            return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_TOKEN);
+        }
+
+        //2.获取请求路径
         String url = request.getRequestURI();
-        OAuth2Authentication auth2Authentication= tokenStore.readAuthentication(bearerToken);
-        if(auth2Authentication==null){
-            return ResultUtil.result(SysConf.ERROR, MessageConf.LOGIN_TIMEOUT);
+        //3.验证
+        String result = authFeign.checkPermission(bearerToken, url);
+
+        Map<String, Object> map = JsonUtils.jsonToMap(result);
+        //4.结果
+        String code=map.get(SysConf.CODE).toString();
+        if(code.equals(SysConf.SUCCESS)){
+            joinPoint.proceed();
         }
-        Collection<? extends GrantedAuthority> authorities = auth2Authentication.getAuthorities();
-        for(GrantedAuthority authority:authorities){
-            String per = authority.getAuthority();
-            if(per.equals(url)){
-                return joinPoint.proceed();
-            }
-        }
+
         return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_AUTH);
     }
 

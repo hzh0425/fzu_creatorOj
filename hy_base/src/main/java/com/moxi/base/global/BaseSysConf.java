@@ -3,8 +3,6 @@ package com.moxi.base.global;
 /**
  * 常量的基类
  *
- * @author xuzhixiang
- * @date 2017年9月25日00:06:54
  */
 public class BaseSysConf {
 
@@ -25,6 +23,7 @@ public class BaseSysConf {
 
     // 文件分割符
     public final static String FILE_SEGMENTATION = ",";
+    public final static String FILE_SEGMEN="/";
 
 
 
@@ -39,6 +38,13 @@ public class BaseSysConf {
     public static final String OTHER_DATA = "otherData";
     public static final String COMMENT_VO = "commentVO";
     public static final String CONTENT = "content";
+    public final static String DATA="data";
+
+
+    //权限相关
+    public final static String Authorization="Authorization";
+    public final static String BEARER="bearer";
+    public final static String CODE="code";
 
 
 

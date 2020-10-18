@@ -7,8 +7,6 @@
     <file url="file://$PROJECT_DIR$/hy_commons/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hy_gateway/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hy_gateway/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/hy_grpc/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/hy_grpc/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hy_minio/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hy_minio/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/hy_sms/src/main/java" charset="UTF-8" />

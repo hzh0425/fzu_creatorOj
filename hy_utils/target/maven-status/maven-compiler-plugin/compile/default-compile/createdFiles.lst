@@ -13,6 +13,7 @@ com\moxi\utils\MD5Utils.class
 com\moxi\utils\upload\Uploader.class
 com\moxi\utils\RegexUtils.class
 com\moxi\utils\DateJsonValueProcessor.class
+com\moxi\utils\FileUtil\CsvUtil.class
 com\moxi\utils\ServerInfo\ServerInfo.class
 com\moxi\utils\RestResult.class
 com\moxi\utils\IdWorkerUtils.class
@@ -27,6 +28,7 @@ com\moxi\utils\RedisUtil$1.class
 com\moxi\utils\upload\FileUtil.class
 com\moxi\utils\CheckUtils.class
 com\moxi\utils\CookieUtils.class
+com\moxi\utils\FileUtil\ExcelUtil.class
 com\moxi\utils\JwtUtil.class
 com\moxi\utils\DateUtils.class
 com\moxi\utils\StrUtils.class

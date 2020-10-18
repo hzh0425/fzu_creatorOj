@@ -3,6 +3,7 @@ package com.moxi.teacherServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2020/10/8 21:53
  */
 @SpringBootApplication
+@EnableFeignClients(basePackages = {"com.moxi.commons.feign"})
 @ComponentScan(basePackages = {
         "com.moxi.teacherServer.config",
         "com.moxi.teacherServer.restApi",

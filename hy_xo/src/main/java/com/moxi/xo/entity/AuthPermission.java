@@ -1,12 +1,15 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moxi.base.entity.SuperEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import com.moxi.utils.StringUtils;
+import com.moxi.xo.global.SysConf;
+import lombok.*;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -22,6 +25,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @TableName("auth_permission")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
@@ -29,37 +33,30 @@ public class AuthPermission extends SuperEntity {
 
     private static final long serialVersionUID = 1L;
 
+    private String resourceType;
 
+    private String resourceId;
 
-    /**
-     * 权限url
-     */
-    private String url;
+    private String operation_type;
 
-    /**
-     * 请求方法(get,post,delete等)
-     */
-    private String method;
+    private String operand;
 
-    /**
-     * 资源创建者uid
-     */
     private String ownerId;
 
-    /**
-     * 该权限是否起作用
-     */
-    private Integer valid;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date  createDate;
 
-    /**
-     * 创造时间
-     */
-    private Date createDate;
-
-    /**
-     * 修改时间
-     */
-    private Date updateDate;
-
-
+    public String getResourceUrl(){
+        StringBuilder sb=new StringBuilder();
+        sb.append(resourceType+SysConf.FILE_SEGMEN+resourceId);
+        if(StringUtils.isNotEmpty(operation_type)){
+            sb.append(SysConf.FILE_SEGMEN+operation_type);
+        }
+        if(StringUtils.isNotEmpty(operand)){
+            sb.append(SysConf.FILE_SEGMEN+operand);
+        }
+        return sb.toString();
+    }
 }
