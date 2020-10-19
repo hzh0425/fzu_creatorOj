@@ -3,7 +3,7 @@ package com.moxi.teacherServer.restApi;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
-import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
+
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;
@@ -34,7 +34,6 @@ public class OptionBankRestApi {
     @Autowired
     OptionBankService optionBankService;
 
-    @AuthorityVerify
     @ApiOperation(value = "获取选择题列表(分页,支持根据keyword字段模糊查询),需要先传入", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"optionVoList","uid"})
     @PostMapping("/getList")

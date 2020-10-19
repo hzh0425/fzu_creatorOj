@@ -70,11 +70,13 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
         exam.insert();
         String eid=exam.getUid();
         //2.创建考试对应的题目集
-        List<ExamBank> bankList=vo.getExamBankVoList().stream().parallel()
-                .map(x->{
-                    return new ExamBank(eid,x.getBid(),x.getType(),x.getNum(),x.getScore());
-                }).collect(Collectors.toList());
-        examBankService.saveBatch(bankList);
+        if(vo.getExamBankVoList()!=null){
+            List<ExamBank> bankList=vo.getExamBankVoList().stream().parallel()
+                    .map(x->{
+                        return new ExamBank(eid,x.getBid(),x.getType(),x.getNum(),x.getScore());
+                    }).collect(Collectors.toList());
+            examBankService.saveBatch(bankList);
+        }
         return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
     }
 

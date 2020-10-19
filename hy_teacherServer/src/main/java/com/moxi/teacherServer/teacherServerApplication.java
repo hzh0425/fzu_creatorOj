@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @date 2020/10/8 21:53
  */
 @SpringBootApplication
+@EnableResourceServer
 @EnableFeignClients(basePackages = {"com.moxi.commons.feign"})
 @ComponentScan(basePackages = {
         "com.moxi.teacherServer.config",

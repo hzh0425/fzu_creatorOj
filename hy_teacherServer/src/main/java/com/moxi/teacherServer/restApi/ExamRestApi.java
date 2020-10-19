@@ -3,7 +3,6 @@ package com.moxi.teacherServer.restApi;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
-import com.moxi.teacherServer.annotation.authority.AuthorityVerify;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.ServerInfo.Sys;
 import com.moxi.utils.StringUtils;
@@ -16,6 +15,7 @@ import com.moxi.xo.vo.OptionBankVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ public class ExamRestApi {
     @Autowired
     ExamService examService;
 
-    @AuthorityVerify
+
     @ApiOperation(value = "获取当前用户创建的考试列表(分页,支持根据keyword字段模糊查询)", notes = "获取当前用户创建的考试列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"examBankVoList","startTime","endTime","uid","examName","publisher"})
     @PostMapping("/getList/{classId}")
@@ -42,6 +42,7 @@ public class ExamRestApi {
         ThrowableUtils.checkParamArgument(result);
         return ResultUtil.result(SysConf.SUCCESS, examService.getList(vo));
     }
+
 
     @ApiOperation(value = "新增考试", notes = "新增考试", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})

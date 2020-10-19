@@ -15,6 +15,7 @@ import com.moxi.xo.service.AuthUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationProcessingFilter;
 import org.springframework.security.oauth2.provider.endpoint.AuthorizationEndpoint;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -70,6 +71,7 @@ public class AuthController {
     @GetMapping(value = "/checkPermission")
     public String checkPermission(@RequestParam("token")String token,@RequestParam("url") String url){
         System.out.println(token);
+        
         Collection<GrantedAuthority> authorities=oauth2Utils.getAuthorities(token);
         Boolean flag=false;
         for(GrantedAuthority authority:authorities){
