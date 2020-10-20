@@ -18,9 +18,9 @@ import java.util.List;
  */
 public interface ExamService extends SuperService<Exam> {
 
-    public IPage<Exam> getList(ExamVo vo);
+    public IPage<Exam> getList(String classId, ExamVo vo);
 
-    public String add(ExamVo vo);
+    public String add(String classId, ExamVo vo);
 
     public String delete(String eid);
 

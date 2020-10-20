@@ -34,7 +34,9 @@ public class Exam extends SuperEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private String tid;
+
+
+    private String classId;
     /**
      * 考试名
      */
@@ -70,8 +72,9 @@ public class Exam extends SuperEntity {
     @TableField(exist = false)
     private List<ExamBank> examBankList;
 
-    public Exam(String tid, String examName, Date startTime, Date endTime, String publisher) {
-        this.tid = tid;
+    public Exam(String classId,String examName, Date startTime, Date endTime, String publisher) {
+
+        this.classId=classId;
         this.examName = examName;
         this.startTime = startTime;
         this.endTime = endTime;

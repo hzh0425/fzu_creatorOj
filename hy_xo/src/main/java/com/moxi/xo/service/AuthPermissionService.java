@@ -13,4 +13,5 @@ import com.moxi.xo.entity.AuthPermission;
  */
 public interface AuthPermissionService extends SuperService<AuthPermission> {
 
+    public void deleteResource(String resourceId);
 }

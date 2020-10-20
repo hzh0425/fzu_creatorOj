@@ -60,11 +60,15 @@ public class ProgramBank extends SuperEntity {
      * 发布者
      */
     private String publisher;
+    /**
+     * 发布者id
+     */
+    private String publisherId;
 
     /**
-     * 该资源是否起作用
+     * 共享模式 0-不共享,1-只读共享,2-读写共享
      */
-    private Integer valid;
+    private int shareMode;
 
     /**
      * 创造时间
@@ -79,25 +83,26 @@ public class ProgramBank extends SuperEntity {
     @TableField(exist = false)
     private List<ProgramExample> exampleList;
 
-    public ProgramBank(String questionTitle, String questionContent, String questionExample, Integer upperTime, Integer upperMemory, String publisher, Integer valid, Date createDate, Date updateDate) {
+    public ProgramBank(String questionTitle, String questionContent, String questionExample, Integer upperTime, Integer upperMemory, String publisher,String publisherId, Integer shareMode, Date createDate, Date updateDate) {
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
         this.questionExample = questionExample;
         this.upperTime = upperTime;
         this.upperMemory = upperMemory;
         this.publisher = publisher;
-        this.valid = valid;
+        this.publisherId=publisherId;
+        this.shareMode=shareMode;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
 
-    public void UpdateProgramBank(String questionTitle, String questionContent, String questionExample, Integer upperTime, Integer upperMemory, Integer valid) {
+    public void UpdateProgramBank(String questionTitle, String questionContent, String questionExample, Integer upperTime, Integer upperMemory, Integer shareMode) {
         this.questionTitle = questionTitle;
         this.questionContent = questionContent;
         this.questionExample = questionExample;
         this.upperTime = upperTime;
         this.upperMemory = upperMemory;
-        this.valid = valid;
+        this.shareMode=shareMode;
         this.updateDate=new Date();
     }
 }

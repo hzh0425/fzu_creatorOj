@@ -15,11 +15,14 @@ import com.moxi.xo.mapper.ExamMapper;
 import com.moxi.xo.mapper.GapBankMapper;
 import com.moxi.xo.mapper.OptionBankMapper;
 import com.moxi.xo.mapper.ProgramBankMapper;
+import com.moxi.xo.service.AuthPermissionService;
 import com.moxi.xo.service.ExamBankService;
 import com.moxi.xo.service.ExamService;
 import com.moxi.xo.entity.Exam;
+import com.moxi.xo.util.ResourceUtil;
 import com.moxi.xo.vo.BankListVo;
 import com.moxi.xo.vo.ExamVo;
+import com.moxi.xo.vo.ResourceReturningVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,25 +51,37 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
     GapBankMapper gapBankMapper;
     @Resource
     ProgramBankMapper programBankMapper;
-
-
+    @Autowired
+    ResourceUtil resourceUtil;
+    @Autowired
+    AuthPermissionService authPermissionService;
     @Override
-    public IPage<Exam> getList(ExamVo vo) {
-
-        QueryWrapper<Exam> wrapper=new QueryWrapper<>();
-        if(StringUtils.isNotEmpty(vo.getKeyword())){
-            wrapper.like(SqlConf.EXAM_NAME,vo.getKeyword());
-        }
-        wrapper.eq(SqlConf.TID,vo.getTid());
-        wrapper.orderByDesc(SqlConf.CREATE_DATE);
+    public IPage<Exam> getList(String classId, ExamVo vo) {
+        QueryWrapper<Exam> wrapper=new QueryWrapper<Exam>(){{
+            //如果关键字不为空
+            if(StringUtils.isNotEmpty(vo.getKeyword())){
+                like(SqlConf.EXAM_NAME,vo.getKeyword());
+            }
+            //classId
+            eq(SqlConf.CLASS_ID,classId);
+            orderByDesc(SqlConf.CREATE_DATE);
+        }};
         Page<Exam> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
         return examService.page(page,wrapper);
     }
 
     @Override
-    public String add(ExamVo vo) {
+    public String add(String classId, ExamVo vo) {
+        //0.先查询当前班级下的该考试是否存在
+        QueryWrapper<Exam> wrapper=new QueryWrapper<Exam>(){{
+            eq(SqlConf.EXAM_NAME,vo.getExamName());
+            eq(SqlConf.CLASS_ID,classId);
+        }};
+        if(examService.count(wrapper)>0){
+            return ResultUtil.result(SysConf.ERROR,MessageConf.EXAM_EXIST);
+        }
         //1.创建考试,获取eid
-        Exam exam=new Exam(vo.getTid(),vo.getExamName(),vo.getStartTime(),vo.getEndTime(),vo.getPublisher());
+        Exam exam=new Exam(classId,vo.getExamName(),vo.getStartTime(),vo.getEndTime(),vo.getPublisher());
         exam.insert();
         String eid=exam.getUid();
         //2.创建考试对应的题目集
@@ -77,6 +92,10 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
                     }).collect(Collectors.toList());
             examBankService.saveBatch(bankList);
         }
+        //3.资源增加返回体
+        ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTid(),SysConf.SUCCESS,exam.getUid(),SysConf.RESOURCE_EXAM);
+        //4.增加考试的权限
+        resourceUtil.buildPermissionAfterAddResource(templateVo, SysConf.EXAM_ID);
         return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
     }
 
@@ -90,6 +109,8 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
         QueryWrapper<ExamBank> wrapper=new QueryWrapper<>();
         wrapper.eq(SqlConf.EID,eid);
         examBankService.remove(wrapper);
+        //3.删除资源表的数据
+        authPermissionService.deleteResource(eid);
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
     }
 

@@ -50,17 +50,21 @@ public class AuthPermission extends SuperEntity {
 
     public String getResourceUrl(){
         StringBuilder sb=new StringBuilder();
+        //资源类型
         if(StringUtils.isNotEmpty(resourceType)){
             sb.append(SysConf.FILE_SEGMEN+resourceType);
         }
+        //资源id
+        if(StringUtils.isNotEmpty(resourceId)){
+            sb.append(SysConf.FILE_SEGMEN+resourceId);
+        }
+        //操作对象
         if(StringUtils.isNotEmpty(operand)){
             sb.append(SysConf.FILE_SEGMEN+operand);
         }
+        //操作类型
         if(StringUtils.isNotEmpty(operationType)){
             sb.append(SysConf.FILE_SEGMEN+operationType);
-        }
-        if(StringUtils.isNotEmpty(resourceId)){
-            sb.append(SysConf.FILE_SEGMEN+resourceId);
         }
         return sb.toString();
     }

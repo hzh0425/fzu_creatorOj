@@ -12,6 +12,7 @@ public class SqlConf extends BaseSQLConf {
      * 班级相关
      */
     public final static String CLASS_NAME="class_name";
+    public final static String CLASS_ID="class_id";
     public final static String CREATOR="creator";
 
     /**

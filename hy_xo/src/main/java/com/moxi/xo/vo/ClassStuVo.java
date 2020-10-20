@@ -28,6 +28,8 @@ public class ClassStuVo extends BaseVO<ClassStuVo> {
     private String cid;
 
 
+
+
     @ApiModelProperty(value = "学生列表")
     @NotBlank(groups = {AddBatch.class})
     private List<StuVo> stuList;

@@ -23,6 +23,7 @@ public class ProgramBankVo extends BaseVO<ProgramBankVo> {
     public static class ProgramVo  {
 
 
+
         private String uid;
         /**
          * 题目的题目/描述
@@ -52,6 +53,19 @@ public class ProgramBankVo extends BaseVO<ProgramBankVo> {
          */
         @ApiModelProperty(value = "发布者姓名")
         private String publisher;
+
+        /**
+         * 发布者id
+         */
+        @ApiModelProperty(value = "发布者id")
+        private String publisherId;
+
+        /**
+         * 共享模式 0-不共享,1-只读共享,2-读写共享
+         */
+        @ApiModelProperty(value = "共享模式 0-不共享,1-只读共享,2-读写共享")
+        private int shareMode;
+
 
         /**
          * 题目示例

@@ -25,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableResourceServer
 @EnableFeignClients(basePackages = {"com.moxi.commons.feign"})
 @ComponentScan(basePackages = {
+        "com.moxi.teacherServer.util",
         "com.moxi.teacherServer.config",
         "com.moxi.teacherServer.restApi",
         "com.moxi.commons.config",//公共配置

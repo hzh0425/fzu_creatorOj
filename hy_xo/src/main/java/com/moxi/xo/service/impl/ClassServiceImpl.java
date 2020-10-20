@@ -14,6 +14,7 @@ import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SqlConf;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.mapper.ClassMapper;
+import com.moxi.xo.service.AuthPermissionService;
 import com.moxi.xo.service.ClassService;
 import com.moxi.xo.service.ClassStuService;
 import com.moxi.xo.service.ClassTeacherService;
@@ -49,6 +50,8 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     ClassStuService classStuService;
     @Autowired
     ResourceUtil resourceUtil;
+    @Autowired
+    AuthPermissionService authPermissionService;
     @Override
     public IPage<Class> getList(ClassVo vo) {
         Page<Class> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
@@ -82,7 +85,7 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),MessageConf.INSERT_SUCCESS,cur.getUid(),SysConf.RESOURCE_CLASS);
 
         //5.创建资源
-        resourceUtil.buildPermissionAfterAddResource(templateVo);
+        resourceUtil.buildPermissionAfterAddResource(templateVo, SysConf.CLASS_ID);
 
         return ResultUtil.result(SysConf.SUCCESS, templateVo);
     }
@@ -116,6 +119,8 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         pre.deleteById();
         //2.删除中间表记录
         deleteMidTableLogByClassId(classId);
+        //3.删除权限表记录
+        authPermissionService.deleteResource(classId);
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
     }
 

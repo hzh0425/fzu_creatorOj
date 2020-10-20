@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.moxi.base.enums.EStatus;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
@@ -54,24 +53,30 @@ public class ProgramBankServiceImpl extends SuperServiceImpl<ProgramBankMapper, 
 
     @Override
     public String addBatch(ProgramBankVo vo) {
+        //1.构造programBank list
         List<ProgramBank> list=vo.getProgramVoList().stream().map(x->{
             String programExamples=null;
             if(x.getExampleVoList()!=null&&x.getExampleVoList().size()>0){
                 programExamples= JSON.toJSONString(x.getExampleVoList());
             }
-            return new ProgramBank(x.getQuestionTitle(),x.getQuestionContent(),programExamples,x.getUpperTime(),x.getUpperMemory(),x.getPublisher(), EStatus.ENABLE,new Date(),new Date());
+            return new ProgramBank(x.getQuestionTitle(),x.getQuestionContent(),programExamples,x.getUpperTime(),x.getUpperMemory(),x.getPublisher(),x.getPublisherId(),x.getShareMode(),new Date(),new Date());
         }).collect(Collectors.toList());
+        //保存
         programBankService.saveBatch(list);
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.INSERT_SUCCESS);
     }
 
 
     @Override
-    public String delete(String pid) {
-        ProgramBank pre=programBankService.getById(pid);
+    public String delete(String programId, String userId) {
+        ProgramBank pre=programBankService.getById(programId);
         if(pre==null)return ResultUtil.result(SysConf.ERROR, MessageConf.ENTITY_NOT_EXIST);
-        pre.deleteById();
-        return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
+        if(pre.getPublisherId().equals(userId)){
+            pre.deleteById();
+            return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
+        }else{
+            return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_AUTH);
+        }
     }
 
     @Override
@@ -84,7 +89,7 @@ public class ProgramBankServiceImpl extends SuperServiceImpl<ProgramBankMapper, 
         }else{
             examples=program.getQuestionExample();
         }
-        program.UpdateProgramBank(vo.getQuestionTitle(),vo.getQuestionContent(),examples,vo.getUpperTime(),vo.getUpperMemory(),1);
+        program.UpdateProgramBank(vo.getQuestionTitle(),vo.getQuestionContent(),examples,vo.getUpperTime(),vo.getUpperMemory(),vo.getShareMode());
         program.updateById();
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.UPDATE_SUCCESS);
     }

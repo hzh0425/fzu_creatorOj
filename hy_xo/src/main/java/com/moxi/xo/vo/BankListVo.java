@@ -20,8 +20,8 @@ public class BankListVo {
     @NotBlank(groups = {GetList.class})
     private String examId;
 
-    @ApiModelProperty(value = "编程题的id")
-    private String programId;
+    @ApiModelProperty(value = "题目的id")
+    private String bankId;
 
     @ApiModelProperty(value = "编程类型")
     private int problemType;

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020/10/14 15:07
  */
 @RestController
-@RequestMapping("/teacher/examBank")
+@RequestMapping("/exam")
 @Api(value = "7.考试的题目相关接口", tags = {"7.考试的题目相关接口"})
 public class ExamBankRestApi {
 
@@ -33,25 +33,29 @@ public class ExamBankRestApi {
 
     @ApiOperation(value = "获取某场考试的某一题型的题目列表,会根据num字段排序,编程题只返回题目列表,需要再通过uid获取编程题的具体内容", notes = "获取某场考试的某一题型的题目列表", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"bankVoList","programId"})
-    @PostMapping("/getListAsType")
-    public String getListAsType(@Validated({GetList.class})@RequestBody BankListVo vo, BindingResult result) {
+    @PostMapping("/{examId}/problem/getList")
+    public String getListAsType(@PathVariable String examId,@Validated({GetList.class})@RequestBody BankListVo vo, BindingResult result) {
         ThrowableUtils.checkParamArgument(result);
+        if(StringUtils.isEmpty(examId))return ResultUtil.result(SysConf.ERROR,MessageConf.PARAM_INCORRECT);
         return ResultUtil.result(SysConf.SUCCESS, examService.getListAsType(vo));
     }
 
     @ApiOperation(value = "为某场考试批量新增题目", notes = "为某场考试批量新增题目", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"programId","problemType","examId"})
-    @PostMapping("/addProblemBatch")
-    public String addProblemBatch(@RequestBody BankListVo vo) {
+    @ApiOperationSupport(ignoreParameters = {"programId","problemType"})
+    @PostMapping("/{examId}/problem/add")
+    public String addProblemBatch(@PathVariable String examId,@RequestBody BankListVo vo) {
         //ThrowableUtils.checkParamArgument(result);
+        if(StringUtils.isEmpty(examId))return ResultUtil.result(SysConf.ERROR,MessageConf.PARAM_INCORRECT);
         return examService.addProblemBatch(vo);
     }
 
     @ApiOperation(value = "为某场考试删除题目", notes = "为某场考试删除题目", response = String.class)
-    @DeleteMapping("/deleteProblem/{eid}/{bid}")
-    public String deleteProblem(@PathVariable String eid,@PathVariable String bid) {
-        if(StringUtils.isEmpty(eid))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
-        if(StringUtils.isEmpty(bid))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
-        return examService.deleteProblem(eid,bid);
+    @ApiOperationSupport(ignoreParameters = {"problemType","bankVoList"})
+    @PostMapping("/{examId}/problem/delete")
+    public String deleteProblem(@PathVariable String examId,@RequestBody BankListVo vo) {
+        if(StringUtils.isEmpty(examId)){
+            return ResultUtil.result(SysConf.ERROR,MessageConf.PARAM_INCORRECT);
+        }
+        return examService.deleteProblem(vo.getExamId(),vo.getBankId());
     }
 }

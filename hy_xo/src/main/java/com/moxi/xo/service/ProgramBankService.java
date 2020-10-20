@@ -19,7 +19,7 @@ public interface ProgramBankService extends SuperService<ProgramBank> {
 
     public String addBatch(ProgramBankVo vo);
 
-    public String delete(String pid);
+    public String delete(String programId, String userId);
 
     public String edit(ProgramBankVo.ProgramVo vo);
 }

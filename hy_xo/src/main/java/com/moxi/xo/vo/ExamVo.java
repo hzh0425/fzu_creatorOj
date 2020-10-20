@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.validator.group.GetList;
+import com.moxi.base.validator.group.Insert;
 import com.moxi.base.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -25,7 +26,7 @@ import java.util.List;
 public class ExamVo extends BaseVO<ExamVo> {
 
     @ApiModelProperty(value = "teacherId")
-    @NotBlank(groups = {GetList.class})
+    @NotBlank(groups = { Insert.class})
     private String tid;
     /**
      * 考试名

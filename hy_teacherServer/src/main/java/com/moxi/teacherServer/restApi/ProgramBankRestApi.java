@@ -5,6 +5,8 @@ import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.Delete;
 import com.moxi.base.validator.group.GetList;
 import com.moxi.base.validator.group.Insert;
+
+import com.moxi.teacherServer.util.AccessTokenUtils;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.ProgramBank;
@@ -15,16 +17,20 @@ import com.moxi.xo.service.ProgramBankService;
 import com.moxi.xo.vo.ClassVo;
 import com.moxi.xo.vo.ProgramBankVo;
 
+import com.netflix.client.http.HttpRequest;
 import io.netty.util.internal.ThrowableUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 /**
  * @author hzh
@@ -37,6 +43,8 @@ import java.util.List;
 public class ProgramBankRestApi {
     @Autowired
     ProgramBankService programBankService;
+    @Autowired
+    AccessTokenUtils accessTokenUtils;
 
     @ApiOperation(value = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"programVoList","uid"})
@@ -57,22 +65,20 @@ public class ProgramBankRestApi {
     }
 
     @ApiOperation(value = "编辑编程问题", notes = "编辑编程问题", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"publisher"})
+    @ApiOperationSupport(ignoreParameters = {"publisher","publisherId"})
     @PostMapping("/edit")
     public String edit(@RequestBody ProgramBankVo.ProgramVo vo) {
         //ThrowableUtils.checkParamArgument(result);
+        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return programBankService.edit(vo);
     }
 
     @ApiOperation(value = "删除编程问题", notes = "删除编程问题", response = String.class)
-    @DeleteMapping("/delete/{pid}")
-    public String delete(@PathVariable String pid) {
-        if(StringUtils.isEmpty(pid))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
-        return programBankService.delete(pid);
+    @DeleteMapping("/delete/{programId}")
+    public String delete(@PathVariable String programId, HttpServletRequest request) {
+        if(StringUtils.isEmpty(programId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
+        String userId=accessTokenUtils.getUserId(request);
+        return programBankService.delete(programId,userId);
     }
-
-
-
-
 }
 
