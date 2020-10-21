@@ -41,6 +41,10 @@ public class AuthPermission extends SuperEntity {
 
     private String operand;
 
+    private String resourceDesc;
+
+    private String operandDesc;
+
     private String ownerId;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -48,6 +52,7 @@ public class AuthPermission extends SuperEntity {
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date  createDate;
 
+    //构建资源路径
     public String getResourceUrl(){
         StringBuilder sb=new StringBuilder();
         //资源类型

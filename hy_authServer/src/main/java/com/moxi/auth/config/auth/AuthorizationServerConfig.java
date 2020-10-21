@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -73,8 +74,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 //这个相当于是client的域名,重定向给code的时候会跳转这个域名
                 .redirectUris("http://www.baidu.com");
     }
-
-
     @Autowired
     private ClientDetailsService clientDetailsService;
 
@@ -99,7 +98,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         //配置token的存储方法
         defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setAccessTokenValiditySeconds(60*60*1000000*1000000);
+        defaultTokenServices.setAccessTokenValiditySeconds(Integer.MAX_VALUE);
         defaultTokenServices.setRefreshTokenValiditySeconds(1500);
         return defaultTokenServices;
     }
@@ -133,6 +132,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         security.tokenKeyAccess("permitAll()")///oauth/token_key公开
                 .checkTokenAccess("permitAll()")///oauth/check_token公开
                 .allowFormAuthenticationForClients();//允许表单认证
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new BCryptPasswordEncoder().encode("123456"));
     }
 
 }

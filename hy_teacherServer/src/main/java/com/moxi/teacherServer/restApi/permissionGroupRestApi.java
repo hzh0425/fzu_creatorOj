@@ -8,10 +8,7 @@ import com.moxi.teacherServer.util.AccessTokenUtils;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;
-import com.moxi.xo.service.AuthGroupPermissionService;
-import com.moxi.xo.service.AuthPermissionService;
-import com.moxi.xo.service.AuthGroupService;
-import com.moxi.xo.service.ClassService;
+import com.moxi.xo.service.*;
 import com.moxi.xo.vo.ClassVo;
 import com.moxi.xo.vo.PermissionGroupVo;
 import io.swagger.annotations.Api;
@@ -43,6 +40,8 @@ public class permissionGroupRestApi {
     AuthGroupPermissionService authGroupPermissionService;
     @Autowired
     AccessTokenUtils accessTokenUtils;
+    @Autowired
+    AuthUserGroupService authUserGroupService;
 
 
     @ApiOperation(value = "1.获取权限组列表", notes = "1.获取权限组列表,keyword可选,用于模糊查询", response = String.class)
@@ -102,13 +101,13 @@ public class permissionGroupRestApi {
     @PostMapping("/permissionGroup/{groupId}/member/add")
     public String addMember(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
-        return authGroupService.edit(vo);
+        return authUserGroupService.add(vo);
     }
     //7.为权限组删除成员
     @ApiOperation(value = "8.为权限组删除成员", notes = "8.为权限组删除成员", response = String.class)
     @PostMapping("/permissionGroup/{groupId}/member/delete")
     public String deleteMember(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
-        return authGroupService.edit(vo);
+        return authUserGroupService.delete(vo);
     }
 }

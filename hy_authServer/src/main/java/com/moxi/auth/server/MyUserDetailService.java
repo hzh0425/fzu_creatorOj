@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -30,27 +31,28 @@ public class MyUserDetailService implements UserDetailsService {
     @Resource
     AuthUserMapper userMapper;
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println(username);
+    public UserDetails loadUserByUsername(String username)  {
         AuthUser authUser=userMapper.loadUserByEmail(username);
-        System.out.println("1231231234");
-        System.out.println(authUser);
         Set<GrantedAuthority> grantedAuthorities=new HashSet<>();
-        for(AuthGroup role:authUser.getRoleList()){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getGroupName()));
-            for (AuthPermission permission : role.getPermissionList()) {
-                //构造资源的url
+        if(authUser.getRoleList()!=null){
+            for(AuthGroup role:authUser.getRoleList()){
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getGroupName()));
+                for (AuthPermission permission : role.getPermissionList()) {
+                    //构造资源的url
+                    String url=permission.getResourceUrl();
+                    System.out.println(url);
+                    GrantedAuthority authority = new SimpleGrantedAuthority(url);
+                    grantedAuthorities.add(authority);
+                }
+            }
+        }
+        if(authUser.getPermissionList()!=null){
+            for(AuthPermission permission:authUser.getPermissionList()){
                 String url=permission.getResourceUrl();
                 System.out.println(url);
                 GrantedAuthority authority = new SimpleGrantedAuthority(url);
                 grantedAuthorities.add(authority);
             }
-        }
-        for(AuthPermission permission:authUser.getPermissionList()){
-            String url=permission.getResourceUrl();
-            System.out.println(url);
-            GrantedAuthority authority = new SimpleGrantedAuthority(url);
-            grantedAuthorities.add(authority);
         }
         //后期再改这几个参数
         // 可用性 :true:可用 false:不可用
@@ -61,7 +63,9 @@ public class MyUserDetailService implements UserDetailsService {
         boolean credentialsNonExpired = true;
         // 锁定性 :true:未锁定 false:已锁定
         boolean accountNonLocked = true;
+
         return new MySecurityUser(authUser.getUid(),authUser.getSelfDesc(),username,authUser.getPassWord(),grantedAuthorities);
     }
+
 
 }

@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 import java.util.List;;
 import java.time.LocalDate;
 
@@ -78,19 +80,17 @@ public class AuthUser extends SuperEntity<AuthUser> {
     /**
      * 创造时间
      */
-    private LocalDate createDate;
+    private Date createDate;
 
     /**
      * 修改时间
      */
-    private LocalDate updateDate;
+    private Date updateDate;
 
     @TableField(exist = false)
     private List<AuthGroup> roleList;
 
     @TableField(exist = false)
     private List<AuthPermission> permissionList;
-
-
 
 }

@@ -16,6 +16,7 @@ public class BaseSysConf {
     public final static String RID="rid";
     public final static String PID="pid";
     public final static String UID = "uid";
+    public final static String USERID="usid";
     public final static String ADMIN_UID = "adminUid";
 
 

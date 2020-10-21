@@ -52,6 +52,8 @@ public class ResourceUtil {
                     .ownerId(vo.getOwnerId())
                     .operationType(x.getOperationType())
                     .operand(x.getOperand())
+                    .resourceDesc(x.getResourceDesc())
+                    .operandDesc(x.getOperandDesc())
                     .createDate(new Date())
                     .build();
         }).collect(Collectors.toList());

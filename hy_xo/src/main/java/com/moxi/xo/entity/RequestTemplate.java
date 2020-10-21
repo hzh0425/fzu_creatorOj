@@ -18,4 +18,6 @@ public class RequestTemplate  {
     private String resourceType;
     private String operand;
     private String operationType;
+    private String resourceDesc;
+    private String operandDesc;
 }
