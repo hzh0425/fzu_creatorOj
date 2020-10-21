@@ -88,6 +88,11 @@ public class AuthController {
         }
     }
 
+    @GetMapping("/login")
+    public String login(){
+        return "success";
+    }
+
     /**
      * 获取教师的信息
      */

@@ -40,11 +40,6 @@ public class teacherServerApplication {
 
         SpringApplication.run(teacherServerApplication.class,args);
     }
-
-    /**
-     * 跨域配置
-     * @return
-     */
     @Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
@@ -61,6 +56,11 @@ public class teacherServerApplication {
             }
         };
     }
+    /**
+     * 跨域配置
+     * @return
+     */
+
 
 
 
