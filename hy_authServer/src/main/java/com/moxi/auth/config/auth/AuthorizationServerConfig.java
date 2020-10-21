@@ -99,7 +99,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         //配置token的存储方法
         defaultTokenServices.setTokenStore(tokenStore());
-        defaultTokenServices.setAccessTokenValiditySeconds(60*60*1000000);
+        defaultTokenServices.setAccessTokenValiditySeconds(60*60*1000000*1000000);
         defaultTokenServices.setRefreshTokenValiditySeconds(1500);
         return defaultTokenServices;
     }

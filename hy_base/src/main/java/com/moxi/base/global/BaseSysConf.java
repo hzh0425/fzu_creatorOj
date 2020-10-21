@@ -51,6 +51,7 @@ public class BaseSysConf {
     //权限相关
     public final static int CLASS_ID=1;
     public final static int EXAM_ID=2;
+
     public final static String RESOURCE_TYPE="resource_type";
     public final static String Authorization="Authorization";
     public final static String BEARER="bearer";

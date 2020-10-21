@@ -26,9 +26,11 @@ public class SqlConf extends BaseSQLConf {
      */
     public final static String QUESTION_TITLE="question_title";
     public final static String OPTION_TYPE="option_type";
-
+    public final static String PUBLISHER_ID="publisher_id";
+    public final static String SHARE_MODE="share_mode";
     /**
      * 考试表
      */
     public final static String EXAM_NAME="exam_name";
+
 }

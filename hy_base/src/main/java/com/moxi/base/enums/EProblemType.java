@@ -3,7 +3,7 @@ package com.moxi.base.enums;
 /**
  * @author hzh
  * @version 1.0
- * @date 2020/10/14 15:56
+ * @date 2020/10/21 13:24
  */
 public class EProblemType {
     public final static int option=1;

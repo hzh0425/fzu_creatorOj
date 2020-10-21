@@ -86,7 +86,7 @@ public class AuthUser extends SuperEntity<AuthUser> {
     private LocalDate updateDate;
 
     @TableField(exist = false)
-    private List<AuthRole> roleList;
+    private List<AuthGroup> roleList;
 
     @TableField(exist = false)
     private List<AuthPermission> permissionList;

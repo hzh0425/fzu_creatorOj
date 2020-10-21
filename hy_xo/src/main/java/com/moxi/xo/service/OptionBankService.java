@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.moxi.base.service.SuperService;
 import com.moxi.xo.entity.OptionBank;
 import com.moxi.xo.vo.OptionBankVo;
-import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -19,7 +19,7 @@ public interface OptionBankService extends SuperService<OptionBank> {
 
     public String addBatch(OptionBankVo vo);
 
-    public String edit(OptionBankVo.OptionVo vo);
+    public String edit(OptionBankVo.OptionVo vo, String userId);
 
-    public String delete(String oid);
+    public String delete(String userId, String oid);
 }

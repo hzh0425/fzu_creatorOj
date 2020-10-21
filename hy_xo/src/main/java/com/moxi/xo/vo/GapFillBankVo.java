@@ -14,6 +14,13 @@ import java.util.List;
 @ApiModel("填空题题库 接收类")
 public class GapFillBankVo extends BaseVO<GapFillBankVo> {
 
+    @ApiModelProperty(value = "若申请的列表为私人题目,需要加上这个属性")
+    private String publisherId;
+
+    @ApiModelProperty(value = "申请获取的列表是否为公共题目(其他老师设置为可分享的,以及管理员公共上传的题目)")
+    private int IsPublic;
+
+
     @ApiModelProperty(value = "填空题题库题库")
     private List<GapFillVo> gapFillVoList;
 
@@ -48,6 +55,12 @@ public class GapFillBankVo extends BaseVO<GapFillBankVo> {
          */
         @ApiModelProperty(value = "发布者姓名")
         private String publisher;
+
+        @ApiModelProperty(value = "发布者id")
+        private String publisherId;
+
+        @ApiModelProperty(value = "共享模式")
+        private int shareMode;
 
         @ApiModelProperty(value = "答案列表")
         private List<GapAnswer> gapAnswerList;

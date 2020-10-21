@@ -1,5 +1,6 @@
 package com.moxi.xo.vo;
 
+import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.vo.BaseVO;
 import com.moxi.xo.entity.ProgramExample;
 import io.swagger.annotations.ApiModel;
@@ -14,6 +15,13 @@ import java.util.List;
 @Data
 @ApiModel("编程题题库接收类")
 public class ProgramBankVo extends BaseVO<ProgramBankVo> {
+
+
+    @ApiModelProperty(value = "若申请的列表为私人题目,需要加上这个属性")
+    private String publisherId;
+
+    @ApiModelProperty(value = "申请获取的列表是否为公共题目(其他老师设置为可分享的,以及管理员公共上传的题目)")
+    private int IsPublic;
 
     @ApiModelProperty(value = "编程题列表")
     List<ProgramVo> programVoList;

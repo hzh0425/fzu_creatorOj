@@ -1,13 +1,12 @@
 package com.moxi.xo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.moxi.base.entity.SuperEntity;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.xo.entity.AuthPermission;
-import com.moxi.xo.entity.AuthRolePermission;
+import com.moxi.xo.entity.AuthGroupPermission;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.mapper.AuthPermissionMapper;
-import com.moxi.xo.mapper.AuthRolePermissionMapper;
+import com.moxi.xo.mapper.AuthGroupPermissionMapper;
 import com.moxi.xo.service.AuthPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -33,7 +32,7 @@ public class AuthPermissionServiceImpl extends SuperServiceImpl<AuthPermissionMa
     @Resource
     AuthPermissionMapper authPermissionMapper;
     @Resource
-    AuthRolePermissionMapper authRolePermissionMapper;
+    AuthGroupPermissionMapper authRolePermissionMapper;
 
     /**
      * 删除相关权限
@@ -59,7 +58,7 @@ public class AuthPermissionServiceImpl extends SuperServiceImpl<AuthPermissionMa
         //批量删除权限
         authPermissionMapper.deleteBatchIds(PermissionUIds);
         //批量删除权限-角色中间表
-        QueryWrapper<AuthRolePermission> rolePermissionQueryWrapper=new QueryWrapper<AuthRolePermission>(){{
+        QueryWrapper<AuthGroupPermission> rolePermissionQueryWrapper=new QueryWrapper<AuthGroupPermission>(){{
             in(SysConf.PID,PermissionIds);
         }};
         authRolePermissionMapper.delete(rolePermissionQueryWrapper);

@@ -4,6 +4,7 @@ import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.base.exception.ThrowableUtils;
 import com.moxi.base.validator.group.GetList;
 
+import com.moxi.teacherServer.util.AccessTokenUtils;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;
@@ -21,6 +22,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @author hzh
  * @version 1.0
@@ -33,6 +36,8 @@ import org.springframework.web.bind.annotation.*;
 public class OptionBankRestApi {
     @Autowired
     OptionBankService optionBankService;
+    @Autowired
+    AccessTokenUtils accessTokenUtils;
 
     @ApiOperation(value = "获取选择题列表(分页,支持根据keyword字段模糊查询),需要先传入", notes = "获取编程问题列表(分页,支持根据keyword字段模糊查询)", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"optionVoList","uid"})
@@ -54,16 +59,18 @@ public class OptionBankRestApi {
     @ApiOperation(value = "编辑选择问题", notes = "编辑选择问题", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"publisher"})
     @PostMapping("/edit")
-    public String edit(@RequestBody OptionBankVo.OptionVo vo) {
+    public String edit(@RequestBody OptionBankVo.OptionVo vo,HttpServletRequest request) {
         //ThrowableUtils.checkParamArgument(result);
-        return optionBankService.edit(vo);
+        String userId=accessTokenUtils.getUserId(request);
+        return optionBankService.edit(vo,userId);
     }
 
     @ApiOperation(value = "删除选择问题", notes = "删除选择问题", response = String.class)
     @DeleteMapping("/delete/{oid}")
-    public String delete(@PathVariable String oid) {
+    public String delete(@PathVariable String oid, HttpServletRequest request) {
         if(StringUtils.isEmpty(oid))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
-        return optionBankService.delete(oid);
+        String userId=accessTokenUtils.getUserId(request);
+        return optionBankService.delete(oid,userId);
     }
 
 }

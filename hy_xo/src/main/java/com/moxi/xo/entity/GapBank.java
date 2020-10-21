@@ -53,10 +53,11 @@ public class GapBank extends SuperEntity {
      */
     private String publisher;
 
+    private String publisherId;
     /**
      * 该资源是否起作用
      */
-    private Integer valid;
+    private Integer shareMode;
 
     /**
      * 创造时间
@@ -71,22 +72,24 @@ public class GapBank extends SuperEntity {
     @TableField(exist = false)
     private List<GapAnswer> gapAnswerList;
 
-    public GapBank(String name, String questionTitle, String questionInfo, String questionAnswer, String publisher, Integer valid, Date createDate, Date updateDate) {
+    public GapBank(String name, String questionTitle, String questionInfo, String questionAnswer, String publisher,String publisherId, Integer share_mode, Date createDate, Date updateDate) {
         this.name = name;
         this.questionTitle = questionTitle;
         this.questionInfo = questionInfo;
         this.questionAnswer = questionAnswer;
         this.publisher = publisher;
-        this.valid = valid;
+        this.publisherId=publisherId;
+        this.shareMode=share_mode;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
 
-    public void UpdateGapBank(String name, String questionTitle, String questionInfo, String questionAnswer) {
+    public void UpdateGapBank(String name, String questionTitle, String questionInfo, String questionAnswer,int shareMode) {
         this.name = name;
         this.questionTitle = questionTitle;
         this.questionInfo = questionInfo;
         this.questionAnswer = questionAnswer;
+        this.shareMode=shareMode;
         this.updateDate=new Date();
     }
 }

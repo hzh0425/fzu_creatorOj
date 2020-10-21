@@ -3,9 +3,8 @@ package com.moxi.auth.server;
 
 import com.moxi.auth.controller.MySecurityUser;
 import com.moxi.xo.entity.AuthPermission;
-import com.moxi.xo.entity.AuthRole;
+import com.moxi.xo.entity.AuthGroup;
 import com.moxi.xo.entity.AuthUser;
-import com.moxi.xo.global.SysConf;
 import com.moxi.xo.mapper.AuthUserMapper;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,10 +31,13 @@ public class MyUserDetailService implements UserDetailsService {
     AuthUserMapper userMapper;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println(username);
         AuthUser authUser=userMapper.loadUserByEmail(username);
+        System.out.println("1231231234");
+        System.out.println(authUser);
         Set<GrantedAuthority> grantedAuthorities=new HashSet<>();
-        for(AuthRole role:authUser.getRoleList()){
-            grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+        for(AuthGroup role:authUser.getRoleList()){
+            grantedAuthorities.add(new SimpleGrantedAuthority(role.getGroupName()));
             for (AuthPermission permission : role.getPermissionList()) {
                 //构造资源的url
                 String url=permission.getResourceUrl();

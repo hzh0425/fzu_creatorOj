@@ -67,10 +67,10 @@ public class ProgramBankRestApi {
     @ApiOperation(value = "编辑编程问题", notes = "编辑编程问题", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"publisher","publisherId"})
     @PostMapping("/edit")
-    public String edit(@RequestBody ProgramBankVo.ProgramVo vo) {
+    public String edit(@RequestBody ProgramBankVo.ProgramVo vo,HttpServletRequest request) {
         //ThrowableUtils.checkParamArgument(result);
-        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return programBankService.edit(vo);
+        String userId=accessTokenUtils.getUserId(request);
+        return programBankService.edit(vo,userId);
     }
 
     @ApiOperation(value = "删除编程问题", notes = "删除编程问题", response = String.class)

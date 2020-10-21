@@ -57,10 +57,11 @@ public class OptionBank extends SuperEntity {
      */
     private String publisher;
 
+    private String publisherId;
     /**
      * 该资源是否起作用
      */
-    private Integer valid;
+    private Integer shareMode;
 
     /**
      * 创造时间
@@ -74,11 +75,12 @@ public class OptionBank extends SuperEntity {
 
 
 
-    public void UpdateOptionBank( String questionTitle, String questionSelect,String questionAnswer,int optionType) {
+    public void UpdateOptionBank( String questionTitle, String questionSelect,String questionAnswer,int optionType,int shareMode) {
         this.questionTitle = questionTitle;
         this.questionSelect = questionSelect;
         this.questionAnswer=questionAnswer;
         this.optionType=optionType;
+        this.shareMode=shareMode;
         this.updateDate=new Date();
     }
 
@@ -86,13 +88,14 @@ public class OptionBank extends SuperEntity {
     private List<OptionSelect> selectList;
 
 
-    public OptionBank(String questionTitle, String questionSelect, Integer optionType,String questionAnswer, String publisher, Integer valid, Date createDate, Date updateDate) {
+    public OptionBank(String questionTitle, String questionSelect, Integer optionType,String questionAnswer, String publisher,String publisherId, Integer share_mode, Date createDate, Date updateDate) {
         this.questionTitle = questionTitle;
         this.questionSelect = questionSelect;
         this.optionType = optionType;
         this.questionAnswer=questionAnswer;
         this.publisher = publisher;
-        this.valid = valid;
+        this.publisherId=publisherId;
+        this.shareMode=share_mode;
         this.createDate = createDate;
         this.updateDate = updateDate;
     }
