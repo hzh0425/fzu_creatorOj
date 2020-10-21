@@ -3,9 +3,13 @@ package com.moxi.xo.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 import java.util.List;
 import java.time.LocalDate;
 
@@ -18,7 +22,9 @@ import java.time.LocalDate;
  * @since 2020-10-09
  */
 @Data
-@TableName("auth_role")
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("auth_group")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class AuthGroup extends SuperEntity {
@@ -46,13 +52,30 @@ public class AuthGroup extends SuperEntity {
     /**
      * 创造时间
      */
-    private LocalDate createDate;
+    private Date createDate;
+
+
+    public void updateGroup(String groupName, String groupDesc) {
+        this.groupName = groupName;
+        this.groupDesc = groupDesc;
+        this.updateDate=new Date();
+    }
 
     /**
      * 修改时间
      */
-    private LocalDate updateDate;
-    
+    private Date updateDate;
+
+    public AuthGroup(String groupName, String groupDesc, Integer groupType, String classId, Date createDate,Date updateDate) {
+        this.groupName = groupName;
+        this.groupDesc = groupDesc;
+        this.groupType = groupType;
+        this.classId = classId;
+        this.updateDate=updateDate;
+        this.createDate = createDate;
+    }
+
+
     @TableField(exist =  false)
     private List<AuthPermission> permissionList;
 

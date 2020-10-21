@@ -34,4 +34,7 @@ public class PermissionGroupVo extends BaseVO<PermissionGroupVo> {
     @ApiModelProperty(value = "如果是1类别的权限组,需要带上classId")
     private String classId;
 
+    @ApiModelProperty(value = "权限id,多个则以,划分")
+    private String permissionIds;
+
 }

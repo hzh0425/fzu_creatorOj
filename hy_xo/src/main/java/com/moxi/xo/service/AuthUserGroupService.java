@@ -1,7 +1,7 @@
 package com.moxi.xo.service;
 
 import com.moxi.base.service.SuperService;
-import com.moxi.xo.entity.AuthUserRole;
+import com.moxi.xo.entity.AuthUserGroup;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.moxi.xo.entity.AuthUserRole;
  * @author hzh
  * @since 2020-10-09
  */
-public interface AuthUserRoleService extends SuperService<AuthUserRole> {
+public interface AuthUserGroupService extends SuperService<AuthUserGroup> {
 
 }

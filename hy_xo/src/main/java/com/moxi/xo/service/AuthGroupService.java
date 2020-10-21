@@ -3,7 +3,6 @@ package com.moxi.xo.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.moxi.base.service.SuperService;
 import com.moxi.xo.entity.AuthGroup;
-import com.moxi.xo.entity.AuthPermission;
 import com.moxi.xo.vo.PermissionGroupVo;
 
 /**
@@ -16,9 +15,9 @@ import com.moxi.xo.vo.PermissionGroupVo;
  */
 public interface AuthGroupService extends SuperService<AuthGroup> {
 
-    public IPage<AuthPermission> getList(PermissionGroupVo vo);
+    public IPage<AuthGroup> getList(PermissionGroupVo vo);
 
-    public String add(PermissionGroupVo vo);
+    public String add(PermissionGroupVo vo, String userId);
 
     public  String edit(PermissionGroupVo vo);
 

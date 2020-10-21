@@ -33,4 +33,10 @@ public class SqlConf extends BaseSQLConf {
      */
     public final static String EXAM_NAME="exam_name";
 
+    /**
+     * 权限组表
+     */
+    public final static String GROUP_NAME="group_name";
+    public final static String GROUP_TYPE="group_type";
+
 }

@@ -18,7 +18,7 @@ import lombok.experimental.Accessors;
 @TableName("auth_user_role")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class AuthUserRole extends SuperEntity {
+public class AuthUserGroup extends SuperEntity {
 
     private static final long serialVersionUID = 1L;
 

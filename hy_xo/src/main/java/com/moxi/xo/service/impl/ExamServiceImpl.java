@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.moxi.base.enums.EProblemType;
+import com.moxi.base.enums.EResourceType;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
@@ -95,7 +96,7 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
         //3.资源增加返回体
         ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTid(),SysConf.SUCCESS,exam.getUid(),SysConf.RESOURCE_EXAM);
         //4.增加考试的权限
-        resourceUtil.buildPermissionAfterAddResource(templateVo, SysConf.EXAM_ID);
+        resourceUtil.buildPermissionAfterAddResource(templateVo, EResourceType.RESOURCE_EXAM);
         return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
     }
 

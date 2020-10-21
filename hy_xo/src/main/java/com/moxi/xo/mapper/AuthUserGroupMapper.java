@@ -1,7 +1,7 @@
 package com.moxi.xo.mapper;
 
 import com.moxi.base.mapper.SuperMapper;
-import com.moxi.xo.entity.AuthUserRole;
+import com.moxi.xo.entity.AuthUserGroup;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.moxi.xo.entity.AuthUserRole;
  * @author hzh
  * @since 2020-10-09
  */
-public interface AuthUserRoleMapper extends SuperMapper<AuthUserRole> {
+public interface AuthUserGroupMapper extends SuperMapper<AuthUserGroup> {
 
 }

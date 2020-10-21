@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.moxi.base.enums.EResourceType;
 import com.moxi.base.enums.EStatus;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
@@ -85,7 +86,7 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         ResourceReturningVo templateVo=new ResourceReturningVo(vo.getTeacherId(),MessageConf.INSERT_SUCCESS,cur.getUid(),SysConf.RESOURCE_CLASS);
 
         //5.创建资源
-        resourceUtil.buildPermissionAfterAddResource(templateVo, SysConf.CLASS_ID);
+        resourceUtil.buildPermissionAfterAddResource(templateVo, EResourceType.RESOURCE_CLASS);
 
         return ResultUtil.result(SysConf.SUCCESS, templateVo);
     }
