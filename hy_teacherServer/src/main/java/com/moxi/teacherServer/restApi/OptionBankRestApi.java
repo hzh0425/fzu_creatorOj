@@ -49,7 +49,7 @@ public class OptionBankRestApi {
     }
 
     @ApiOperation(value = "批量新增选择问题", notes = "批量新增选择问题", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","optionType"})
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","optionType","isPublic","publisherId"})
     @PostMapping("/addBatch")
     public String addBatch(@RequestBody OptionBankVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -57,7 +57,7 @@ public class OptionBankRestApi {
     }
 
     @ApiOperation(value = "编辑选择问题", notes = "编辑选择问题", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"publisher"})
+    @ApiOperationSupport(ignoreParameters = {"publisher","publisherId"})
     @PostMapping("/edit")
     public String edit(@RequestBody OptionBankVo.OptionVo vo,HttpServletRequest request) {
         //ThrowableUtils.checkParamArgument(result);
@@ -70,7 +70,7 @@ public class OptionBankRestApi {
     public String delete(@PathVariable String oid, HttpServletRequest request) {
         if(StringUtils.isEmpty(oid))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
         String userId=accessTokenUtils.getUserId(request);
-        return optionBankService.delete(oid,userId);
+        return optionBankService.delete(userId,oid);
     }
 
 }

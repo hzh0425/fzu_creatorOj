@@ -56,6 +56,6 @@ public class AuthGroupPermissionServiceImpl extends SuperServiceImpl<AuthGroupPe
             }};
             authGroupPermissionMapper.delete(wrapper);
         }
-        return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
+        return ResultUtil.result(SysConf.SUCCESS, MessageConf.DELETE_SUCCESS);
     }
 }

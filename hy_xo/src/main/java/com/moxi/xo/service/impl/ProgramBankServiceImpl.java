@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.moxi.base.entity.SuperEntity;
 import com.moxi.base.enums.EPublicBank;
 import com.moxi.base.enums.EShareMode;
 import com.moxi.base.enums.EStatus;
@@ -80,7 +81,7 @@ public class ProgramBankServiceImpl extends SuperServiceImpl<ProgramBankMapper, 
     @Override
     public String addBatch(ProgramBankVo vo) {
         //1.构造programBank list
-        List<ProgramBank> list=vo.getProgramVoList().stream().map(x->{
+        List<ProgramBank> programBanks=vo.getProgramVoList().stream().map(x->{
             String programExamples=null;
             if(x.getExampleVoList()!=null&&x.getExampleVoList().size()>0){
                 programExamples= JSON.toJSONString(x.getExampleVoList());
@@ -88,8 +89,10 @@ public class ProgramBankServiceImpl extends SuperServiceImpl<ProgramBankMapper, 
             return new ProgramBank(x.getQuestionTitle(),x.getQuestionContent(),programExamples,x.getUpperTime(),x.getUpperMemory(),x.getPublisher(),x.getPublisherId(),x.getShareMode(),new Date(),new Date());
         }).collect(Collectors.toList());
         //保存
-        programBankService.saveBatch(list);
-        return ResultUtil.result(SysConf.SUCCESS,MessageConf.INSERT_SUCCESS);
+        programBankService.saveBatch(programBanks);
+        //返回uid
+        List<String> uids=programBanks.stream().map(SuperEntity::getUid).collect(Collectors.toList());
+        return ResultUtil.result(SysConf.SUCCESS,uids);
     }
 
 

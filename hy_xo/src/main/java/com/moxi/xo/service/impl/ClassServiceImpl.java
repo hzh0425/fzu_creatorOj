@@ -55,22 +55,30 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     AuthPermissionService authPermissionService;
     @Override
     public IPage<Class> getList(ClassVo vo) {
+        //1.构建wrapper
+        QueryWrapper<Class> wrapper=new QueryWrapper<Class>(){{
+            //中间表tid
+            eq(SqlConf.TID,vo.getTeacherId());
+            //2.模糊查询
+            if(StringUtils.isNotEmpty(vo.getKeyword())){
+                like(SqlConf.CLASS_NAME,vo.getKeyword());
+            }
+            //3.降序排序
+            orderByDesc(SqlConf.CREATE_DATE);
+        }};
+        //2.构建page
         Page<Class> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
-        QueryWrapper<Class> wrapper=new QueryWrapper<>();
-        wrapper.eq(SqlConf.TID,vo.getTeacherId());
-        wrapper.eq(SqlConf.VALID,EStatus.ENABLE);
-        if(StringUtils.isNotEmpty(vo.getKeyword())){
-            wrapper.like(SqlConf.CLASS_NAME,vo.getKeyword());
-        }
+
         return classMapper.getListByTeacherId(page,wrapper);
     }
 
     @Override
     public String add(ClassVo vo) {
         //1.查询该班级名称是否已经存在
-        QueryWrapper<Class> wrapper=new QueryWrapper<>();
-        wrapper.eq(SqlConf.CLASS_NAME,vo.getClassName());
-        wrapper.eq(SqlConf.CREATOR,vo.getCreator());
+        QueryWrapper<Class> wrapper=new QueryWrapper<Class>(){{
+            eq(SqlConf.CLASS_NAME,vo.getClassName());
+            eq(SqlConf.CREATOR,vo.getCreator());
+        }};
         Class pre=classService.getOne(wrapper);
         if(pre!=null){
             return ResultUtil.result(SysConf.ERROR, MessageConf.CLASS_EXIST);
@@ -94,12 +102,11 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     @Override
     public String edit(ClassVo vo) {
         //1.查询该班级是否存在
-        QueryWrapper<Class> wrapper=new QueryWrapper<>();
-        wrapper.eq(SqlConf.UID,vo.getUid());
-        Class pre=classService.getOne(wrapper);
+        Class pre=classService.getById(vo.getUid());
         if(pre==null){
             return ResultUtil.result(SysConf.ERROR,MessageConf.ENTITY_NOT_EXIST);
         }
+        //2.更新
         pre.setClassDesc(vo.getClassDesc());
         pre.setClassName(vo.getClassName());
         pre.updateById();
@@ -109,9 +116,7 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
     @Override
     public String delete(String classId) {
         //1.查询该班级是否存在
-        QueryWrapper<Class> wrapper=new QueryWrapper<>();
-        wrapper.eq(SqlConf.UID,classId);
-        Class pre=classService.getOne(wrapper);
+        Class pre=classService.getById(classId);
         if(pre==null){
             return ResultUtil.result(SysConf.ERROR,MessageConf.ENTITY_NOT_EXIST);
         }

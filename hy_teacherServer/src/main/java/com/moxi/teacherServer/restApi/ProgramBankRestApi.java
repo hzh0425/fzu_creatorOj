@@ -57,7 +57,7 @@ public class ProgramBankRestApi {
     }
 
     @ApiOperation(value = "批量新增编程问题", notes = "批量新增编程问题", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","isPublic","publisherId"})
     @PostMapping("/addBatch")
     public String addBatch(@RequestBody ProgramBankVo vo) {
         //ThrowableUtils.checkParamArgument(result);

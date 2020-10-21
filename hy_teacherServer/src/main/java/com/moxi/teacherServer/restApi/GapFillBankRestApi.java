@@ -47,7 +47,7 @@ public class GapFillBankRestApi {
 
 
     @ApiOperation(value = "批量新增填空题问题", notes = "批量新增填空题问题", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword"})
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","isPublic","publisherId"})
     @PostMapping("/addBatch")
     public String addBatch(@RequestBody GapFillBankVo vo) {
         //ThrowableUtils.checkParamArgument(result);
@@ -55,7 +55,7 @@ public class GapFillBankRestApi {
     }
 
     @ApiOperation(value = "编辑填空题问题", notes = "编辑填空题问题", response = String.class)
-    @ApiOperationSupport(ignoreParameters = {"publisher"})
+    @ApiOperationSupport(ignoreParameters = {"publisher","publisherId"})
     @PostMapping("/edit")
     public String edit(@RequestBody GapFillBankVo.GapFillVo vo, HttpServletRequest request) {
         //ThrowableUtils.checkParamArgument(result);

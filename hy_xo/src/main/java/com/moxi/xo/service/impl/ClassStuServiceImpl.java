@@ -58,13 +58,12 @@ public class ClassStuServiceImpl extends SuperServiceImpl<ClassStuMapper, ClassS
     @Override
     public IPage<AuthStudent> getList(ClassStuVo vo) {
         Page<AuthStudent> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
-        QueryWrapper<AuthStudent> wrapper=new QueryWrapper<>();
-        wrapper.eq(SqlConf.CID,vo.getCid());
-        if(StringUtils.isNotEmpty(vo.getKeyword())){
-            wrapper.like(SqlConf.STUDENT_NAME,vo.getKeyword());
-        }
-
-        System.out.println(vo.getCid());
+        QueryWrapper<AuthStudent> wrapper=new QueryWrapper<AuthStudent>(){{
+            eq(SqlConf.CID,vo.getCid());
+            if(StringUtils.isNotEmpty(vo.getKeyword())){
+                like(SqlConf.STUDENT_NAME,vo.getKeyword());
+            }
+        }};
         return studentMapper.getStudentsByClassId(page,wrapper);
     }
 
@@ -81,7 +80,7 @@ public class ClassStuServiceImpl extends SuperServiceImpl<ClassStuMapper, ClassS
         //1.批量删除
         QueryWrapper<ClassStu> wrapper=new QueryWrapper<>();
         wrapper.eq(SqlConf.CID,vo.getCid());
-        wrapper.in(SqlConf.SID,vo.getSid().split(SysConf.FILE_SEGMENTATION));
+        wrapper.in(SqlConf.SID,Arrays.asList(vo.getSid().split(SysConf.FILE_SEGMENTATION)));
         classStuMapper.delete(wrapper);
         //2.更新人数
         updateClassStudentNums(curClass);
@@ -111,8 +110,8 @@ public class ClassStuServiceImpl extends SuperServiceImpl<ClassStuMapper, ClassS
         if(curClass==null)return ResultUtil.result(SysConf.ERROR,MessageConf.CLASS_NOT_FOUND);
         List<StuVo> stuVoList = vo.getStuList();
         //1.先插入
-        List<AuthStudent>  stuList=stuVoList.
-                parallelStream()
+        List<AuthStudent>  stuList=stuVoList
+                .parallelStream()
                 .filter(x->StringUtils.isNotEmpty(x.getStuNum()))
                 .map(x->
                 {

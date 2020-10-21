@@ -91,7 +91,9 @@ public class GapBankServiceImpl extends SuperServiceImpl<GapBankMapper, GapBank>
             return new GapBank(x.getName(),x.getQuestionTitle(),x.getQuestionInfo(),answerList,x.getPublisher(),x.getPublisherId(),x.getShareMode(),new Date(),new Date());
         }).collect(Collectors.toList());
         gapBankService.saveBatch(gapBankList);
-        return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
+        //返回uid
+        List<String> uids=gapBankList.stream().map(x->x.getUid()).collect(Collectors.toList());
+        return ResultUtil.result(SysConf.SUCCESS, uids);
     }
 
     @Override

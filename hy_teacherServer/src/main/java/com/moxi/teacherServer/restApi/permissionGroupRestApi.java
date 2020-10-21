@@ -45,6 +45,7 @@ public class permissionGroupRestApi {
 
 
     @ApiOperation(value = "1.获取权限组列表", notes = "1.获取权限组列表,keyword可选,用于模糊查询", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"memberIds","permissionIds","uid","groupDesc","groupName","memberIds","permissionIds","uid"})
     @PostMapping("/class/{classId}/permissionGroup/getList")
     public String getList(@PathVariable String classId,@RequestBody PermissionGroupVo vo)
     {
@@ -55,6 +56,7 @@ public class permissionGroupRestApi {
 
     //1.创建权限组
     @ApiOperation(value = "2.新增权限组", notes = "2.新增权限组新增班级", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","memberIds","permissionIds","uid"})
     @PostMapping("/class/{classId}/permissionGroup/add")
     public String add(@PathVariable String classId, @RequestBody PermissionGroupVo vo, HttpServletRequest request) {
         if(StringUtils.isEmpty(classId))return ResultUtil.result(SysConf.ERROR,MessageConf.PARAM_INCORRECT);
@@ -66,6 +68,7 @@ public class permissionGroupRestApi {
 
     //2.编辑权限组
     @ApiOperation(value = "3.编辑权限组", notes = "3.编辑权限组", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","classId","memberIds","permissionIds","groupType"})
     @PostMapping("/permissionGroup/{groupId}/permissionGroup/edit")
     public String edit(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
@@ -84,6 +87,7 @@ public class permissionGroupRestApi {
 
     //4.为权限组赋予权限
     @ApiOperation(value = "5.为权限组赋予权限", notes = "5.为权限组赋予权限", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","classId","groupName","groupDesc","memberIds","groupType"})
     @PostMapping("/permissionGroup/{groupId}/permission/add")
     public String addPermission(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
@@ -91,13 +95,15 @@ public class permissionGroupRestApi {
     }
     //5.为权限组删除权限
     @ApiOperation(value = "6.为权限组删除权限", notes = "6.为权限组删除权限", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","classId","groupName","groupDesc","memberIds","groupType"})
     @PostMapping("/permissionGroup/{groupId}/permission/delete")
     public String deletePermission(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
         return authGroupPermissionService.delete(vo);
     }
     //6.为权限组增加成员
-    @ApiOperation(value = "7.为权限组增加成员", notes = "4.为权限组增加成员", response = String.class)
+    @ApiOperation(value = "7.为权限组增加成员", notes = "7.为权限组增加成员", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","classId","groupName","groupDesc","permissionIds","groupType"})
     @PostMapping("/permissionGroup/{groupId}/member/add")
     public String addMember(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
@@ -105,6 +111,7 @@ public class permissionGroupRestApi {
     }
     //7.为权限组删除成员
     @ApiOperation(value = "8.为权限组删除成员", notes = "8.为权限组删除成员", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","keyword","classId","groupName","groupDesc","permissionIds","groupType"})
     @PostMapping("/permissionGroup/{groupId}/member/delete")
     public String deleteMember(@PathVariable String groupId, @Validated({Update.class}) @RequestBody PermissionGroupVo vo) {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);

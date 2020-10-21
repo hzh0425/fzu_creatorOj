@@ -91,7 +91,9 @@ public class OptionBankServiceImpl extends SuperServiceImpl<OptionBankMapper, Op
                     return new OptionBank(x.getQuestionTitle(),selectLists,x.getOptionType(),x.getQuestionAnswer(),x.getPublisher(),x.getPublisherId(),x.getShareMode(),new Date(),new Date());
                 }).collect(Collectors.toList());
         optionBankService.saveBatch(optionList);
-        return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
+        //返回uids
+        List<String>uids=optionList.stream().map(x->x.getUid()).collect(Collectors.toList());;
+        return ResultUtil.result(SysConf.SUCCESS, uids);
     }
 
     @Override
