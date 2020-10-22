@@ -22,4 +22,6 @@ public interface GapBankService extends SuperService<GapBank> {
     public String edit(GapFillBankVo.GapFillVo vo, String userId);
 
     public String delete(String userId, String gid);
+
+    public GapBank getById(String pid, String userId);
 }

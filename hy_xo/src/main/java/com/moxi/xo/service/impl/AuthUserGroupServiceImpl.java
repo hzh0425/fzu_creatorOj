@@ -34,10 +34,10 @@ public class AuthUserGroupServiceImpl extends SuperServiceImpl<AuthUserGroupMapp
     AuthUserGroupMapper authUserGroupMapper;
 
     @Override
-    public String add(PermissionGroupVo vo) {
-        if(StringUtils.isNotEmpty(vo.getMemberIds())){
-            List<AuthUserGroup> userGroupList=Arrays.stream(vo.getMemberIds().split(SysConf.FILE_SEGMENTATION)).map(x->{
-                return new AuthUserGroup(x,vo.getUid());
+    public String add(String groupIds,String memberIds) {
+        if(StringUtils.isNotEmpty(memberIds)){
+            List<AuthUserGroup> userGroupList=Arrays.stream(memberIds.split(SysConf.FILE_SEGMENTATION)).map(x->{
+                return new AuthUserGroup(x,groupIds);
             }).collect(Collectors.toList());
             authUserGroupService.saveBatch(userGroupList);
         }
@@ -45,15 +45,15 @@ public class AuthUserGroupServiceImpl extends SuperServiceImpl<AuthUserGroupMapp
     }
 
     @Override
-    public String delete(PermissionGroupVo vo) {
-        if(StringUtils.isNotEmpty(vo.getMemberIds())){
-            List<String> memberIds=Arrays.asList(vo.getMemberIds().split(SysConf.FILE_SEGMENTATION));
+    public String delete(String groupIds,String memberIds) {
+        if(StringUtils.isNotEmpty(memberIds)){
+            List<String> ids=Arrays.asList(memberIds.split(SysConf.FILE_SEGMENTATION));
             QueryWrapper<AuthUserGroup> wrapper=new QueryWrapper<AuthUserGroup>(){{
-                in(SysConf.USERID,memberIds);
-                eq(SysConf.RID,vo.getUid());
+                in(SysConf.USERID,ids);
+                eq(SysConf.RID,groupIds);
             }};
             authUserGroupMapper.delete(wrapper);
         }
-        return null;
+        return ResultUtil.result(SysConf.SUCCESS, MessageConf.INSERT_SUCCESS);
     }
 }

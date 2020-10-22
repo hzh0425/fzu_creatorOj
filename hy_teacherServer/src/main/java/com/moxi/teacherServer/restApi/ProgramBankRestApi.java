@@ -56,6 +56,16 @@ public class ProgramBankRestApi {
         return ResultUtil.result(SysConf.SUCCESS, programBankService.getList(vo));
     }
 
+    @ApiOperation(value = "根据uid获取编程题具体题目", notes = "根据uid获取编程题具体题目", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"programVoList","uid"})
+    @GetMapping("/getById")
+    public String getById(@RequestParam("pid")String pid,HttpServletRequest request)
+    {
+        String userId=accessTokenUtils.getUserId(request);
+        return ResultUtil.result(SysConf.SUCCESS, programBankService.getById(pid,userId));
+    }
+
+
     @ApiOperation(value = "批量新增编程问题", notes = "批量新增编程问题", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","isPublic","publisherId"})
     @PostMapping("/addBatch")

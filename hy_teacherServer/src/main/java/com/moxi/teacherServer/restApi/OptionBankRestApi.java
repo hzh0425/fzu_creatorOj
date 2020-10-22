@@ -48,6 +48,14 @@ public class OptionBankRestApi {
         return ResultUtil.result(SysConf.SUCCESS, optionBankService.getList(vo));
     }
 
+    @ApiOperation(value = "根据uid获取编程题具体题目", notes = "根据uid获取编程题具体题目", response = String.class)
+    @GetMapping("/getById")
+    public String getById(@RequestParam("pid")String pid,HttpServletRequest request)
+    {
+        String userId=accessTokenUtils.getUserId(request);
+        return ResultUtil.result(SysConf.SUCCESS, optionBankService.getById(pid,userId));
+    }
+
     @ApiOperation(value = "批量新增选择问题", notes = "批量新增选择问题", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","optionType","isPublic","publisherId"})
     @PostMapping("/addBatch")

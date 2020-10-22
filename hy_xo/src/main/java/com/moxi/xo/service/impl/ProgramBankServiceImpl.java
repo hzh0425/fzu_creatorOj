@@ -136,4 +136,13 @@ public class ProgramBankServiceImpl extends SuperServiceImpl<ProgramBankMapper, 
             return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_AUTH);
         }
     }
+
+    @Override
+    public ProgramBank getById(String pid, String userId) {
+        ProgramBank program=programBankService.getById(pid);
+        if(program!=null&&StringUtils.isNotEmpty(program.getQuestionExample())){
+            program.setExampleList(JSON.parseArray(program.getQuestionExample(), ProgramExample.class));
+        }
+        return program;
+    }
 }

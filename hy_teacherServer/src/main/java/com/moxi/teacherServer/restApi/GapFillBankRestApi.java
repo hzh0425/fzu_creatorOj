@@ -45,6 +45,13 @@ public class GapFillBankRestApi {
         return ResultUtil.result(SysConf.SUCCESS, gapBankService.getList(vo));
     }
 
+    @ApiOperation(value = "根据uid获取编程题具体题目", notes = "根据uid获取编程题具体题目", response = String.class)
+    @GetMapping("/getById")
+    public String getById(@RequestParam("pid")String pid,HttpServletRequest request)
+    {
+        String userId=accessTokenUtils.getUserId(request);
+        return ResultUtil.result(SysConf.SUCCESS, gapBankService.getById(pid,userId));
+    }
 
     @ApiOperation(value = "批量新增填空题问题", notes = "批量新增填空题问题", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"currentPage","pageSize","uid","keyword","isPublic","publisherId"})

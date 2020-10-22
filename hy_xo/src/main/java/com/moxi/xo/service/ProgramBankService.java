@@ -22,4 +22,6 @@ public interface ProgramBankService extends SuperService<ProgramBank> {
     public String delete(String programId, String userId);
 
     public String edit(ProgramBankVo.ProgramVo vo, String userId);
+
+    public ProgramBank getById(String pid, String userId);
 }

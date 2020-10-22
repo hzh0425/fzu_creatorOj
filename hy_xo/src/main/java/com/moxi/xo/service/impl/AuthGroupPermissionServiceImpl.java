@@ -35,11 +35,11 @@ public class AuthGroupPermissionServiceImpl extends SuperServiceImpl<AuthGroupPe
     AuthGroupPermissionMapper authGroupPermissionMapper;
 
     @Override
-    public String add(PermissionGroupVo vo) {
-        if(StringUtils.isNotEmpty(vo.getPermissionIds())){
-            List<AuthGroupPermission> authGroupPermissionList= Arrays.stream(vo.getPermissionIds().split(SysConf.FILE_SEGMENTATION))
+    public String add(String groupID,String permissionIds) {
+        if(StringUtils.isNotEmpty(permissionIds)){
+            List<AuthGroupPermission> authGroupPermissionList= Arrays.stream(permissionIds.split(SysConf.FILE_SEGMENTATION))
                                                     .map(x->{
-                                                        return new AuthGroupPermission(vo.getUid(),x);
+                                                        return new AuthGroupPermission(groupID,x);
                                                     }).collect(Collectors.toList());
             authGroupPermissionService.saveBatch(authGroupPermissionList);
         }
@@ -47,12 +47,12 @@ public class AuthGroupPermissionServiceImpl extends SuperServiceImpl<AuthGroupPe
     }
 
     @Override
-    public String delete(PermissionGroupVo vo) {
-        if(StringUtils.isNotEmpty(vo.getPermissionIds())){
-            List<String> permissionIds= Arrays.stream(vo.getPermissionIds().split(SysConf.FILE_SEGMENTATION)).collect(Collectors.toList());
+    public String delete(String groupID,String permissionIds) {
+        if(StringUtils.isNotEmpty(permissionIds)){
+            List<String> permissionList= Arrays.stream(permissionIds.split(SysConf.FILE_SEGMENTATION)).collect(Collectors.toList());
             QueryWrapper<AuthGroupPermission> wrapper=new QueryWrapper<AuthGroupPermission>(){{
-                in(SysConf.PID,permissionIds);
-                eq(SysConf.RID,vo.getUid());
+                in(SysConf.PID,permissionList);
+                eq(SysConf.RID,groupID);
             }};
             authGroupPermissionMapper.delete(wrapper);
         }

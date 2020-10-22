@@ -22,4 +22,6 @@ public interface OptionBankService extends SuperService<OptionBank> {
     public String edit(OptionBankVo.OptionVo vo, String userId);
 
     public String delete(String userId, String oid);
+
+    public OptionBank getById(String pid, String userId);
 }

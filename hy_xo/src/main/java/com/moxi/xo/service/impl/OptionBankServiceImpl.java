@@ -135,4 +135,13 @@ public class OptionBankServiceImpl extends SuperServiceImpl<OptionBankMapper, Op
             return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_AUTH);
         }
     }
+
+    @Override
+    public OptionBank getById(String pid, String userId) {
+        OptionBank optionBank=optionBankService.getById(pid);
+        if(optionBank!=null&&StringUtils.isNotEmpty(optionBank.getQuestionSelect())){
+            optionBank.setSelectList(JSON.parseArray(optionBank.getQuestionSelect(),OptionSelect.class));
+        }
+        return optionBank;
+    }
 }

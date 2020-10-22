@@ -137,4 +137,13 @@ public class GapBankServiceImpl extends SuperServiceImpl<GapBankMapper, GapBank>
             return ResultUtil.result(SysConf.ERROR,MessageConf.INVALID_AUTH);
         }
     }
+
+    @Override
+    public GapBank getById(String pid, String userId) {
+        GapBank gapBank=gapBankService.getById(pid);
+        if(gapBank!=null&&StringUtils.isNotEmpty(gapBank.getQuestionAnswer())){
+            gapBank.setGapAnswerList(JSON.parseArray(gapBank.getQuestionAnswer(), GapAnswer.class));
+        }
+        return gapBank;
+    }
 }

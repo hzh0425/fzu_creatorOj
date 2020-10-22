@@ -14,7 +14,7 @@ import com.moxi.xo.vo.PermissionGroupVo;
  */
 public interface AuthGroupPermissionService extends SuperService<AuthGroupPermission> {
 
-    public String add(PermissionGroupVo vo);
+    public String add(String groupId,String permissionIds);
 
-    public String delete(PermissionGroupVo vo);
+    public String delete(String groupID,String permissionIds);
 }
