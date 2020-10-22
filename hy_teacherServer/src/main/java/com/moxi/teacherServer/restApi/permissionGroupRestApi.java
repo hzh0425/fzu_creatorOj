@@ -43,7 +43,7 @@ public class permissionGroupRestApi {
     @Autowired
     AuthUserGroupService authUserGroupService;
 
-    //获取班级所能操作的权限表,为权限组赋予权限用
+
 
     @ApiOperation(value = "1.获取权限组列表", notes = "1.获取权限组列表,keyword可选,用于模糊查询", response = String.class)
     @ApiOperationSupport(ignoreParameters = {"memberIds","permissionIds","uid","groupDesc","groupName","memberIds","permissionIds","uid"})
@@ -115,5 +115,15 @@ public class permissionGroupRestApi {
         if(StringUtils.isEmpty(groupId))return ResultUtil.result(SysConf.ERROR, MessageConf.PARAM_INCORRECT);
         return authUserGroupService.delete(groupId,memberIds);
     }
+
+    //获取班级所能操作的权限表,为权限组赋予权限用
+    @ApiOperation(value = "0.获取班级所能操作的权限表,为权限组赋予权限用", notes = "0.获取班级所能操作的权限表,为权限组赋予权限用", response = String.class)
+    @GetMapping("/class/{classId}/permission/getPermissionTable")
+    public String getPermissionTable(@PathVariable String classId)
+    {
+        if(StringUtils.isEmpty(classId))return ResultUtil.result(SysConf.ERROR,MessageConf.PARAM_INCORRECT);
+        return ResultUtil.result(SysConf.SUCCESS, authPermissionService.getPermissionTable(classId));
+    }
+
 
 }

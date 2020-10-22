@@ -23,7 +23,7 @@
             <!--在引用时请在maven中央仓库搜索最新版本号-->
             <version>2.0.4</version>
         </dependency>
-        <!-- 引入lombok -->
+<!--         //引入lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

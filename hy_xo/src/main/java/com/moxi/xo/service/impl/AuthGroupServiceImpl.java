@@ -9,19 +9,24 @@ import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.AuthGroup;
+import com.moxi.xo.entity.Exam;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SqlConf;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.mapper.AuthGroupMapper;
 
 import com.moxi.xo.service.AuthGroupService;
+import com.moxi.xo.service.ExamService;
 import com.moxi.xo.util.ResourceUtil;
 import com.moxi.xo.vo.PermissionGroupVo;
 import com.moxi.xo.vo.ResourceReturningVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -38,6 +43,8 @@ public class AuthGroupServiceImpl extends SuperServiceImpl<AuthGroupMapper, Auth
     AuthGroupService authGroupService;
     @Autowired
     ResourceUtil resourceUtil;
+    @Autowired
+    ExamService examService;
     @Override
     public IPage<AuthGroup> getList(PermissionGroupVo vo) {
         QueryWrapper<AuthGroup> wrapper=new QueryWrapper<AuthGroup>(){{
@@ -87,5 +94,26 @@ public class AuthGroupServiceImpl extends SuperServiceImpl<AuthGroupMapper, Auth
         if(pre==null)return ResultUtil.result(SysConf.ERROR,MessageConf.ENTITY_NOT_EXIST);
         pre.deleteById();
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
+    }
+
+    @Override
+    public List getPermissionTable(PermissionGroupVo vo) {
+        //统一权限ids列表
+        List<String> permissionIds=new ArrayList<>();
+        //1.班级类资源
+        String classId=vo.getClassId();
+        //2.考试类资源
+        // 查询考试列表
+        QueryWrapper<Exam>examWrapper=new QueryWrapper<Exam>(){{
+            eq(SqlConf.CLASS_ID,vo.getClassId());
+        }};
+        List<Exam> examList=examService.list(examWrapper);
+        List<String> examIds=examList.stream().map(Exam::getUid).collect(Collectors.toList());
+        //3.权限组资源类
+        QueryWrapper<AuthGroup> groupWrapper=new QueryWrapper<AuthGroup>(){{
+            eq(SqlConf.CLASS_ID,vo.getClassId());
+        }};
+
+        return null;
     }
 }

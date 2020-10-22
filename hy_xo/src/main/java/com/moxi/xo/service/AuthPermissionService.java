@@ -3,6 +3,7 @@ package com.moxi.xo.service;
 import com.moxi.base.service.SuperService;
 import com.moxi.xo.entity.AuthPermission;
 
+import java.util.List;
 /**
  * <p>
  *  服务类
@@ -14,4 +15,6 @@ import com.moxi.xo.entity.AuthPermission;
 public interface AuthPermissionService extends SuperService<AuthPermission> {
 
     public void deleteResource(String resourceId);
+
+    public List<AuthPermission> getPermissionTable(String classId);
 }

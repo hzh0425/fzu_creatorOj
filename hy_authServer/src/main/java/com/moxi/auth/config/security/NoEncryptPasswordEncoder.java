@@ -3,6 +3,10 @@ package com.moxi.auth.config.security;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  */
 @Component

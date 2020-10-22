@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RequestTemplate  {
-    private int resource_id;
+    private int resourceId;
     private String resourceType;
     private String operand;
     private String operationType;

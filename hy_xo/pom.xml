@@ -50,7 +50,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -63,15 +62,6 @@
             <scope>provided</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger2</artifactId>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-swagger-ui</artifactId>-->
-<!--        </dependency>-->
 
 
         <dependency>
@@ -81,10 +71,7 @@
             <version>2.0.4</version>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>io.springfox</groupId>-->
-<!--            <artifactId>springfox-boot-starter</artifactId>-->
-<!--        </dependency>-->
+
         <dependency>
             <artifactId>hy_commons</artifactId>
             <groupId>com.moxi</groupId>

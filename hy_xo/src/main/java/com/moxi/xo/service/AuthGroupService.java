@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.moxi.base.service.SuperService;
 import com.moxi.xo.entity.AuthGroup;
 import com.moxi.xo.vo.PermissionGroupVo;
-
+import java.util.List;
 /**
  * <p>
  *  服务类
@@ -22,4 +22,6 @@ public interface AuthGroupService extends SuperService<AuthGroup> {
     public  String edit(PermissionGroupVo vo);
 
     public String delete(String groupId);
+
+    public List getPermissionTable(PermissionGroupVo vo);
 }

@@ -64,4 +64,10 @@ public class AuthPermissionServiceImpl extends SuperServiceImpl<AuthPermissionMa
         authRolePermissionMapper.delete(rolePermissionQueryWrapper);
 
     }
+
+    @Override
+    public List<AuthPermission> getPermissionTable(String classId) {
+        List<AuthPermission> permissionList=authPermissionMapper.getPermissionSelectTable(classId);
+        return permissionList;
+    }
 }

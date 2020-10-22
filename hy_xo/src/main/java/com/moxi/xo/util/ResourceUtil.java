@@ -45,8 +45,8 @@ public class ResourceUtil {
         List<RequestTemplate> requestTemplateList = requestTemplateService.list(wrapper);
         //2.根据模板,构建权限表
         List<AuthPermission> collect = requestTemplateList.stream().map(x -> {
-            System.out.println(x);
             return AuthPermission.builder()
+                    .resourceTypeId(x.getResourceId())
                     .resourceType(vo.getResourceType())
                     .resourceId(vo.getResourceId())
                     .ownerId(vo.getOwnerId())

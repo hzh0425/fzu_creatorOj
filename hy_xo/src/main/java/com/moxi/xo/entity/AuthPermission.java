@@ -33,6 +33,9 @@ public class AuthPermission extends SuperEntity {
 
     private static final long serialVersionUID = 1L;
 
+
+    private int resourceTypeId;
+
     private String resourceType;
 
     private String resourceId;
