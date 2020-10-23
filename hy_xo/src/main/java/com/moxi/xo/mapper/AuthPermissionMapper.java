@@ -32,7 +32,7 @@ public interface AuthPermissionMapper extends SuperMapper<AuthPermission> {
     /**
      * 获取该班级下的所有资源对应的resource_id
      */
-    @Select("SELECT uid,resourceTypeId,resourceType,resourceDesc,operandDesc FROM auth_permission WHERE resource_id IN(\n" +
+    @Select("SELECT uid,resource_type_id,resource_type,resource_desc,operand_desc FROM auth_permission WHERE resource_id IN(\n" +
             "\tSELECT uid FROM auth_group WHERE class_id=#{classId} \n" +
             "\tUNION ALL\n" +
             "\tSELECT uid FROM exam WHERE class_id=#{classId} \n" +

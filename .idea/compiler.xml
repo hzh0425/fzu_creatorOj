@@ -25,6 +25,7 @@
       <module name="hy_envoy" target="1.8" />
       <module name="hy_grpc" target="1.8" />
       <module name="hy_kubes" target="1.8" />
+      <module name="hy_ojJudger" target="1.8" />
       <module name="hy_search" target="1.8" />
       <module name="hy_socket" target="1.8" />
     </bytecodeTargetLevel>
@@ -42,6 +43,7 @@
       <module name="hy_grpc" options="-parameters" />
       <module name="hy_kubes" options="-parameters" />
       <module name="hy_minio" options="-parameters" />
+      <module name="hy_ojJudger" options="-parameters" />
       <module name="hy_search" options="-parameters" />
       <module name="hy_sms" options="-parameters" />
       <module name="hy_socket" options="-parameters" />
