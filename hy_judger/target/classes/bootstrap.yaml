@@ -1,0 +1,44 @@
+server:
+  port: 9004
+
+spring:
+  application:
+    name: oj-judgert
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 124.70.200.174:8848
+        #ip: 124.70.200.174
+      config:
+        file-extension: yaml
+        group: creatorOj
+        server-addr: 124.70.200.174:8848
+
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+  # elasticsearch:
+  #   rest:
+  #     uris: 124.70.200.174:9200
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/voj?autoReconnect=true&useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+  redis:
+    host: localhost
+    port: 6379
+
+  kafka:
+    bootstrap-servers: 124.70.200.174:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      group-id: judgerGroup #群组ID
+      enable-auto-commit: true
+      auto-commit-interval: 1000
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
