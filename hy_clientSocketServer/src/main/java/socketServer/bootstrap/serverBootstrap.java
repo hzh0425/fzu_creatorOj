@@ -56,7 +56,7 @@ public class serverBootstrap {
                             /*
                              * WebSocketServerProtocolHandler核心功能是将http协议升级为ws协议,保持长连接
                              * */
-                            pipeline.addLast(new WebSocketServerProtocolHandler("/chat/ws"));
+                            pipeline.addLast(new WebSocketServerProtocolHandler("/ws/problem"));
                         }
                     });
             ChannelFuture future=bootstrap.bind(10000).sync();

@@ -31,6 +31,7 @@
       <module name="hy_search" target="1.8" />
       <module name="hy_sms" target="1.8" />
       <module name="hy_socket" target="1.8" />
+      <module name="hy_socketServer" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
