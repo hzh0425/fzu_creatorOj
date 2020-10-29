@@ -2,7 +2,7 @@ package com.moxi.xo.vo;
 
 import com.moxi.base.validator.annotion.NotBlank;
 import com.moxi.base.vo.BaseVO;
-import com.moxi.xo.entity.ProgramExample;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,10 +1,11 @@
 package com.moxi.xo.service.impl;
 
 import com.moxi.base.serviceImpl.SuperServiceImpl;
+import com.moxi.xo.entity.SubmitProgram;
+import com.moxi.xo.mapper.SubmitProgramMapper;
 import com.moxi.xo.service.SubmitProgramService;
 import org.springframework.stereotype.Service;
-import test.entity.SubmitProgram;
-import test.mapper.SubmitProgramMapper;
+
 
 /**
  * <p>

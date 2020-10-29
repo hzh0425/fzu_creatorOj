@@ -1,10 +1,10 @@
 package com.moxi.xo.service.impl;
 
 import com.moxi.base.serviceImpl.SuperServiceImpl;
+import com.moxi.xo.entity.CheckPoints;
+import com.moxi.xo.mapper.CheckPointsMapper;
 import com.moxi.xo.service.CheckPointsService;
 import org.springframework.stereotype.Service;
-import test.entity.CheckPoints;
-import test.mapper.CheckPointsMapper;
 
 /**
  * <p>

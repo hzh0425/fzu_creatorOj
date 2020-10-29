@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class test {
     @GetMapping(value = "/test")
     public String test1(){
+
         return "success";
     }
 }

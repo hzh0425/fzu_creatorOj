@@ -1,7 +1,8 @@
 package com.moxi.xo.mapper;
 
 import com.moxi.base.mapper.SuperMapper;
-import test.entity.SubmitSelect;
+import com.moxi.xo.entity.SubmitSelect;
+
 
 /**
  * <p>

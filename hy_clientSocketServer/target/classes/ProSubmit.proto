@@ -1,0 +1,25 @@
+syntax="proto3";
+option java_multiple_files = true;
+package  socketServer.proBuf;
+message ProSubmit{
+  string eventType=6;
+  /**
+     * 用户id
+     */
+   string userId=1;
+
+  /**
+   * 考试的id
+   */
+  string examId=2;
+
+  /**
+   * 考试的题库id
+   */
+  string bankId=3;
+
+  /**
+   * 提交的代码
+   */
+  string submitCode=5;
+}

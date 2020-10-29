@@ -13,7 +13,7 @@ public class SubmitFill extends SuperEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private String uid;
+
 
     /**
      * 用户id

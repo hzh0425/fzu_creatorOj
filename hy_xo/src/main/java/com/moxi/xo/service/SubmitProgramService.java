@@ -1,7 +1,7 @@
 package com.moxi.xo.service;
 
 import com.moxi.base.service.SuperService;
-import test.entity.SubmitProgram;
+import com.moxi.xo.entity.SubmitProgram;
 
 /**
  * <p>

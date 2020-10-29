@@ -1,10 +1,10 @@
 package com.moxi.xo.service.impl;
 
 import com.moxi.base.serviceImpl.SuperServiceImpl;
+import com.moxi.xo.entity.SubmitSelect;
+import com.moxi.xo.mapper.SubmitSelectMapper;
 import com.moxi.xo.service.SubmitSelectService;
 import org.springframework.stereotype.Service;
-import test.entity.SubmitSelect;
-import test.mapper.SubmitSelectMapper;
 
 /**
  * <p>

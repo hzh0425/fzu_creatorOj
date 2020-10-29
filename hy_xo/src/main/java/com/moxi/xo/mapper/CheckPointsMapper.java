@@ -1,7 +1,8 @@
 package com.moxi.xo.mapper;
 
 import com.moxi.base.mapper.SuperMapper;
-import test.entity.CheckPoints;
+import com.moxi.xo.entity.CheckPoints;
+
 
 /**
  * <p>
