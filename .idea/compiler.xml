@@ -6,19 +6,18 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hy_sms" />
         <module name="hy_adminServer" />
         <module name="hy_teacherServer" />
-        <module name="hy_xo" />
+        <module name="hy_minio" />
         <module name="hy_utils" />
         <module name="hy_base" />
+        <module name="hy_authServer" />
         <module name="hy_gateway" />
         <module name="hy_commons" />
-        <module name="hy_judger" />
+        <module name="hy_clientSocketServer" />
         <module name="hy_judger_gateway" />
-        <module name="hy_minio" />
-        <module name="hy_socketServer" />
-        <module name="hy_authServer" />
+        <module name="hy_judger" />
+        <module name="hy_xo" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -27,8 +26,10 @@
       <module name="hy_envoy" target="1.8" />
       <module name="hy_grpc" target="1.8" />
       <module name="hy_kubes" target="1.8" />
+      <module name="hy_nettyServer" target="1.8" />
       <module name="hy_ojJudger" target="1.8" />
       <module name="hy_search" target="1.8" />
+      <module name="hy_sms" target="1.8" />
       <module name="hy_socket" target="1.8" />
     </bytecodeTargetLevel>
   </component>
@@ -39,6 +40,7 @@
       <module name="hy_authClient" options="-parameters" />
       <module name="hy_authServer" options="-parameters" />
       <module name="hy_base" options="-parameters" />
+      <module name="hy_clientSocketServer" options="-parameters" />
       <module name="hy_commons" options="-parameters" />
       <module name="hy_envoy" options="-parameters" />
       <module name="hy_gateway" options="-parameters" />
@@ -47,11 +49,11 @@
       <module name="hy_judger_gateway" options="-parameters" />
       <module name="hy_kubes" options="-parameters" />
       <module name="hy_minio" options="-parameters" />
+      <module name="hy_nettyServer" options="-parameters" />
       <module name="hy_ojJudger" options="-parameters" />
       <module name="hy_search" options="-parameters" />
       <module name="hy_sms" options="-parameters" />
       <module name="hy_socket" options="-parameters" />
-      <module name="hy_socketServer" options="-parameters" />
       <module name="hy_teacherServer" options="-parameters" />
       <module name="hy_utils" options="-parameters" />
       <module name="hy_xo" options="-parameters" />

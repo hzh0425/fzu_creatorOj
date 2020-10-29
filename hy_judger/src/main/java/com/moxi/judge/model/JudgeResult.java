@@ -40,6 +40,7 @@
 package com.moxi.judge.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -51,6 +52,7 @@ import java.io.Serializable;
  *
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class JudgeResult implements Serializable {
@@ -70,7 +72,8 @@ public class JudgeResult implements Serializable {
 	 * 评测结果的名称.
 	 */
 	private String judgeResultName;
-	
+
+
 	/**
 	 * 唯一的序列化标识符.
 	 */

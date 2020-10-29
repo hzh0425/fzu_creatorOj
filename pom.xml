@@ -18,16 +18,14 @@
         <module>hy_commons</module>
         <module>hy_base</module>
         <module>hy_gateway</module>
-        <module>hy_sms</module>
         <module>hy_xo</module>
         <module>hy_minio</module>
         <module>hy_authServer</module>
-        <module>hy_socketServer</module>
         <module>hy_teacherServer</module>
         <module>hy_adminServer</module>
         <module>hy_judger_gateway</module>
-        <module>hy_judge</module>
         <module>hy_judger</module>
+        <module>hy_clientSocketServer</module>
     </modules>
     <packaging>pom</packaging>
     <name>hy_creatorOj</name>

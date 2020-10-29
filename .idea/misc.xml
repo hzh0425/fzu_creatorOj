@@ -17,7 +17,9 @@
         <option value="$PROJECT_DIR$/hy_envoy/pom.xml" />
         <option value="$PROJECT_DIR$/hy_grpc/pom.xml" />
         <option value="$PROJECT_DIR$/hy_judge/pom.xml" />
+        <option value="$PROJECT_DIR$/hy_nettyServer/pom.xml" />
         <option value="$PROJECT_DIR$/hy_ojJudger/pom.xml" />
+        <option value="$PROJECT_DIR$/hy_sms/pom.xml" />
         <option value="$PROJECT_DIR$/hy_socket/pom.xml" />
       </set>
     </option>

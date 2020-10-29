@@ -1,5 +1,6 @@
 package com.moxi.judge.message;
 
+import com.moxi.judge.Application.ApplicationDispatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -15,17 +16,21 @@ import javax.annotation.Resource;
 @Service
 public class MessageReceiver {
 
-    @Resource
-    KafkaTemplate<String,String> messageTemplate;
+    @Autowired
+    ApplicationDispatcher dispatcher;
+
     @KafkaListener(topics = {"judgeProblem"},groupId = "judgeGroup")
     public void onMessage(String submissionId){
-
+        System.out.println("receive a message:"+submissionId);
+        newSubmissionHandler(submissionId);
     }
 
     /**
      * 处理新提交的请求
      */
     public void newSubmissionHandler(String submissionId){
-
+        dispatcher.newSubmissionHandler(submissionId);
     }
+
+
 }
