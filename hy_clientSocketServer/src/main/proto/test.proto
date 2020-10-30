@@ -1,7 +1,0 @@
-syntax="proto3";
-option java_multiple_files = true;
-package  com.moxi.proBuf;
-message ProTest{
-  string name=1;
-  int32 age=2;
-}

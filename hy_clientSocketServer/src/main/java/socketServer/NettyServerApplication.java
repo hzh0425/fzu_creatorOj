@@ -17,7 +17,8 @@ import socketServer.bootstrap.serverBootstrap;
         "socketServer.handler",
         "socketServer.restApi",
         "socketServer.message",
-        "socketServer.util"
+        "socketServer.util",
+        "socketServer.Application"
 })
 public class NettyServerApplication {
     public static void main(String[] args) throws Exception {

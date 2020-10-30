@@ -50,6 +50,10 @@ public class SubmitProgram extends SuperEntity {
     private String submitCode;
 
     /**
+     * 语言
+     */
+    private String language;
+    /**
      * 运行开始时间
      */
     private LocalDateTime executeTime;

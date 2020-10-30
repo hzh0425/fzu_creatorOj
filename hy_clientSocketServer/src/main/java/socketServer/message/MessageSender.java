@@ -22,6 +22,6 @@ public class MessageSender {
 
     }
     public void sendMessage(String result){
-        messageTemplate.send("judgeResult",result);
+        messageTemplate.send("judgeProblem",result);
     }
 }

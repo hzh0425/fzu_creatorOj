@@ -1,8 +1,0 @@
-syntax="proto3";
-option java_multiple_files = true;
-package  com.moxi.proBuf;
-
-message usertest{
-  string name=1;
-  string age=2;
-}
