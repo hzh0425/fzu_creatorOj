@@ -1,16 +1,16 @@
 package socketServer.Application;
 
 import com.alibaba.fastjson.JSONObject;
+import com.moxi.utils.RedisUtil;
 import io.netty.channel.Channel;
 import io.netty.util.AttributeKey;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import socketServer.Interface.ApplicationService;
-import socketServer.Interface.MainEventService;
+import socketServer.Interface.DispatcherService;
 
 import javax.annotation.PostConstruct;
-import javax.management.Attribute;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @date 2020/10/31 0:00
  */
 @Service
-public class EventApplication implements MainEventService {
+public class EventDispatcher implements DispatcherService {
     /**
      * 定义特性
      */
@@ -32,6 +32,14 @@ public class EventApplication implements MainEventService {
      */
     @Autowired
     SubmitApplication submitApplication;
+    @Autowired
+    QuestionApplication questionApplication;
+    @Autowired
+    MonitorApplication monitorApplication;
+    @Autowired
+    CheckPointApplication checkPointApplication;
+    @Autowired
+    RedisUtil redisUtil;
 
     private List<ApplicationService> chains;
 

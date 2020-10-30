@@ -10,7 +10,7 @@ import org.apache.poi.ss.formula.functions.T;
  * @version 1.0
  * @date 2020/10/31 0:03
  */
-public interface MainEventService {
+public interface DispatcherService {
     /**
      * 处理事件
      * @param event

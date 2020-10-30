@@ -1,17 +1,12 @@
 package socketServer.handler;
 
-import com.moxi.utils.StringUtils;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import socketServer.Application.EventApplication;
-import socketServer.Application.SubmitApplication;
-import socketServer.Interface.ApplicationService;
+import socketServer.Application.EventDispatcher;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.annotation.PostConstruct;
 
 /**
@@ -26,7 +21,7 @@ public class MonitorHandler extends SimpleChannelInboundHandler<TextWebSocketFra
      * 依赖注入
      */
     @Autowired
-    EventApplication eventApplication;
+    EventDispatcher eventApplication;
     /**
      * 防止无法依赖注入的初始化
      */

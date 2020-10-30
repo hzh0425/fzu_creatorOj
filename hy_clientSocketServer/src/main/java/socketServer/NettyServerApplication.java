@@ -18,7 +18,9 @@ import socketServer.bootstrap.serverBootstrap;
         "socketServer.restApi",
         "socketServer.message",
         "socketServer.util",
-        "socketServer.Application"
+        "socketServer.Application",
+        "com.moxi.utils",
+        "com.moxi.commons.config"
 })
 public class NettyServerApplication {
     public static void main(String[] args) throws Exception {
