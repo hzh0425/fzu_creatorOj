@@ -46,6 +46,7 @@ public class SubmitApplication implements ApplicationService {
     @Override
     public void handleEvent(String message) {
         CodeSubmit submit= messageUtil.parseMessage(message, CodeSubmit.class);
+        System.out.println(submit);
         if(submit!=null){
             //将代码缓存到redis,key: uuid,value:CodeSubmit
             String uuid= UUID.randomUUID().toString();

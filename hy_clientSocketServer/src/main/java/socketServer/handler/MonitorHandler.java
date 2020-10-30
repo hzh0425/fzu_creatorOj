@@ -6,6 +6,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import socketServer.Application.EventApplication;
 import socketServer.Application.SubmitApplication;
 import socketServer.Interface.ApplicationService;
 
@@ -21,30 +22,23 @@ import javax.annotation.PostConstruct;
 @Component
 public class MonitorHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
-
     /**
      * 依赖注入
      */
     @Autowired
-    SubmitApplication submitApplication;
-
-
-    private  List<ApplicationService> chains;
+    EventApplication eventApplication;
     /**
-     * 防止无法依赖注入的初始化,并初始化责任链
+     * 防止无法依赖注入的初始化
      */
     public static MonitorHandler handler;
 
     @PostConstruct
     public void init(){
         handler=this;
-        handler.chains=new ArrayList<ApplicationService>(){{
-            add(handler.submitApplication);
-        }};
     }
 
     /**
-     * 前端传送消息,传递至application责任链
+     * 前端传送消息
      * @param channelHandlerContext
      * @param frame
      * @throws Exception
@@ -52,15 +46,8 @@ public class MonitorHandler extends SimpleChannelInboundHandler<TextWebSocketFra
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame frame) throws Exception {
         String message=frame.text();
-        if(StringUtils.isNotEmpty(message)){
-            for(ApplicationService application:handler.chains){
-                if(application.supportEvent(message)){
-                    application.handleEvent(message);
-                    break;
-                }else{
-                    System.out.println("it is no suport");
-                }
-            }
+        if(message!=null){
+            handler.eventApplication.handler(message);
         }
     }
 
