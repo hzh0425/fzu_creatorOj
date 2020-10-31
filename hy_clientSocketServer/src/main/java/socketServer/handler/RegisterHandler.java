@@ -66,6 +66,15 @@ public class RegisterHandler extends SimpleChannelInboundHandler<TextWebSocketFr
         ctx.fireChannelRead(msg);
     }
 
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        deRegister(ctx.channel());
+        System.out.println("channel exit:"+ctx.channel().remoteAddress());
+    }
+
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
+    }
     /**
      * 注册
      * @param channel
@@ -73,6 +82,9 @@ public class RegisterHandler extends SimpleChannelInboundHandler<TextWebSocketFr
      */
     public void doRegister(Channel channel, Map<String,String> paramMap){
         handler.eventDispatcher.register(channel , paramMap);
+    }
+    public void deRegister(Channel channel){
+        handler.eventDispatcher.deregister(channel);
     }
 
     /**
@@ -96,8 +108,4 @@ public class RegisterHandler extends SimpleChannelInboundHandler<TextWebSocketFr
         return paramsMap;
     }
 
-
-    @Override
-    protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
-    }
 }

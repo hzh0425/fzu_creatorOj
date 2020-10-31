@@ -1,20 +1,15 @@
 package socketServer.Application;
 
-import com.moxi.base.enums.EStatus;
 import com.moxi.utils.RedisUtil;
 import com.moxi.xo.entity.SubmitProgram;
 import com.moxi.xo.vo.CodeSubmitVo;
-import com.vladsch.flexmark.ast.Code;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import socketServer.Interface.ApplicationService;
 import socketServer.global.SysConf;
 import socketServer.message.MessageSender;
-import socketServer.model.CodeSubmit;
 import socketServer.util.MessageUtil;
 
-import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -51,7 +46,7 @@ public class SubmitApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
-        CodeSubmitVo submit= messageUtil.parseMessage(message, CodeSubmitVo.class);
+        CodeSubmitVo submit= messageUtil.doParseMessage(message, CodeSubmitVo.class);
         System.out.println(submit);
         if(submit!=null){
             //构建提交记录

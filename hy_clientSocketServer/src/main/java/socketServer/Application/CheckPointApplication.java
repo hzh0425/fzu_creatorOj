@@ -46,12 +46,10 @@ public class CheckPointApplication implements ApplicationService {
         System.out.println("get a message:"+points);
         String userId=points.getUserId();
         Channel userChannel=EventDispatcher.globalChannelMap.get(userId);
-        System.out.println(userId);
-        System.out.println(userChannel);
-        if(userChannel!=null){
-            System.out.println("begin to send ");
-            messageUtil.sendWebsocketFrame(message,userChannel);
-            System.out.println("send done");
+        if(userChannel != null){
+            messageUtil.doSendMessage(points,userChannel);
+            //异步保存checkpoints到mysql
+            userChannel.eventLoop().execute(points::insert);
         }
     }
 }

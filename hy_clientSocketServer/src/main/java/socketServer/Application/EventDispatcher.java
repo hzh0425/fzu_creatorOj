@@ -63,8 +63,9 @@ public class EventDispatcher implements DispatcherService {
     public void init(){
         chains=new ArrayList<ApplicationService>(){{
             add(submitApplication);
+            add(questionApplication);
+            add(monitorApplication);
         }};
-
     }
 
     /**
@@ -82,7 +83,6 @@ public class EventDispatcher implements DispatcherService {
                 System.out.println("it is not support");
             }
         }
-
     }
 
     /**
@@ -110,7 +110,6 @@ public class EventDispatcher implements DispatcherService {
     @Override
     public void deregister(Channel channel){
         globalChannels.remove(channel);
-
         String userId=getAttr(channel,USER_ID);
         if(StringUtils.isNotEmpty(userId)){
             globalChannelMap.remove(userId);
@@ -122,6 +121,8 @@ public class EventDispatcher implements DispatcherService {
     public  Channel getChannel(String key){
         return globalChannelMap.getOrDefault(key,null);
     }
+
+
     /**
      * 增加attributes
      *

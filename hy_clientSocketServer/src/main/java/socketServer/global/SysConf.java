@@ -12,4 +12,9 @@ public class SysConf extends com.moxi.xo.global.SysConf {
     public final static String EVENT_QUESTION="event_question";
 
     public final static int RUNNING_UPPER=2;
+
+    //群聊
+    public final static String QUIZ_GROUP="group";
+    //单聊
+    public final static String QUIZ_SINGLE="single";
 }

@@ -43,8 +43,6 @@ public class BaseSysConf {
 
 
 
-
-    public final static String RESOURCE_TYPE="resource_type";
     public final static String Authorization="Authorization";
     public final static String BEARER="bearer";
     public final static String CODE="code";
