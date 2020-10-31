@@ -22,7 +22,6 @@ public class MessageReceiver {
 
     @KafkaListener(topics = {"judgeResult"},groupId = "judgeServer")
     public void onMessage(String result){
-        System.out.println("receive a message:");
         this.handlerCheckPoint(result);
     }
 

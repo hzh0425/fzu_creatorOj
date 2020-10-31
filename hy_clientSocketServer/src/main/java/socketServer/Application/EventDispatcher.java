@@ -74,7 +74,7 @@ public class EventDispatcher implements DispatcherService {
      */
     @Override
     public void handler(String event) {
-        for(ApplicationService application:chains){
+        for(ApplicationService application : chains){
             if(application.supportEvent(event)){
                 application.handleEvent(event);
                 break;
@@ -98,9 +98,11 @@ public class EventDispatcher implements DispatcherService {
         setAttr(channel,USER_ID,userId);
         setAttr(channel,EXAM_ID,examId);
         setAttr(channel, USER_TYPE,userType);
-        System.out.println("register success");
         globalChannels.add(channel);
         globalChannelMap.put(userId,channel);
+        System.out.println(userId);
+        System.out.println(channel);
+        System.out.println("register success");
     }
     /**
      * 注销channel

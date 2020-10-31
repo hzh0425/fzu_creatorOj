@@ -35,6 +35,8 @@ public class BaseSysConf {
     public final static String FILE_SEGMENTATION = ",";
     public final static String FILE_SEGMEN="/";
     public final static String FILE_COLON=":";
+    public final static String FILE_EQUAL="=";
+    public final static String FILE_COLLATION="&";
 
 
 

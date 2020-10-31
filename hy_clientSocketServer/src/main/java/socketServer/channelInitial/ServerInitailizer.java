@@ -10,6 +10,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import socketServer.handler.MonitorHandler;
+import socketServer.handler.RegisterHandler;
 
 import static io.netty.buffer.Unpooled.wrappedBuffer;
 
@@ -30,10 +31,12 @@ public class ServerInitailizer extends ChannelInitializer<SocketChannel> {
         pipeline.addLast(new StringEncoder());
         // WebSocket数据压缩
         //pipeline.addLast(new WebSocketServerCompressionHandler());
-        // 处理websocket
-        pipeline.addLast(new WebSocketServerProtocolHandler("/ws"));
 
         //自定义处理
+        pipeline.addLast("registerHandler",new RegisterHandler());
+        // 处理websocket
+        pipeline.addLast(new WebSocketServerProtocolHandler("/ws",null,true,65526*10));
+
         pipeline.addLast("moniterHandler",new MonitorHandler());
 
     }

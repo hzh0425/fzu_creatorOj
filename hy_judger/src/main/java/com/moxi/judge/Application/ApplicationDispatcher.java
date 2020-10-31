@@ -22,7 +22,7 @@ public class ApplicationDispatcher {
     RedisUtil redisUtil;
     @Autowired
     MessageSender sender;
-    public void newSubmissionHandler(String  submissionKey){
+    public void newSubmissionHandler(String  submissionKey) throws InterruptedException {
         System.out.println("receive a new submitTask,begin to resolve:"+submissionKey);
         Random random=new Random();
         //获取submission
@@ -34,6 +34,7 @@ public class ApplicationDispatcher {
             System.out.println("发送消息:");
             CheckPoints points=new CheckPoints(program.getUid(),random.nextInt(),random.nextDouble()*10,"qwerqewr","asdfff",program.getUserId());
             sender.sendMessage(JSON.toJSONString(points));
+            Thread.sleep(500);
         }
     }
 }

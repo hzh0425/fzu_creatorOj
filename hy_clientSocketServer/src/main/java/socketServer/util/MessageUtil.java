@@ -2,6 +2,7 @@ package socketServer.util;
 
 import com.alibaba.fastjson.JSON;
 import io.netty.channel.Channel;
+import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,6 +14,10 @@ import org.springframework.stereotype.Component;
 public class MessageUtil {
     public void sendMessage(Object message, Channel channel){
         channel.writeAndFlush(JSON.toJSONString(message));
+
+    }
+    public void sendWebsocketFrame(String message, Channel channel){
+        channel.writeAndFlush(new TextWebSocketFrame(JSON.toJSONString(message)));
     }
     public <T> T parseMessage(String message,Class<T> c){
     return JSON.parseObject(message,c);

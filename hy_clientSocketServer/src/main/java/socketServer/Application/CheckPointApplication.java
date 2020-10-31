@@ -46,8 +46,12 @@ public class CheckPointApplication implements ApplicationService {
         System.out.println("get a message:"+points);
         String userId=points.getUserId();
         Channel userChannel=EventDispatcher.globalChannelMap.get(userId);
+        System.out.println(userId);
+        System.out.println(userChannel);
         if(userChannel!=null){
-            messageUtil.sendMessage(message,userChannel);
+            System.out.println("begin to send ");
+            messageUtil.sendWebsocketFrame(message,userChannel);
+            System.out.println("send done");
         }
     }
 }
