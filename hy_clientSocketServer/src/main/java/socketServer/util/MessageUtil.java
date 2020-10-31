@@ -15,6 +15,6 @@ public class MessageUtil {
         channel.writeAndFlush(JSON.toJSONString(message));
     }
     public <T> T parseMessage(String message,Class<T> c){
-        return JSON.parseObject(message,c);
+    return JSON.parseObject(message,c);
     }
 }

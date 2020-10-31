@@ -14,10 +14,11 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = {
         "com.moxi.judge.core",
         "com.moxi.judge.message",
-        "com.moxi.judge.model",
         "com.moxi.judge.util",
         "com.moxi.judge.Application",
-        "com.moxi.judge.Config"
+        "com.moxi.judge.Config",
+        "com.moxi.utils",
+        "com.moxi.commons.config"
 })
 @MapperScan(basePackages = {
         "com.moxi.judge.mapper"

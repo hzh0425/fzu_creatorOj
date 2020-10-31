@@ -1,11 +1,21 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moxi.base.entity.SuperEntity;
+import com.moxi.xo.vo.CodeSubmitVo;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -16,9 +26,12 @@ import java.time.LocalDateTime;
  * @since 2020-10-29
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("submit_program")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class SubmitProgram extends SuperEntity {
+public class SubmitProgram extends SuperEntity<SubmitProgram> {
 
     private static final long serialVersionUID = 1L;
 
@@ -42,7 +55,20 @@ public class SubmitProgram extends SuperEntity {
     /**
      * 提交时间
      */
-    private LocalDateTime submitTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date submitTime;
+
+    public SubmitProgram(CodeSubmitVo submitVo) {
+        this.userId = submitVo.getUserId();
+        this.examId = submitVo.getExamId();
+        this.bankId = submitVo.getBankId();
+        this.submitCode = submitVo.getSubmitCode();
+        this.language = submitVo.getLanguage();
+        this.submitTime=new Date();
+        this.judgeResult="wait";
+    }
 
     /**
      * 提交的代码
@@ -56,7 +82,10 @@ public class SubmitProgram extends SuperEntity {
     /**
      * 运行开始时间
      */
-    private LocalDateTime executeTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date executeTime;
 
     /**
      * 运行用时
@@ -82,6 +111,9 @@ public class SubmitProgram extends SuperEntity {
      * 判题日志
      */
     private String judgeLog;
+
+
+
 
 
 }

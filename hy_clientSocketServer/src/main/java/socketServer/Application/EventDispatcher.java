@@ -2,8 +2,15 @@ package socketServer.Application;
 
 import com.alibaba.fastjson.JSONObject;
 import com.moxi.utils.RedisUtil;
+import com.moxi.utils.StringUtils;
+import com.moxi.xo.global.SysConf;
 import io.netty.channel.Channel;
+import io.netty.channel.group.ChannelGroup;
+import io.netty.channel.group.ChannelMatcher;
+import io.netty.channel.group.DefaultChannelGroup;
 import io.netty.util.AttributeKey;
+import io.netty.util.concurrent.EventExecutor;
+import io.netty.util.concurrent.GlobalEventExecutor;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +18,12 @@ import socketServer.Interface.ApplicationService;
 import socketServer.Interface.DispatcherService;
 
 import javax.annotation.PostConstruct;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author hzh
@@ -21,12 +32,14 @@ import java.util.List;
  */
 @Service
 public class EventDispatcher implements DispatcherService {
+    public static DefaultChannelGroup globalChannels=new DefaultChannelGroup(GlobalEventExecutor.INSTANCE);
+    public static ConcurrentHashMap<String,Channel> globalChannelMap=new ConcurrentHashMap<>();
     /**
      * 定义特性
      */
-    public final static AttributeKey<String> USER_ID=AttributeKey.valueOf("userId");
-    public final static AttributeKey<String> EXAM_ID=AttributeKey.valueOf("examId");
-    public final static AttributeKey<JSONObject> ATTRS=AttributeKey.valueOf("attrs");
+    public final static AttributeKey<String> USER_ID=AttributeKey.valueOf(SysConf.USER_ID);
+    public final static AttributeKey<String> EXAM_ID=AttributeKey.valueOf(SysConf.EXAM_ID);
+    public final static AttributeKey<String> USER_TYPE=AttributeKey.valueOf(SysConf.USER_TYPE);
     /**
      * 依赖注入
      */
@@ -51,6 +64,7 @@ public class EventDispatcher implements DispatcherService {
         chains=new ArrayList<ApplicationService>(){{
             add(submitApplication);
         }};
+
     }
 
     /**
@@ -68,6 +82,7 @@ public class EventDispatcher implements DispatcherService {
                 System.out.println("it is not support");
             }
         }
+
     }
 
     /**
@@ -76,10 +91,35 @@ public class EventDispatcher implements DispatcherService {
      * @param channel
      */
     @Override
-    public void register(Channel channel) {
-
+    public void register(Channel channel, Map<String,String> attrs) {
+        String userId=attrs.getOrDefault(SysConf.USER_ID,"");
+        String examId=attrs.getOrDefault(SysConf.EXAM_ID,"");
+        String userType=attrs.getOrDefault(SysConf.USER_TYPE,"");
+        setAttr(channel,USER_ID,userId);
+        setAttr(channel,EXAM_ID,examId);
+        setAttr(channel, USER_TYPE,userType);
+        System.out.println("register success");
+        globalChannels.add(channel);
+        globalChannelMap.put(userId,channel);
     }
+    /**
+     * 注销channel
+     */
+    @Override
+    public void deregister(Channel channel){
+        globalChannels.remove(channel);
 
+        String userId=getAttr(channel,USER_ID);
+        if(StringUtils.isNotEmpty(userId)){
+            globalChannelMap.remove(userId);
+        }
+    }
+    /**
+     * 根据Key获取channel
+     */
+    public  Channel getChannel(String key){
+        return globalChannelMap.getOrDefault(key,null);
+    }
     /**
      * 增加attributes
      *
@@ -88,29 +128,11 @@ public class EventDispatcher implements DispatcherService {
      * @param value
      */
     @Override
-    public void setAttrs(Channel channel, String key, Object value) {
-        if(!channel.hasAttr(ATTRS)){
-            channel.attr(ATTRS).set(new JSONObject());
-        }else{
-            JSONObject object=channel.attr(ATTRS).get();
-            object.put(key,value);
-            channel.attr(ATTRS).set(object);
-        }
+    public <T> void setAttr(Channel channel, AttributeKey<T> key, T value) {
+        channel.attr(key).set(value);
     }
 
-    /**
-     * 获取attributes
-     *
-     * @param channel
-     */
-    @Override
-    public JSONObject getAttrs(Channel channel) {
-        if(channel.hasAttr(ATTRS)){
-            return channel.attr(ATTRS).get();
-        }else{
-            return null;
-        }
-    }
+
 
     /**
      * 获取attribute
@@ -119,7 +141,7 @@ public class EventDispatcher implements DispatcherService {
      * @param key
      */
     @Override
-    public Object getAttr(Channel channel, AttributeKey<T> key) {
+    public <T> T getAttr(Channel channel, AttributeKey<T> key) {
         if(channel.hasAttr(key)){
             return channel.attr(key).get();
         }else{

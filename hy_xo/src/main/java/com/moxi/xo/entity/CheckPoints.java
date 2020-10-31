@@ -1,8 +1,12 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
@@ -14,6 +18,9 @@ import lombok.experimental.Accessors;
  * @since 2020-10-29
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("check_points")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class CheckPoints extends SuperEntity {
@@ -39,5 +46,8 @@ public class CheckPoints extends SuperEntity {
 
     private String checkOutput;
 
+
+    @TableField(exist = false)
+    private String userId;
 
 }

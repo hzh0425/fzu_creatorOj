@@ -16,11 +16,7 @@ import java.util.Random;
 public class MessageSender {
     @Resource
     KafkaTemplate<String,String> messageTemplate;
-    //单点评判回传
-    public void sendMessagePerResult(String id){
-        Random random=new Random();
 
-    }
     public void sendMessage(String result){
         messageTemplate.send("judgeProblem",result);
     }

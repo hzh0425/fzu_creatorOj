@@ -1,5 +1,8 @@
 package com.moxi.utils;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang.ObjectUtils;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.DataType;
@@ -14,10 +17,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Redis工具类
- *
- * @author WangFan
- * @version 1.1 (GitHub文档: https://github.com/whvcse/RedisUtil )
- * @date 2018-02-24 下午03:09:50
  */
 @Component
 public class RedisUtil {
@@ -200,9 +199,10 @@ public class RedisUtil {
      * @param key
      * @return
      */
-    public String get(String key) {
-        return (String) redisTemplate.opsForValue().get(key);
+    public Object get(String key) {
+        return  redisTemplate.opsForValue().get(key);
     }
+
 
     /**
      * 返回 key 中字符串值的子字符
@@ -268,7 +268,7 @@ public class RedisUtil {
      * @param unit    时间单位, 天:TimeUnit.DAYS 小时:TimeUnit.HOURS 分钟:TimeUnit.MINUTES
      *                秒:TimeUnit.SECONDS 毫秒:TimeUnit.MILLISECONDS
      */
-    public void setEx(String key, String value, long timeout, TimeUnit unit) {
+    public <T> void setEx(String key, T value, long timeout, TimeUnit unit) {
         redisTemplate.opsForValue().set(key, value, timeout, unit);
     }
 
