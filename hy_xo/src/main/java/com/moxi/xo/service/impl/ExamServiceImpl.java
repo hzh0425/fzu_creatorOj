@@ -24,6 +24,7 @@ import com.moxi.xo.util.ResourceUtil;
 import com.moxi.xo.vo.BankListVo;
 import com.moxi.xo.vo.ExamVo;
 import com.moxi.xo.vo.ResourceReturningVo;
+import com.moxi.xo.vo.StuExamVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -69,6 +70,13 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
         }};
         Page<Exam> page=new Page<>(vo.getCurrentPage(),vo.getPageSize());
         return examService.page(page,wrapper);
+    }
+
+    @Override
+    public IPage<Exam> getList(StuExamVo vo) {
+        String stuId= vo.getStuId();
+
+        return null;
     }
 
     @Override

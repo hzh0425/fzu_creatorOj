@@ -20,6 +20,7 @@ public class PageInfo<T> {
     /**
      * 关键字
      */
+    @ApiModelProperty(value = "搜索关键字",required = false)
     private String keyword;
 
     /**

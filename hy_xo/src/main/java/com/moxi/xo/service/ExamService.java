@@ -5,6 +5,7 @@ import com.moxi.base.service.SuperService;
 import com.moxi.xo.entity.Exam;
 import com.moxi.xo.vo.BankListVo;
 import com.moxi.xo.vo.ExamVo;
+import com.moxi.xo.vo.StuExamVo;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public interface ExamService extends SuperService<Exam> {
 
     public IPage<Exam> getList(String classId, ExamVo vo);
+
+    public IPage<Exam> getList(StuExamVo vo);
 
     public String add(String classId, ExamVo vo);
 

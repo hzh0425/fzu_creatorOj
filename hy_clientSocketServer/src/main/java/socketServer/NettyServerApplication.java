@@ -20,7 +20,8 @@ import socketServer.bootstrap.serverBootstrap;
         "socketServer.util",
         "socketServer.Application",
         "com.moxi.utils",
-        "com.moxi.commons.config"
+        "com.moxi.commons.config",
+        "com.moxi.xo.service"
 })
 public class NettyServerApplication {
     public static void main(String[] args) throws Exception {
