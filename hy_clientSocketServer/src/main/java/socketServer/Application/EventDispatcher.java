@@ -79,8 +79,6 @@ public class EventDispatcher implements DispatcherService {
             if(application.supportEvent(event)){
                 application.handleEvent(event);
                 break;
-            }else{
-                System.out.println("it is not support");
             }
         }
     }

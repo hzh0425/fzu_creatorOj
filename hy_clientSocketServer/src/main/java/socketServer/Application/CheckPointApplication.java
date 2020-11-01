@@ -1,6 +1,7 @@
 package socketServer.Application;
 
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.moxi.utils.RedisUtil;
 import com.moxi.xo.entity.CheckPoints;
 import io.netty.channel.Channel;
@@ -44,12 +45,16 @@ public class CheckPointApplication implements ApplicationService {
     public void handleEvent(String message) {
         CheckPoints points= JSON.parseObject(message,CheckPoints.class);
         System.out.println("get a message:"+points);
-        String userId=points.getUserId();
-        Channel userChannel=EventDispatcher.globalChannelMap.get(userId);
-        if(userChannel != null){
-            messageUtil.doSendMessage(points,userChannel);
-            //异步保存checkpoints到mysql
-            userChannel.eventLoop().execute(points::insert);
+        if(points != null){
+            Channel userChannel=messageUtil.getChannelByUserId( points.getUserId() );
+            if(userChannel != null){
+
+                messageUtil.doSendMessage(points,userChannel);
+                //异步保存checkpoints到mysql
+                doSave(userChannel,points);
+            }
         }
     }
+
+
 }

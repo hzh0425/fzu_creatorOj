@@ -1,8 +1,12 @@
 package socketServer.Application;
 
+import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.moxi.utils.RedisUtil;
+import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.SubmitProgram;
 import com.moxi.xo.vo.CodeSubmitVo;
+import io.netty.channel.Channel;
+import org.omg.CORBA.IDLType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import socketServer.Interface.ApplicationService;
@@ -10,6 +14,9 @@ import socketServer.global.SysConf;
 import socketServer.message.MessageSender;
 import socketServer.util.MessageUtil;
 
+
+import java.util.Date;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -46,22 +53,38 @@ public class SubmitApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
-        CodeSubmitVo submit= messageUtil.doParseMessage(message, CodeSubmitVo.class);
-        System.out.println(submit);
-        if(submit!=null){
+        SubmitProgram program= messageUtil.doParseMessage(message, SubmitProgram.class);
+
+        if(program != null){
+            if(StringUtils.isEmpty( program.getUserId() ))return;
+
+            Channel channel= messageUtil.getChannelByUserId(program.getUserId());
+            if(channel == null)return;
+
             //构建提交记录
-            SubmitProgram program=new SubmitProgram(submit);
-            program.insert();
+            program.setJudgeResult( "wait" );
+            program.setSubmitTime( new Date() );
+            program.setUid(UUID.randomUUID().toString());
+
             //将代码缓存到redis
-            String key=buildKey(SysConf.EVENT_SUBMIT,program.getUid());
-            redisUtil.setEx(key,program,SysConf.RUNNING_UPPER, TimeUnit.MINUTES);
+            String key=buildKey( SysConf.EVENT_SUBMIT, program.getUid());
+            redisUtil.setEx( key, program, SysConf.RUNNING_UPPER, TimeUnit.MINUTES);
+
             //发送到评测队列
-            messageSender.sendMessage(key);
+            messageSender.sendMessage( key );
             System.out.println("send done"+key);
+
+            //保存到mysql
+            doSave( channel, program);
         }
     }
 
+
     public String buildKey(String event,String id){
-        return event+ SysConf.FILE_COLON+id;
+        StringBuilder sb=new StringBuilder();
+        sb.append(event);
+        sb.append(SysConf.FILE_COLON);
+        sb.append(id);
+        return sb.toString();
     }
 }

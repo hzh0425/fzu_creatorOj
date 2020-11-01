@@ -11,7 +11,7 @@ import socketServer.global.SysConf;
 import socketServer.matcher.examMatcher;
 import socketServer.util.MessageUtil;
 
-/**提问处理器
+/**提问处理器---ok
  * @author hzh
  * @version 1.0
  * @date 2020/10/30 22:03
@@ -39,7 +39,6 @@ public class QuestionApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
-        System.out.println("handler quiz:"+message);
         ExamQuiz quiz = JSON.parseObject(message,ExamQuiz.class);
         if(
                 StringUtils.isEmpty(quiz.getUserFrom())
@@ -49,7 +48,8 @@ public class QuestionApplication implements ApplicationService {
             return;
         }
         String type = quiz.getSendType();
-
+        Channel channel=messageUtil.getChannelByUserId( quiz.getUserFrom() );
+        if(channel == null) return;
         switch (type){
             case SysConf.QUIZ_GROUP : {
                 doHandleGroup(quiz);
@@ -60,6 +60,9 @@ public class QuestionApplication implements ApplicationService {
                 break;
             }
         }
+
+        //保存到mysql
+        doSave( channel,quiz );
     }
 
     public void doHandleGroup(ExamQuiz quiz){
