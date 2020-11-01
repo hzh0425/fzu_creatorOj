@@ -87,7 +87,7 @@ public class MpGenerator {
         strategy.setSuperServiceImplClass("com.moxi.base.serviceImpl.SuperServiceImpl");
         strategy.setSuperMapperClass("com.moxi.base.mapper.SuperMapper");
         //表的名字,在配置中以,给给,
-        strategy.setInclude(rb.getString("tableName").split(","));
+        strategy.setInclude("log_action","log_picture");
         mpg.setStrategy(strategy);
         mpg.setTemplateEngine(new FreemarkerTemplateEngine());
         mpg.execute();

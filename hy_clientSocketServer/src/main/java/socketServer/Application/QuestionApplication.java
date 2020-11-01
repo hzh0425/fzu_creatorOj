@@ -39,7 +39,8 @@ public class QuestionApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
-        ExamQuiz quiz = JSON.parseObject(message,ExamQuiz.class);
+        ExamQuiz quiz = doParse( message , ExamQuiz.class);
+        if(quiz == null ) return;
         if(
                 StringUtils.isEmpty(quiz.getUserFrom())
                 || StringUtils.isEmpty(quiz.getUserTo())

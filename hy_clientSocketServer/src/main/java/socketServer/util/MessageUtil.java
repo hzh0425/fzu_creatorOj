@@ -46,6 +46,12 @@ public class MessageUtil {
         channel.writeAndFlush(frame);
     }
 
+    public void doSendMessage(String message,Channel channel){
+        if(channel == null)return;
+        TextWebSocketFrame frame=doBuildSocketFrame(message);
+        channel.writeAndFlush(frame);
+    }
+
     public void doSendMessageGroup(Object message,ChannelMatcher matcher){
         if(matcher == null)return;
         if(message == null)return;
@@ -56,6 +62,11 @@ public class MessageUtil {
     public <T> T doParseMessage(String message, Class<T> c){
         return JSON.parseObject(message,c);
     }
+
+    public TextWebSocketFrame doBuildSocketFrame(String message){
+        return new TextWebSocketFrame(message);
+    }
+
     public TextWebSocketFrame doBuildSocketFrame(Object message){
         return new TextWebSocketFrame(JSON.toJSONString(message));
     }

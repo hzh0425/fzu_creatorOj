@@ -1,8 +1,11 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.moxi.base.entity.SuperEntity;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDate;
@@ -16,6 +19,9 @@ import java.time.LocalDate;
  * @since 2020-10-29
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@TableName("submit_select")
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 public class SubmitSelect extends SuperEntity {

@@ -43,18 +43,13 @@ public class CheckPointApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
-        CheckPoints points= JSON.parseObject(message,CheckPoints.class);
-        System.out.println("get a message:"+points);
-        if(points != null){
-            Channel userChannel=messageUtil.getChannelByUserId( points.getUserId() );
-            if(userChannel != null){
-
-                messageUtil.doSendMessage(points,userChannel);
-                //异步保存checkpoints到mysql
-                doSave(userChannel,points);
-            }
+        CheckPoints points= doParse(message , CheckPoints.class);
+        if(points == null)return;
+        Channel userChannel=messageUtil.getChannelByUserId( points.getUserId() );
+        if(userChannel != null){
+            messageUtil.doSendMessage(points,userChannel);
+            //异步保存checkpoints到mysql
+            doSave(userChannel,points);
         }
     }
-
-
 }

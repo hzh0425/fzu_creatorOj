@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 import socketServer.Interface.ApplicationService;
 import socketServer.global.SysConf;
 import socketServer.message.MessageSender;
+import socketServer.model.CodeSubmit;
 import socketServer.util.MessageUtil;
 
 
@@ -53,30 +54,28 @@ public class SubmitApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
-        SubmitProgram program= messageUtil.doParseMessage(message, SubmitProgram.class);
+        CodeSubmitVo vo= doParse(message,CodeSubmitVo.class);
 
-        if(program != null){
-            if(StringUtils.isEmpty( program.getUserId() ))return;
+        if(vo == null)return;
 
-            Channel channel= messageUtil.getChannelByUserId(program.getUserId());
-            if(channel == null)return;
+        if(StringUtils.isEmpty( vo.getUserId() ))return;
+        Channel channel= messageUtil.getChannelByUserId(vo.getUserId());
+        if(channel == null)return;
 
-            //构建提交记录
-            program.setJudgeResult( "wait" );
-            program.setSubmitTime( new Date() );
-            program.setUid(UUID.randomUUID().toString());
+        //构建提交记录
+        SubmitProgram program=new SubmitProgram( vo );
 
-            //将代码缓存到redis
-            String key=buildKey( SysConf.EVENT_SUBMIT, program.getUid());
-            redisUtil.setEx( key, program, SysConf.RUNNING_UPPER, TimeUnit.MINUTES);
+        //将代码缓存到redis
+        String key=buildKey( SysConf.EVENT_SUBMIT, program.getUid() );
+        redisUtil.setEx( key, program, SysConf.RUNNING_UPPER, TimeUnit.MINUTES);
 
-            //发送到评测队列
-            messageSender.sendMessage( key );
-            System.out.println("send done"+key);
+        //发送到评测队列
+        messageSender.sendMessage( key );
+        System.out.println("send done"+key);
 
-            //保存到mysql
-            doSave( channel, program);
-        }
+        //保存到mysql
+        doSave( channel, program);
+
     }
 
 

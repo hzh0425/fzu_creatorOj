@@ -1,5 +1,6 @@
 package socketServer.Interface;
 
+import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import io.netty.channel.Channel;
 import org.apache.poi.ss.formula.functions.T;
@@ -31,5 +32,16 @@ public interface ApplicationService {
 
             channel.eventLoop().execute(t :: insert);
         }
+    }
+
+    /**
+     * 解析json
+     * @param message
+     * @param c
+     * @param <T>
+     * @return
+     */
+    public default <T> T doParse(String message,Class<T> c){
+        return JSON.parseObject(message,c);
     }
 }

@@ -1,10 +1,18 @@
 package socketServer.Application;
 
+import com.alibaba.fastjson.JSON;
+import com.moxi.utils.StringUtils;
+import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import socketServer.Interface.ApplicationService;
 import socketServer.global.SysConf;
 import socketServer.util.MessageUtil;
+import sun.rmi.runtime.Log;
+import test.entity.LogAction;
+
+import java.util.Date;
+import java.util.UUID;
 
 /**
  * @author hzh
@@ -33,6 +41,22 @@ public class MonitorApplication implements ApplicationService {
      */
     @Override
     public void handleEvent(String message) {
+        LogAction action=doParse(message , LogAction.class);
+        if( action != null){
+            action.setUid(UUID.randomUUID().toString());
+            action.setActionTime(new Date());
+
+            String stuID= action.getUserId();
+            if(StringUtils.isEmpty( stuID ))return;
+            Channel channel= messageUtil.getChannelByUserId( stuID );
+
+            if(channel != null){
+                messageUtil.doSendMessage( "警告!您已被检测到:"+action.getActionDesc(),channel);
+
+                //保存到Mysql
+                doSave(channel ,action);
+            }
+        }
 
     }
 }

@@ -16,6 +16,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * <p>
@@ -61,6 +62,7 @@ public class SubmitProgram extends SuperEntity<SubmitProgram> {
     private Date submitTime;
 
     public SubmitProgram(CodeSubmitVo submitVo) {
+        setUid(UUID.randomUUID().toString());
         this.userId = submitVo.getUserId();
         this.examId = submitVo.getExamId();
         this.bankId = submitVo.getBankId();
