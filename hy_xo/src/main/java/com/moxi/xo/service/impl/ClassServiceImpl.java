@@ -10,6 +10,7 @@ import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.Class;
+import com.moxi.xo.entity.ClassStu;
 import com.moxi.xo.entity.ClassTeacher;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SqlConf;
@@ -22,6 +23,7 @@ import com.moxi.xo.service.ClassTeacherService;
 import com.moxi.xo.util.ResourceUtil;
 import com.moxi.xo.vo.ClassVo;
 import com.moxi.xo.vo.ResourceReturningVo;
+import com.moxi.xo.vo.StuExamVo;
 import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -128,6 +130,75 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         //3.删除权限表记录
         authPermissionService.deleteResource(classId);
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
+    }
+
+    /**
+     * 获取学生端班级列表
+     *
+     * @param vo
+     * @return
+     */
+    @Override
+    public IPage<Class> getListForStu(StuExamVo vo) {
+        QueryWrapper<Class> wrapper= new QueryWrapper<Class>(){{
+            //中间表tid
+            eq( SqlConf.SID,vo.getStuId() );
+            //2.模糊查询
+            if( StringUtils.isNotEmpty(vo.getKeyword()) ){
+                like( SqlConf.CLASS_NAME,vo.getKeyword() );
+            }
+            //3.降序排序
+            orderByDesc( SqlConf.CREATE_DATE );
+        }};
+        //2.构建page
+        Page<Class> page= new Page<>( vo.getCurrentPage(), vo.getPageSize() );
+
+        return classMapper.getListByStuId( page,vo.getStuId() );
+    }
+
+    /**
+     * 学生加入班级
+     *
+     * @param stuId
+     * @param classId
+     * @return
+     */
+    @Override
+    public String stuAddClass(String stuId, String classId) {
+        QueryWrapper<ClassStu> wrapper= new QueryWrapper<ClassStu>(){{
+            eq( SqlConf.SID, stuId ) ;
+            eq( SqlConf.CID, classId );
+        }};
+        ClassStu cs= classStuService.getOne( wrapper );
+        if(cs!=null){
+            return ResultUtil.result( SysConf.ERROR, MessageConf.CLASS_EXIST );
+        }
+
+        cs.insert();
+
+        return ResultUtil.result( SysConf.ERROR, MessageConf.INSERT_SUCCESS );
+    }
+
+    /**
+     * 学生退出班级
+     *
+     * @param stuId
+     * @param classId
+     * @return
+     */
+    @Override
+    public String stuRemoveClass(String stuId, String classId) {
+        QueryWrapper<ClassStu> wrapper= new QueryWrapper<ClassStu>(){{
+            eq( SqlConf.SID, stuId ) ;
+            eq( SqlConf.CID, classId );
+        }};
+        ClassStu cs= classStuService.getOne( wrapper );
+        if(cs!=null){
+            cs.deleteById();
+            return ResultUtil.result( SysConf.SUCCESS, MessageConf.DELETE_SUCCESS );
+        }
+
+        return ResultUtil.result( SysConf.ERROR, MessageConf.ENTITY_NOT_EXIST );
     }
 
     @Async

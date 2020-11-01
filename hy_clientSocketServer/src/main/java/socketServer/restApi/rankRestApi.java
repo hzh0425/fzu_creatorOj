@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "4.排名api",tags = {"4.排名api"})
 @RequestMapping("/stu/rank")
 public class rankRestApi {
-    
+
     @ApiOperation(value = "获取排名列表", notes = "获取排名列表", response = String.class)
     @PostMapping("/getList")
     public String getList( @RequestBody StuExamVo vo ) {

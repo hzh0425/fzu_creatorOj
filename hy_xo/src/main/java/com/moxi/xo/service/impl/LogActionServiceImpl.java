@@ -1,10 +1,10 @@
 package com.moxi.xo.service.impl;
 
 import com.moxi.base.serviceImpl.SuperServiceImpl;
+import com.moxi.xo.entity.LogAction;
+import com.moxi.xo.mapper.LogActionMapper;
 import com.moxi.xo.service.LogActionService;
 import org.springframework.stereotype.Service;
-import test.entity.LogAction;
-import test.mapper.LogActionMapper;
 
 /**
  * <p>

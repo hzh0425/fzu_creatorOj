@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -47,7 +48,7 @@ public class LogAction extends SuperEntity {
 
     private String pictureIds;
 
-    private LocalDateTime actionTime;
+    private Date actionTime;
 
 
 }

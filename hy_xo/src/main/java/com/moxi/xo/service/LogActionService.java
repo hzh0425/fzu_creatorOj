@@ -1,7 +1,8 @@
 package com.moxi.xo.service;
 
 import com.moxi.base.service.SuperService;
-import test.entity.LogAction;
+import com.moxi.xo.entity.LogAction;
+
 
 /**
  * <p>

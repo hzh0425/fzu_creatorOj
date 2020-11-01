@@ -1,10 +1,11 @@
 package com.moxi.xo.service.impl;
 
 import com.moxi.base.serviceImpl.SuperServiceImpl;
+import com.moxi.xo.entity.LogPicture;
+import com.moxi.xo.mapper.LogPictureMapper;
 import com.moxi.xo.service.LogPictureService;
 import org.springframework.stereotype.Service;
-import test.entity.LogPicture;
-import test.mapper.LogPictureMapper;
+
 
 /**
  * <p>

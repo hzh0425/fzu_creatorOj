@@ -2,6 +2,7 @@ package socketServer.Application;
 
 import com.alibaba.fastjson.JSON;
 import com.moxi.utils.StringUtils;
+import com.moxi.xo.entity.LogAction;
 import io.netty.channel.Channel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import socketServer.Interface.ApplicationService;
 import socketServer.global.SysConf;
 import socketServer.util.MessageUtil;
 import sun.rmi.runtime.Log;
-import test.entity.LogAction;
+
 
 import java.util.Date;
 import java.util.UUID;

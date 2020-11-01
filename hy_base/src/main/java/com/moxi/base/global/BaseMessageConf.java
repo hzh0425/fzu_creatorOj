@@ -14,13 +14,13 @@ public class BaseMessageConf {
     public static final String OPERATION_FAIL = "操作失败";
 
 
-    public static final String INSERT_SUCCESS = "插入成功";
-    public static final String INSERT_FAIL = "插入失败";
+    public static final String INSERT_SUCCESS = "增加成功";
+    public static final String INSERT_FAIL = "增加失败";
     public static final String UPDATE_SUCCESS = "更新成功";
     public static final String UPDATE_FAIL = "更新失败";
     public static final String DELETE_SUCCESS = "删除成功";
 
-    public static final String ENTITY_NOT_EXIST = "该实体不存在";
+    public static final String ENTITY_NOT_EXIST = "您操作的实体不存在";
 
     public static final String PARAM_INCORRECT = "传入参数有误！";
     public final static String INVALID_TOKEN = "token令牌未被识别";

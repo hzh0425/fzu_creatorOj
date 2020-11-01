@@ -24,4 +24,13 @@ public interface ClassMapper extends SuperMapper<Class> {
             "ON a1.cid=a2.uid \n" +
             "${ew.customSqlSegment}")
     public IPage<Class> getListByTeacherId(IPage<Class> page,@Param(Constants.WRAPPER) Wrapper<Class> wrapper);
+
+
+    @Select(" SELECT c2.* FROM " +
+            " class_stu c1 \n" +
+            " JOIN " +
+            " class c2 " +
+            " ON c1.cid=c2.uid \n" +
+            " WHERE c1.sid=#{stuId} ")
+    public IPage<Class> getListByStuId( IPage<Class>page, @Param("stuId")String stuId );
 }

@@ -1,7 +1,8 @@
 package com.moxi.xo.service;
 
 import com.moxi.base.service.SuperService;
-import test.entity.LogPicture;
+import com.moxi.xo.entity.LogPicture;
+
 
 /**
  * <p>

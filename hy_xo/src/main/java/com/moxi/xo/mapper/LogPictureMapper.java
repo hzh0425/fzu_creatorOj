@@ -1,7 +1,8 @@
 package com.moxi.xo.mapper;
 
 import com.moxi.base.mapper.SuperMapper;
-import test.entity.LogPicture;
+import com.moxi.xo.entity.LogPicture;
+
 
 /**
  * <p>
