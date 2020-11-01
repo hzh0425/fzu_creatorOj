@@ -153,7 +153,7 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         //2.构建page
         Page<Class> page= new Page<>( vo.getCurrentPage(), vo.getPageSize() );
 
-        return classMapper.getListByStuId( page,vo.getStuId() );
+        return classMapper.getListByStuId( page , wrapper );
     }
 
     /**
@@ -173,9 +173,8 @@ public class ClassServiceImpl extends SuperServiceImpl<ClassMapper, Class> imple
         if(cs!=null){
             return ResultUtil.result( SysConf.ERROR, MessageConf.CLASS_EXIST );
         }
-
-        cs.insert();
-
+        ClassStu item= new ClassStu( stuId, classId);
+        item.insert();
         return ResultUtil.result( SysConf.ERROR, MessageConf.INSERT_SUCCESS );
     }
 

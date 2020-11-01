@@ -1,5 +1,6 @@
 package socketServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.utils.ResultUtil;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.service.ClassService;
@@ -23,6 +24,7 @@ public class ClassRestApi {
     ClassService classService;
 
     @ApiOperation(value = "获取班级列表", notes = "获取班级列表", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"uid"})
     @PostMapping("/getList")
     public String getList( @RequestBody StuExamVo vo ) {
         return ResultUtil.result(SysConf.SUCCESS, classService.getListForStu(vo) );
