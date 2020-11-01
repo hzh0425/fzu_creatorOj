@@ -21,7 +21,7 @@ public interface ExamService extends SuperService<Exam> {
 
     public IPage<Exam> getList(String classId, ExamVo vo);
 
-    public IPage<Exam> getList(StuExamVo vo);
+    public IPage<Exam> getListForStu(StuExamVo vo);
 
     public String add(String classId, ExamVo vo);
 

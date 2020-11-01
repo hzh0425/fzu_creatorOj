@@ -1,5 +1,6 @@
 package socketServer.restApi;
 
+import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
 import com.moxi.utils.ResultUtil;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.service.ExamService;
@@ -20,10 +21,12 @@ import org.springframework.web.bind.annotation.*;
 public class ExamRestApi {
     @Autowired
     ExamService examService;
+
     @ApiOperation(value = "获取考试列表", notes = "获取考试列表", response = String.class)
+    @ApiOperationSupport(ignoreParameters = {"uid"})
     @PostMapping("/getList")
     public String getList( @RequestBody StuExamVo vo ) {
-        return ResultUtil.result(SysConf.SUCCESS, examService.getList(vo) );
+        return ResultUtil.result(SysConf.SUCCESS, examService.getListForStu(vo) );
     }
 
 }

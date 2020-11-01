@@ -8,6 +8,7 @@ import com.moxi.base.enums.EResourceType;
 import com.moxi.base.serviceImpl.SuperServiceImpl;
 import com.moxi.utils.ResultUtil;
 import com.moxi.utils.StringUtils;
+import com.moxi.xo.entity.Class;
 import com.moxi.xo.entity.ExamBank;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SqlConf;
@@ -46,6 +47,8 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
     @Autowired
     ExamService examService;
     @Autowired
+    ExamMapper examMapper;
+    @Autowired
     ExamBankService examBankService;
     @Resource
     OptionBankMapper optionBankMapper;
@@ -73,10 +76,21 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
     }
 
     @Override
-    public IPage<Exam> getList(StuExamVo vo) {
-        String stuId= vo.getStuId();
+    public IPage<Exam> getListForStu(StuExamVo vo) {
 
-        return null;
+        QueryWrapper<Exam> wrapper= new QueryWrapper<Exam>(){{
+            //中间表tid
+            eq( SqlConf.SID,vo.getStuId() );
+            //2.模糊查询
+            if( StringUtils.isNotEmpty(vo.getKeyword()) ){
+                like( SqlConf.EXAM_NAME,vo.getKeyword() );
+            }
+            //3.降序排序
+            orderByDesc( SqlConf.CREATE_DATE );
+        }};
+        //2.构建page
+        Page<Exam> page= new Page<>( vo.getCurrentPage(), vo.getPageSize() );
+        return examMapper.getListByStuId( page,wrapper );
     }
 
     @Override

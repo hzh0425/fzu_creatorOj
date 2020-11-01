@@ -43,7 +43,7 @@ public class RegisterHandler extends SimpleChannelInboundHandler<TextWebSocketFr
      * @throws Exception
      */
     @Override
-    public  void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+    public  void  channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         if(msg instanceof FullHttpRequest){
             FullHttpRequest request= (FullHttpRequest) msg;
             String uri= request.uri();

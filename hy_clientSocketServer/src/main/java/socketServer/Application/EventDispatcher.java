@@ -75,8 +75,8 @@ public class EventDispatcher implements DispatcherService {
      */
     @Override
     public void handler(String event) {
-        for(ApplicationService application : chains){
-            if(application.supportEvent(event)){
+        for(    ApplicationService application : chains ){
+            if( application.supportEvent(event) ){
                 application.handleEvent(event);
                 break;
             }
