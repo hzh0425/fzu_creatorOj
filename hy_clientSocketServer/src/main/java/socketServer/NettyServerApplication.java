@@ -28,6 +28,7 @@ import socketServer.bootstrap.serverBootstrap;
         "com.moxi.xo.util",
         "com.moxi.commons.feign",
         "com.moxi.utils.FileUtil",
+        "com.moxi.utils.factory"
 })
 public class NettyServerApplication {
     public static void main(String[] args) throws Exception {

@@ -185,4 +185,17 @@ public class ExamServiceImpl extends SuperServiceImpl<ExamMapper, Exam> implemen
         pre.deleteById();
         return ResultUtil.result(SysConf.SUCCESS,MessageConf.DELETE_SUCCESS);
     }
+
+
+
+
+    @Override
+    public IPage getProblemList(String examId, int problemType) {
+        return null;
+    }
+
+    @Override
+    public IPage doGetProblemList(String examId, int... problemTypes) {
+        return null;
+    }
 }

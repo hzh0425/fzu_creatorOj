@@ -26,4 +26,5 @@ public interface ExamMapper extends SuperMapper<Exam> {
             " ON c2.uid=c3.class_id\n" +
             " ${ew.customSqlSegment} ")
     public IPage<Exam> getListByStuId( IPage<Exam>page , @Param(Constants.WRAPPER) Wrapper<Exam> wrapper );
+
 }

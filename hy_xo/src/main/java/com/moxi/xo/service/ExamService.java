@@ -19,9 +19,10 @@ import java.util.List;
  */
 public interface ExamService extends SuperService<Exam> {
 
+    /**
+     * 教师端api
+     */
     public IPage<Exam> getList(String classId, ExamVo vo);
-
-    public IPage<Exam> getListForStu(StuExamVo vo);
 
     public String add(String classId, ExamVo vo);
 
@@ -34,4 +35,14 @@ public interface ExamService extends SuperService<Exam> {
     public String addProblemBatch(BankListVo vo);
 
     public String deleteProblem(String eid, String bid);
+
+
+    /**
+     * 学生端api
+     */
+    public IPage<Exam> getListForStu(StuExamVo vo);
+
+    public IPage getProblemList(String examId,int problemType);
+
+    public IPage doGetProblemList(String examId,int ... problemTypes);
 }
