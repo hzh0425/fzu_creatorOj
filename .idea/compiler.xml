@@ -6,18 +6,19 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="hy_examServer" />
         <module name="hy_adminServer" />
         <module name="hy_teacherServer" />
-        <module name="hy_minio" />
+        <module name="hy_judger" />
         <module name="hy_utils" />
         <module name="hy_base" />
-        <module name="hy_authServer" />
         <module name="hy_gateway" />
         <module name="hy_commons" />
         <module name="hy_clientSocketServer" />
         <module name="hy_judger_gateway" />
-        <module name="hy_judger" />
+        <module name="hy_minio" />
         <module name="hy_xo" />
+        <module name="hy_authServer" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -44,6 +45,7 @@
       <module name="hy_clientSocketServer" options="-parameters" />
       <module name="hy_commons" options="-parameters" />
       <module name="hy_envoy" options="-parameters" />
+      <module name="hy_examServer" options="-parameters" />
       <module name="hy_gateway" options="-parameters" />
       <module name="hy_grpc" options="-parameters" />
       <module name="hy_judger" options="-parameters" />

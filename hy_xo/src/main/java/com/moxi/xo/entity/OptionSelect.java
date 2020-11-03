@@ -15,9 +15,8 @@ import lombok.NoArgsConstructor;
 public class OptionSelect {
     private static final long serialVersionUID = 1L;
 
+    private String optionDesc;
 
+    private int optionNum;
 
-    private String pid;
-
-    private String aid;
 }

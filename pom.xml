@@ -26,6 +26,7 @@
         <module>hy_judger_gateway</module>
         <module>hy_judger</module>
         <module>hy_clientSocketServer</module>
+        <module>hy_examServer</module>
     </modules>
     <packaging>pom</packaging>
     <name>hy_creatorOj</name>

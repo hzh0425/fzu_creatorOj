@@ -20,4 +20,13 @@ public interface OptionBankMapper extends SuperMapper<OptionBank> {
             "JOIN option_bank a2 ON e1.bid=a2.uid \n" +
             "WHERE e1.eid=#{examId} ORDER BY e1.num ASC")
     public List<OptionBank> getExamOptionList(@Param("examId")String examId);
+
+
+    @Select("SELECT e2.* FROM \n" +
+            "exam_bank e1 \n" +
+            "JOIN option_bank e2\n" +
+            "ON e1.bid=e2.uid \n" +
+            "WHERE e1.eid=#{examId} \n" +
+            "AND e1.type=1")
+    public List<OptionBank> getExamOptionListForStu(@Param("examId")String examId);
 }

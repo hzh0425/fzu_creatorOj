@@ -19,4 +19,7 @@ public interface GapBankMapper extends SuperMapper<GapBank> {
             "JOIN gap_bank a2 ON e1.bid=a2.uid \n" +
             "WHERE e1.eid=#{examId} ORDER BY e1.num ASC")
     public List<GapBank> getExamGapList(@Param("examId")String examId);
+
+
+    public List<GapBank> getExamOptionListForStu(@Param("examId")String examId);
 }

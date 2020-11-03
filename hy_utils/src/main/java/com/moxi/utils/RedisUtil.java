@@ -752,9 +752,11 @@ public class RedisUtil {
     public Long sAdd(String key, String ... values) {
         return redisTemplate.opsForSet().add(key, values);
     }
-    public Long sAddList(String key, List<String>list) {
+    public <T> Long sAddList(String key, List<T> list) {
 
-        return redisTemplate.opsForSet().add(key, list);
+        T values[]= (T[]) list.toArray();
+
+        return redisTemplate.opsForSet().add(key,values);
     }
     /**
      * set移除元素
@@ -792,9 +794,11 @@ public class RedisUtil {
      * 获取所有元素
      * @return
      */
-    public Set<String> sMembers(String key){
+    public <T> Set<T> sMembers(String key){
         return redisTemplate.opsForSet().members(key);
     }
+
+
     /**
      * 获取集合的大小
      *
