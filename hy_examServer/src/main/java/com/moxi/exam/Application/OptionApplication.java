@@ -1,20 +1,17 @@
 package com.moxi.exam.Application;
 
 import com.alibaba.fastjson.JSON;
-import com.moxi.exam.factoryMethod.problemApplication;
+import com.moxi.exam.Template.problemApplication;
 import com.moxi.utils.RedisUtil;
 import com.moxi.utils.StringUtils;
 import com.moxi.xo.entity.OptionBank;
 import com.moxi.xo.entity.OptionSelect;
-import com.moxi.xo.entity.ProgramBank;
 import com.moxi.xo.mapper.OptionBankMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -24,7 +21,7 @@ import java.util.stream.Collectors;
  * @date 2020/11/3 20:18
  */
 @Component
-public class OptionApplication extends problemApplication<OptionBank> {
+public class OptionApplication implements problemApplication<OptionBank> {
     @Autowired
     RedisUtil redisUtil;
 

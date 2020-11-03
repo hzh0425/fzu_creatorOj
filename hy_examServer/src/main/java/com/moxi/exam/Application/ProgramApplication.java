@@ -1,20 +1,15 @@
 package com.moxi.exam.Application;
 
-import com.moxi.exam.factoryMethod.problemApplication;
+import com.moxi.exam.Template.problemApplication;
 import com.moxi.utils.RedisUtil;
 import com.moxi.xo.entity.ProgramBank;
 import com.moxi.xo.mapper.ProgramBankMapper;
 import com.moxi.xo.service.ProgramBankService;
-import com.moxi.xo.vo.programVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 /**
  * 编程题处理器
@@ -23,7 +18,7 @@ import java.util.stream.Collectors;
  * @date 2020/11/3 20:18
  */
 @Component
-public class ProgramApplication extends problemApplication<ProgramBank> {
+public class ProgramApplication implements problemApplication<ProgramBank> {
 
     @Autowired
     RedisUtil redisUtil;

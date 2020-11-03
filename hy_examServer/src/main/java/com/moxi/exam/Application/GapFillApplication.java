@@ -1,6 +1,6 @@
 package com.moxi.exam.Application;
 
-import com.moxi.exam.factoryMethod.problemApplication;
+import com.moxi.exam.Template.problemApplication;
 import com.moxi.xo.mapper.GapBankMapper;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2020/11/3 20:18
  */
 @Component
-public class GapFillApplication extends problemApplication {
+public class GapFillApplication implements problemApplication {
 
     @Resource
     GapBankMapper bankMapper;

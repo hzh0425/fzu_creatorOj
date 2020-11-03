@@ -1,8 +1,6 @@
-package com.moxi.exam.factoryMethod;
+package com.moxi.exam.Template;
 import com.moxi.utils.RedisUtil;
 import com.moxi.utils.StringUtils;
-import com.moxi.xo.entity.OptionBank;
-import com.moxi.xo.global.SysConf;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ import java.util.Set;
  * @date 2020/11/3 20:10
  */
 
-public abstract class problemApplication<T> {
+public interface problemApplication<T> {
 
 
 
@@ -23,7 +21,7 @@ public abstract class problemApplication<T> {
      * @param
      * @return
      */
-    public List<T> getPage(String key,String examId,String stuId ,RedisUtil redisUtil){
+    public default List<T> getPage(String key,String examId,String stuId ,RedisUtil redisUtil){
 
         if(StringUtils.isEmpty( examId )||StringUtils.isEmpty( stuId ))return null;
 
@@ -58,7 +56,7 @@ public abstract class problemApplication<T> {
      * 从redis获取数据
      * @return
      */
-    public  List<T>  getPageFromRedis(String key , RedisUtil redisUtil){
+    public default List<T>  getPageFromRedis(String key , RedisUtil redisUtil){
         if(redisUtil.hasKey(key)){
             Set<T> set= redisUtil.sMembers( key );
             return new ArrayList<>(set);
@@ -69,7 +67,7 @@ public abstract class problemApplication<T> {
     /**
      * save to redis
      */
-    public  void savePageToRedis(String key, List<T> page, RedisUtil redisUtil){
+    public  default  void savePageToRedis(String key, List<T> page, RedisUtil redisUtil){
         redisUtil.sAddList( key ,page);
     }
 
