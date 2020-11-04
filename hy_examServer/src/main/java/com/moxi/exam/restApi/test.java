@@ -25,4 +25,9 @@ public class test {
     public List getList(@RequestParam("examId")String examId,@RequestParam("stuId")String stuId,@RequestParam("type")int type) throws ExecutionException, InterruptedException {
         return problemDispatcher.getPage(examId,stuId,type);
     }
+
+    @GetMapping("/test1")
+    public String test(@RequestParam("examId")String examId,@RequestParam("stuId")String stuId,@RequestParam("type")int type) throws ExecutionException, InterruptedException {
+        return "suasdf";
+    }
 }

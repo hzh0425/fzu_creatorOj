@@ -71,6 +71,17 @@ public interface problemApplication<T> {
         redisUtil.sAddList( key ,page);
     }
 
+    /**
+     * 提交答案
+     * @param examId
+     * @param stuId
+     * @param page
+     * @param <T>
+     */
+
+    public  abstract  <T> void submit(String examId,String stuId,List<T> page);
+
+
 
     /**
      * 评分
@@ -83,4 +94,7 @@ public interface problemApplication<T> {
      * @param <T>
      */
     public abstract <T> void analyze();
+
+
+
 }

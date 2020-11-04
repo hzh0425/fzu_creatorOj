@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moxi.base.entity.SuperEntity;
+import com.moxi.base.enums.EProblemStatus;
+import com.moxi.base.enums.EStatus;
+import com.moxi.xo.global.SysConf;
 import com.moxi.xo.vo.CodeSubmitVo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -114,8 +117,12 @@ public class SubmitProgram extends SuperEntity<SubmitProgram> {
      */
     private String judgeLog;
 
+    private int status;
 
 
-
-
+    public SubmitProgram(String examId, String stuId, SubmitProgram program) {
+        this.examId=examId;
+        this.userId=stuId;
+        //待写完
+    }
 }

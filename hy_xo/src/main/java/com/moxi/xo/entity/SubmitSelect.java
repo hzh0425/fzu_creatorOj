@@ -1,14 +1,20 @@
 package com.moxi.xo.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.moxi.base.entity.SuperEntity;
+import com.moxi.base.enums.EProblemStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * <p>
@@ -57,7 +63,20 @@ public class SubmitSelect extends SuperEntity {
     /**
      * 提交时间
      */
-    private LocalDate submitTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private Date submitTime;
 
+    private int status;
 
+    public SubmitSelect(String stuId, String examId, OptionBank x) {
+        this.userId=stuId;
+        this.examId=examId;
+        this.bankId=x.getUid();
+        this.response=x.getQuestionAnswer();
+        this.submitTime=new Date();
+        this.score=0;
+        this.status= EProblemStatus.IM_JUDGE;
+    }
 }

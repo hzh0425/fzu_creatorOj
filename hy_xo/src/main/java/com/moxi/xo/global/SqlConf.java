@@ -39,4 +39,6 @@ public class SqlConf extends BaseSQLConf {
     public final static String GROUP_NAME="group_name";
     public final static String GROUP_TYPE="group_type";
 
+
+
 }
