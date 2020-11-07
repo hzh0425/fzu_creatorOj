@@ -20,6 +20,14 @@ import java.util.stream.Collectors;
 @Component("authPermissionConfig")
 public class AuthPermissionConfig {
     public boolean canAccess(HttpServletRequest request, Authentication authentication){
+
+
+
+
+
+
+
+
         String uri=request.getRequestURI();
         //0.判断是否在白名单中
         if(SysConf.WHITE.contains(uri)){

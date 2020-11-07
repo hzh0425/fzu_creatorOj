@@ -72,6 +72,14 @@ public interface problemApplication<T> {
     }
 
     /**
+     * 当前处理器是否支持该事件
+     *
+     * @param type
+     * @return
+     */
+    public boolean support(int type);
+
+    /**
      * 提交答案
      * @param examId
      * @param stuId
@@ -79,7 +87,7 @@ public interface problemApplication<T> {
      * @param <T>
      */
 
-    public  abstract  <T> void submit(String examId,String stuId,List<T> page);
+    public  abstract  <T> void submit(String key,String examId,String stuId,List<T> page);
 
 
 

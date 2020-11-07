@@ -2,6 +2,7 @@ package com.moxi.exam.Application;
 
 import com.alibaba.fastjson.JSON;
 import com.moxi.base.enums.EProblemStatus;
+import com.moxi.base.enums.EProblemType;
 import com.moxi.exam.Template.problemApplication;
 import com.moxi.utils.RedisUtil;
 import com.moxi.utils.StringUtils;
@@ -9,6 +10,7 @@ import com.moxi.xo.entity.OptionBank;
 import com.moxi.xo.entity.OptionSelect;
 import com.moxi.xo.entity.SubmitSelect;
 import com.moxi.xo.mapper.OptionBankMapper;
+import com.moxi.xo.service.OptionBankService;
 import com.moxi.xo.service.SubmitSelectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -31,6 +33,8 @@ public class OptionApplication implements problemApplication<OptionBank> {
 
     @Resource
     OptionBankMapper optionBankMapper;
+    @Autowired
+    OptionBankService optionBankService;
 
     @Autowired
     SubmitSelectService submitSelectService;
@@ -59,6 +63,17 @@ public class OptionApplication implements problemApplication<OptionBank> {
     }
 
     /**
+     * 当前处理器是否支持该事件
+     *
+     * @param type
+     * @return
+     */
+    @Override
+    public boolean support(int type) {
+        return type== EProblemType.option;
+    }
+
+    /**
      * 提交答案
      *
      * @param examId
@@ -66,8 +81,9 @@ public class OptionApplication implements problemApplication<OptionBank> {
      * @param page
      */
     @Override
-    public <T> void submit(String examId, String stuId, List<T> page) {
+    public <T> void submit(String key,String examId, String stuId, List<T> page) {
         if( page.size() >0 && page.get(0) instanceof SubmitSelect ){
+            List<OptionBank> preSubmit= getPageFromRedis( key , redisUtil );
             List<SubmitSelect> answers= page.stream()
                     .map(x->{
                         SubmitSelect s=(SubmitSelect)x;
@@ -77,7 +93,13 @@ public class OptionApplication implements problemApplication<OptionBank> {
                         s.setStatus( EProblemStatus.IM_JUDGE );
                         s.setSubmitTime( new Date() );
                         return s;
-                    }).collect(Collectors.toList());;
+                    })
+                    .collect(Collectors.toList());;
+            if( preSubmit != null ){
+                answers=answers.stream()
+                        .filter( x-> !preSubmit.contains( x ))
+                        .collect(Collectors.toList());
+            }
              submitSelectService.saveBatch( answers );
         }
     }

@@ -1,6 +1,7 @@
 package com.moxi.exam.Application;
 
 import com.moxi.base.enums.EProblemStatus;
+import com.moxi.base.enums.EProblemType;
 import com.moxi.exam.Template.problemApplication;
 import com.moxi.utils.RedisUtil;
 import com.moxi.xo.entity.ProgramBank;
@@ -8,6 +9,7 @@ import com.moxi.xo.entity.SubmitProgram;
 import com.moxi.xo.mapper.ProgramBankMapper;
 import com.moxi.xo.service.ProgramBankService;
 import com.moxi.xo.service.SubmitProgramService;
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -47,6 +49,17 @@ public class ProgramApplication implements problemApplication<ProgramBank> {
     }
 
     /**
+     * 当前处理器是否支持该事件
+     *
+     * @param type
+     * @return
+     */
+    @Override
+    public boolean support(int type) {
+        return type== EProblemType.program;
+    }
+
+    /**
      * 提交答案
      *
      * @param examId
@@ -54,9 +67,9 @@ public class ProgramApplication implements problemApplication<ProgramBank> {
      * @param page
      */
     @Override
-    public <T> void submit(String examId, String stuId, List<T> page) {
-        if( page.size() > 0 && page.get(0) instanceof SubmitProgram){
+    public <T> void submit(String key,String examId, String stuId, List<T> page) {
 
+        if( page.size() > 0 && page.get(0) instanceof SubmitProgram){
             List<SubmitProgram> answers= page.stream()
                             .map( x->{
                                 SubmitProgram program= (SubmitProgram) x;

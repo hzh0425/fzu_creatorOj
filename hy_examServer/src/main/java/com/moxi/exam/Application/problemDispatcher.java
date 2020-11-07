@@ -1,11 +1,15 @@
 package com.moxi.exam.Application;
 
 import com.moxi.exam.Template.PageCall;
+import com.moxi.exam.Template.problemApplication;
 import com.moxi.utils.RedisUtil;
+import com.moxi.xo.global.SysConf;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.concurrent.*;
 import java.util.List;
 /**
@@ -25,6 +29,9 @@ public class problemDispatcher {
     @Autowired
     OptionApplication optionApplication;
 
+    private  List<problemApplication>  chains;
+
+
     public static ThreadPoolExecutor executor;
 
     static {
@@ -39,25 +46,26 @@ public class problemDispatcher {
                 new  ThreadPoolExecutor.AbortPolicy());
     }
 
+    @PostConstruct
+    public void init(){
+        this.chains=new ArrayList<problemApplication>(){{
+            add( optionApplication );
+            add( gapFillApplication );
+            add( programApplication );
+        }};
+    }
+
 
     public  List getPage(String examId, String stuId , int type) throws ExecutionException, InterruptedException {
         Future< List > page= null;
-        PageCall call= null;
-        switch (type){
-            case 1:{
-                //选择题
-                call=new PageCall( optionApplication , examId, stuId, type, redisUtil);
-                page= executor.submit(call);
-                break;
-            }
-            case 3:{
-                //编程题
-                call=new PageCall( programApplication, examId, stuId, type, redisUtil);
-                page= executor.submit(call);
-                break;
+        String key= examId + SysConf.FILE_COLON + stuId + SysConf.FILE_COLON + type;
+
+        for( problemApplication application : chains ){
+            if( application.support( type ) ){
+                page = executor.submit(() -> application.getPage( key ,examId, stuId, redisUtil ));
             }
         }
-        return page != null? page.get() :null;
+        return page.get();
     }
 
     /**
@@ -69,26 +77,14 @@ public class problemDispatcher {
      */
     public <T> void submit(String examId, String stuId, List<T> page ,int type){
         Runnable runnable=null;
-        switch ( type ){
-            case 1:{
-                runnable=new Runnable() {
-                    @Override
-                    public void run() {
-                        optionApplication.submit( examId , stuId ,page);
-                    };
-                };
-                break;
-            }
-            case 3:{
-                runnable= new Runnable() {
-                    @Override
-                    public void run() {
-                        programApplication.submit( examId, stuId , page);
-                    }
-                };
-                break;
+        String key= examId + SysConf.FILE_COLON + stuId + SysConf.FILE_COLON + type;
+
+        for( problemApplication application : chains ){
+            if(application.support( type )){
+                runnable= () -> application.submit( key,examId ,stuId , page);
             }
         }
+
         if( runnable != null){
             executor.submit( runnable );
         }

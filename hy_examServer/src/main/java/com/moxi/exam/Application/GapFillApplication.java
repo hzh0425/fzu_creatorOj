@@ -1,5 +1,6 @@
 package com.moxi.exam.Application;
 
+import com.moxi.base.enums.EProblemType;
 import com.moxi.exam.Template.problemApplication;
 import com.moxi.xo.mapper.GapBankMapper;
 import org.springframework.stereotype.Component;
@@ -28,6 +29,29 @@ public class GapFillApplication implements problemApplication {
     @Override
     public List getPageFromMysql(String examId, String stuId) {
         return null;
+    }
+
+    /**
+     * 当前处理器是否支持该事件
+     *
+     * @param type
+     * @return
+     */
+    @Override
+    public boolean support(int type) {
+        return type== EProblemType.gapFill;
+    }
+
+    /**
+     * 提交答案
+     *
+     * @param examId
+     * @param stuId
+     * @param page
+     */
+    @Override
+    public void submit(String key,String examId, String stuId, List page) {
+
     }
 
     /**
