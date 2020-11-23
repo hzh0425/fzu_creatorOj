@@ -38,6 +38,8 @@ public class OptionApplication implements problemApplication<OptionBank> {
 
     @Autowired
     SubmitSelectService submitSelectService;
+    @Autowired
+    problemDispatcher problemDispatcher;
 
     /**
      * 从mysql 获取数据
@@ -82,7 +84,7 @@ public class OptionApplication implements problemApplication<OptionBank> {
      */
     @Override
     public <T> void submit(String key,String examId, String stuId, List<T> page) {
-        if( page.size() >0 && page.get(0) instanceof SubmitSelect ){
+        if( page != null && page.size() >0 && page.get(0) instanceof SubmitSelect ){
             List<OptionBank> preSubmit= getPageFromRedis( key , redisUtil );
             List<SubmitSelect> answers= page.stream()
                     .map(x->{
@@ -94,18 +96,22 @@ public class OptionApplication implements problemApplication<OptionBank> {
                         s.setSubmitTime( new Date() );
                         return s;
                     })
-                    .collect(Collectors.toList());;
+                    .collect(Collectors.toList());
             if( preSubmit != null ){
                 answers=answers.stream()
                         .filter( x-> !preSubmit.contains( x ))
                         .collect(Collectors.toList());
+                //异步保存
+                problemDispatcher.runTask( ()->{
+                    System.out.println("save yibu");
+
+
+                } );
+            } else {
+
             }
-             submitSelectService.saveBatch( answers );
         }
     }
-
-
-
 
     /**
      * 评分

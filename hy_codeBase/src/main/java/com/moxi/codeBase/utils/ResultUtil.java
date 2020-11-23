@@ -1,4 +1,4 @@
-package com.moxi.utils;
+package com.moxi.codeBase.utils;
 
 import java.util.HashMap;
 import java.util.Map;

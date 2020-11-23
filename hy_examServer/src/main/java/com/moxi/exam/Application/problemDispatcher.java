@@ -56,13 +56,15 @@ public class problemDispatcher {
     }
 
 
+    
     public  List getPage(String examId, String stuId , int type) throws ExecutionException, InterruptedException {
         Future< List > page= null;
         String key= examId + SysConf.FILE_COLON + stuId + SysConf.FILE_COLON + type;
 
         for( problemApplication application : chains ){
             if( application.support( type ) ){
-                page = executor.submit(() -> application.getPage( key ,examId, stuId, redisUtil ));
+                page = runMultiCall(() -> application.getPage( key ,examId, stuId, redisUtil ));
+                break;
             }
         }
         return page.get();
@@ -86,11 +88,26 @@ public class problemDispatcher {
         }
 
         if( runnable != null){
-            executor.submit( runnable );
+            runTask( runnable );
         }
     }
 
 
+
+
+
+
+    public void runTask(Runnable runnable){
+        executor.submit( runnable );
+    }
+
+    public <T> Future<T> runSingleCall(Callable<T> callable){
+        return executor.submit( callable );
+    }
+
+    public <T> Future<List<T>> runMultiCall(Callable<List<T>> callable){
+        return executor.submit( callable );
+    }
 
 
 }
