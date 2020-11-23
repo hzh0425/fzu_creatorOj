@@ -1,6 +1,7 @@
 package com.moxi.xo.global;
 
-import com.moxi.base.global.BaseSQLConf;
+
+import com.moxi.codeBase.global.BaseSQLConf;
 
 /**
  * @author hzh

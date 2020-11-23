@@ -1,7 +1,8 @@
 package com.moxi.xo.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.moxi.base.service.SuperService;
+
+import com.moxi.codeBase.Interface.SuperService;
 import com.moxi.xo.entity.AuthGroup;
 import com.moxi.xo.vo.PermissionGroupVo;
 import java.util.List;

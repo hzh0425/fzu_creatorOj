@@ -1,6 +1,7 @@
 package com.moxi.xo.service.impl;
 
-import com.moxi.base.serviceImpl.SuperServiceImpl;
+
+import com.moxi.codeBase.Interface.SuperServiceImpl;
 import com.moxi.xo.mapper.AuthUserAdminMapper;
 import com.moxi.xo.service.AuthUserAdminService;
 import com.moxi.xo.entity.AuthUserAdmin;

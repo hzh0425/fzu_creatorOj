@@ -1,7 +1,8 @@
 package com.moxi.xo.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.moxi.base.service.SuperService;
+
+import com.moxi.codeBase.Interface.SuperService;
 import com.moxi.xo.entity.Class;
 import com.moxi.xo.vo.ClassVo;
 import com.moxi.xo.vo.StuExamVo;

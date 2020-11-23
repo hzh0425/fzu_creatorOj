@@ -3,7 +3,8 @@ package com.moxi.xo.mapper;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.moxi.base.mapper.SuperMapper;
+
+import com.moxi.codeBase.Interface.SuperMapper;
 import com.moxi.xo.entity.AuthStudent;
 import com.moxi.xo.entity.Class;
 import com.moxi.xo.entity.ClassStu;

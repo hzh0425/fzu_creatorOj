@@ -72,8 +72,10 @@
         </dependency>
 
 
+
+        <!--工具模块-->
         <dependency>
-            <artifactId>hy_commons</artifactId>
+            <artifactId>hy_codeBase</artifactId>
             <groupId>com.moxi</groupId>
             <version>${project.version}</version>
         </dependency>

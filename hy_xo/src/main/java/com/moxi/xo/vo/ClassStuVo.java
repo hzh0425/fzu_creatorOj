@@ -1,14 +1,16 @@
 package com.moxi.xo.vo;
 
-import com.moxi.base.validator.annotion.NotBlank;
-import com.moxi.base.validator.group.AddBatch;
-import com.moxi.base.validator.group.Delete;
-import com.moxi.base.validator.group.Insert;
-import com.moxi.base.vo.BaseVO;
+
+import com.moxi.codeBase.validator.annotion.NotBlank;
+import com.moxi.codeBase.validator.group.AddBatch;
+import com.moxi.codeBase.validator.group.Delete;
+import com.moxi.codeBase.validator.group.Insert;
+import com.moxi.codeBase.vo.BaseVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 /**
  * @author hzh
@@ -24,7 +26,7 @@ public class ClassStuVo extends BaseVO<ClassStuVo> {
     private String sid;
 
     @ApiModelProperty(value = "classId")
-    @NotBlank(groups = {Insert.class,AddBatch.class})
+    @NotBlank(groups = {Insert.class, AddBatch.class})
     private String cid;
 
 

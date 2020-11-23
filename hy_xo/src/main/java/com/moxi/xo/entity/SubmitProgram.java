@@ -5,9 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.moxi.base.entity.SuperEntity;
-import com.moxi.base.enums.EProblemStatus;
-import com.moxi.base.enums.EStatus;
+
+import com.moxi.codeBase.Interface.SuperEntity;
 import com.moxi.xo.global.SysConf;
 import com.moxi.xo.vo.CodeSubmitVo;
 import lombok.AllArgsConstructor;

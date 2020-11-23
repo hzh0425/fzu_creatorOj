@@ -1,6 +1,7 @@
 package com.moxi.xo.service.impl;
 
-import com.moxi.base.serviceImpl.SuperServiceImpl;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.moxi.codeBase.Interface.SuperServiceImpl;
 import com.moxi.xo.entity.AuthUserStu;
 import com.moxi.xo.mapper.AuthUserStuMapper;
 import com.moxi.xo.service.AuthUserStuService;

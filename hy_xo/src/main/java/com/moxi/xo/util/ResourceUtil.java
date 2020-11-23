@@ -1,7 +1,6 @@
 package com.moxi.xo.util;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.moxi.utils.ServerInfo.Sys;
 import com.moxi.xo.entity.AuthPermission;
 import com.moxi.xo.entity.RequestTemplate;
 import com.moxi.xo.global.SysConf;

@@ -1,9 +1,9 @@
 package com.moxi.xo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.moxi.base.serviceImpl.SuperServiceImpl;
-import com.moxi.utils.ResultUtil;
-import com.moxi.utils.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.moxi.codeBase.Interface.SuperServiceImpl;
+import com.moxi.codeBase.utils.ResultUtil;
 import com.moxi.xo.entity.AuthGroupPermission;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.global.SysConf;

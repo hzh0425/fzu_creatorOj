@@ -1,6 +1,7 @@
 package com.moxi.xo.global;
 
-import com.moxi.base.global.BaseSysConf;
+
+import com.moxi.codeBase.global.BaseSysConf;
 
 /**
  * @author hzh

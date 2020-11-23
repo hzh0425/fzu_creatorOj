@@ -1,6 +1,7 @@
 package com.moxi.xo.vo;
 
-import com.moxi.base.vo.BaseVO;
+
+import com.moxi.codeBase.vo.BaseVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

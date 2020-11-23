@@ -1,6 +1,6 @@
 package com.moxi.xo.entity;
 
-import com.moxi.base.entity.SuperEntity;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

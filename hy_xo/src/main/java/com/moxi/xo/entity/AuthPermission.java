@@ -4,8 +4,9 @@ import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.moxi.base.entity.SuperEntity;
-import com.moxi.utils.StringUtils;
+
+import com.moxi.codeBase.Interface.SuperEntity;
+import com.moxi.codeBase.utils.StringUtils;
 import com.moxi.xo.global.SysConf;
 import lombok.*;
 import lombok.experimental.Accessors;

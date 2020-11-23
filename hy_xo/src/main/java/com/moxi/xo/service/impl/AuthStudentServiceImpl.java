@@ -1,6 +1,7 @@
 package com.moxi.xo.service.impl;
 
-import com.moxi.base.serviceImpl.SuperServiceImpl;
+
+import com.moxi.codeBase.Interface.SuperServiceImpl;
 import com.moxi.xo.entity.AuthStudent;
 import com.moxi.xo.mapper.AuthStudentMapper;
 import com.moxi.xo.service.AuthStudentService;

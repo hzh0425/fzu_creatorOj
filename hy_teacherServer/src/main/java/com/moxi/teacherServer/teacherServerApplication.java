@@ -28,10 +28,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         "com.moxi.teacherServer.util",
         "com.moxi.teacherServer.config",
         "com.moxi.teacherServer.restApi",
-        "com.moxi.commons.config",//公共配置
+        "com.moxi.codeBase.config",//公共配置
         "com.moxi.xo.service",
-        "com.moxi.commons.feign",
-        "com.moxi.utils.FileUtil",
         "com.moxi.teacherServer.annotation",
         "com.moxi.xo.util"
 })

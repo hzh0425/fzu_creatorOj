@@ -1,6 +1,7 @@
 package com.moxi.xo.mapper;
 
-import com.moxi.base.mapper.SuperMapper;
+
+import com.moxi.codeBase.Interface.SuperMapper;
 import com.moxi.xo.entity.LogAction;
 
 /**

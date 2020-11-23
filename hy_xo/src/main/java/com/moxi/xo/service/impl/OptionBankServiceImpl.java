@@ -4,13 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.moxi.base.enums.EOption;
-import com.moxi.base.enums.EPublicBank;
-import com.moxi.base.enums.EShareMode;
-import com.moxi.base.enums.EStatus;
-import com.moxi.base.serviceImpl.SuperServiceImpl;
-import com.moxi.utils.ResultUtil;
-import com.moxi.utils.StringUtils;
+import com.moxi.codeBase.Interface.SuperServiceImpl;
+import com.moxi.codeBase.enums.EOption;
+import com.moxi.codeBase.enums.EPublicBank;
+import com.moxi.codeBase.enums.EShareMode;
+import com.moxi.codeBase.utils.ResultUtil;
+import com.moxi.codeBase.utils.StringUtils;
 import com.moxi.xo.entity.OptionSelect;
 import com.moxi.xo.entity.ProgramBank;
 import com.moxi.xo.global.MessageConf;
@@ -64,7 +63,7 @@ public class OptionBankServiceImpl extends SuperServiceImpl<OptionBankMapper, Op
                     like(SqlConf.QUESTION_TITLE,vo.getKeyword());
                 }
                 //shareMode
-                ge(SqlConf.SHARE_MODE,EShareMode.SHARE_ONLY_READ);
+                ge(SqlConf.SHARE_MODE, EShareMode.SHARE_ONLY_READ);
                 //降序排序
                 orderByDesc(SqlConf.CREATE_DATE);
             }};
@@ -85,7 +84,7 @@ public class OptionBankServiceImpl extends SuperServiceImpl<OptionBankMapper, Op
                 .map(x->{
                     String selectLists=null;
                     //如果不是多选题类型,需要构造选项
-                    if(vo.getOptionType()!=EOption.JUDGE_CHOICE&&vo.getOptionVoList()!=null&&vo.getOptionVoList().size()>0){
+                    if(vo.getOptionType()!= EOption.JUDGE_CHOICE&&vo.getOptionVoList()!=null&&vo.getOptionVoList().size()>0){
                         selectLists= JSON.toJSONString(x.getOptionSelectList());
                     }
                     return new OptionBank(x.getQuestionTitle(),selectLists,x.getOptionType(),x.getQuestionAnswer(),x.getPublisher(),x.getPublisherId(),x.getShareMode(),new Date(),new Date());

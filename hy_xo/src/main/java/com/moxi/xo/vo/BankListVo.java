@@ -1,12 +1,13 @@
 package com.moxi.xo.vo;
 
-import com.moxi.base.validator.annotion.NotBlank;
-import com.moxi.base.validator.group.GetList;
-import com.moxi.base.validator.group.Insert;
+
+import com.moxi.codeBase.validator.group.GetList;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 /**
  * @author hzh

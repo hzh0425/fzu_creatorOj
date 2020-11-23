@@ -1,7 +1,8 @@
 package com.moxi.xo.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.moxi.base.entity.SuperEntity;
+
+import com.moxi.codeBase.Interface.SuperEntity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

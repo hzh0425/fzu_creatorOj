@@ -1,6 +1,7 @@
 package com.moxi.xo.service;
 
-import com.moxi.base.service.SuperService;
+
+import com.moxi.codeBase.Interface.SuperService;
 import com.moxi.xo.entity.CheckPoints;
 
 

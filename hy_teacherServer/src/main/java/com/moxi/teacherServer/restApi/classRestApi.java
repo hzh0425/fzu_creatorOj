@@ -1,13 +1,11 @@
 package com.moxi.teacherServer.restApi;
 
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
-import com.moxi.base.exception.ThrowableUtils;
-import com.moxi.base.validator.group.GetList;
-import com.moxi.base.validator.group.Insert;
+
+import com.moxi.codeBase.utils.ResultUtil;
+import com.moxi.codeBase.utils.StringUtils;
+import com.moxi.codeBase.validator.group.Insert;
 import com.moxi.teacherServer.global.SysConf;
-import com.moxi.utils.ResultUtil;
-import com.moxi.utils.ServerInfo.Sys;
-import com.moxi.utils.StringUtils;
 import com.moxi.xo.global.MessageConf;
 import com.moxi.xo.service.ClassService;
 import com.moxi.xo.vo.ClassVo;
@@ -56,7 +54,7 @@ public class classRestApi {
     @ApiOperationSupport(ignoreParameters ={"uid","currentPage","pageSize","keyword"})
     @PostMapping("/add")
     public String add(@Validated({Insert.class}) @RequestBody ClassVo vo, BindingResult result) {
-        ThrowableUtils.checkParamArgument(result);
+
         return classService.add(vo);
     }
 

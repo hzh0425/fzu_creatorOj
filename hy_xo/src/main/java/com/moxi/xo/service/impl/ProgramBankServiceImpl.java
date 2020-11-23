@@ -4,13 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.moxi.base.entity.SuperEntity;
-import com.moxi.base.enums.EPublicBank;
-import com.moxi.base.enums.EShareMode;
-import com.moxi.base.enums.EStatus;
-import com.moxi.base.serviceImpl.SuperServiceImpl;
-import com.moxi.utils.ResultUtil;
-import com.moxi.utils.StringUtils;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import com.moxi.codeBase.Interface.SuperEntity;
+import com.moxi.codeBase.Interface.SuperServiceImpl;
+import com.moxi.codeBase.enums.EPublicBank;
+import com.moxi.codeBase.enums.EShareMode;
+import com.moxi.codeBase.utils.ResultUtil;
 import com.moxi.xo.entity.ProgramBank;
 import com.moxi.xo.entity.ProgramExample;
 import com.moxi.xo.global.MessageConf;
@@ -63,7 +62,7 @@ public class ProgramBankServiceImpl extends SuperServiceImpl<ProgramBankMapper, 
                     like(SqlConf.QUESTION_TITLE,vo.getKeyword());
                 }
                 //shareMode
-                ge(SqlConf.SHARE_MODE,EShareMode.SHARE_ONLY_READ);
+                ge(SqlConf.SHARE_MODE, EShareMode.SHARE_ONLY_READ);
                 //降序排序
                 orderByDesc(SqlConf.CREATE_DATE);
             }};

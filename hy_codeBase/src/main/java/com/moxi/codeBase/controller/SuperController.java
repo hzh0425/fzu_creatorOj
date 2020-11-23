@@ -1,9 +1,9 @@
 package com.moxi.codeBase.controller;
 
 import com.moxi.codeBase.Exception.MyException;
-import com.moxi.codeBase.Enums.HttpCode;
 import com.moxi.codeBase.Result.Response;
-import com.moxi.codeBase.Enums.SysConf;
+import com.moxi.codeBase.global.HttpCode;
+import com.moxi.codeBase.global.SysConf;
 
 /**
  * Controller基类

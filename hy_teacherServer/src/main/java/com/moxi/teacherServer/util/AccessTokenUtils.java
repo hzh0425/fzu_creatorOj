@@ -1,7 +1,7 @@
 package com.moxi.teacherServer.util;
 
 import com.moxi.teacherServer.config.RedisTokenStore;
-import com.moxi.utils.ServerInfo.Sys;
+
 import com.moxi.xo.global.SysConf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;

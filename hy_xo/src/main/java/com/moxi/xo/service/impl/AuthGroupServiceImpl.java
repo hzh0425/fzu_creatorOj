@@ -2,12 +2,13 @@ package com.moxi.xo.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.moxi.base.enums.EGroupType;
-import com.moxi.base.enums.EResourceType;
-import com.moxi.base.serviceImpl.SuperServiceImpl;
-import com.moxi.utils.ResultUtil;
-import com.moxi.utils.StringUtils;
+
+import com.moxi.codeBase.Interface.SuperServiceImpl;
+import com.moxi.codeBase.enums.EGroupType;
+import com.moxi.codeBase.enums.EResourceType;
+import com.moxi.codeBase.utils.ResultUtil;
 import com.moxi.xo.entity.AuthGroup;
 import com.moxi.xo.entity.Exam;
 import com.moxi.xo.global.MessageConf;

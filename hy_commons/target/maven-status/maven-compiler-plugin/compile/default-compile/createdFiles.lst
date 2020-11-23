@@ -1,9 +1,0 @@
-com\moxi\commons\annotation\asdf.class
-com\moxi\commons\config\redis\RedisConfig.class
-com\moxi\commons\config\jwt\JwtHelper.class
-com\moxi\commons\config\feign\FeignBasicAuthRequestInterceptor.class
-com\moxi\commons\config\redis\FastJsonRedisSerializer.class
-com\moxi\commons\config\mybatis\MybatisPlusConfig.class
-com\moxi\commons\config\mybatis\MetaObjectHandlerConfig.class
-com\moxi\commons\config\feign\FeignConfiguration.class
-com\moxi\commons\config\jwt\Audience.class

@@ -4,7 +4,8 @@ import com.alibaba.nacos.common.util.UuidUtils;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Constants;
-import com.moxi.base.mapper.SuperMapper;
+
+import com.moxi.codeBase.Interface.SuperMapper;
 import com.moxi.xo.entity.AuthStudent;
 import org.apache.ibatis.annotations.InsertProvider;
 import org.apache.ibatis.annotations.Param;

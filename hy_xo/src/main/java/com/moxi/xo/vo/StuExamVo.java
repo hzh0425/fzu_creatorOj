@@ -1,6 +1,10 @@
 package com.moxi.xo.vo;
 
-import com.moxi.base.vo.BaseVO;
+import com.moxi.codeBase.validator.annotion.NotBlank;
+import com.moxi.codeBase.validator.group.AddBatch;
+import com.moxi.codeBase.validator.group.Delete;
+import com.moxi.codeBase.validator.group.Insert;
+import com.moxi.codeBase.vo.BaseVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

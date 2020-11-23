@@ -1,6 +1,8 @@
 package com.moxi.teacherServer.global;
 
-import com.moxi.base.global.BaseSysConf;
+
+
+import com.moxi.codeBase.global.BaseSysConf;
 
 import java.util.ArrayList;
 import java.util.List;
